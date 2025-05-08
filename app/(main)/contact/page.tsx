@@ -15,14 +15,14 @@ export default function ContactPage() {
   return (
     <Shell variant="default"> {/* Changed variant to default */}
       {/* Removed text-center from PageHeader, adding text-left, further reducing bottom padding */}
-      <PageHeader className="text-left pb-2 lg:pb-4"> 
+      <PageHeader className="pb-2 text-left lg:pb-4"> 
         <PageHeaderHeading size="lg">Get In Touch</PageHeaderHeading>
         <PageHeaderDescription size="lg">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of something amazing.
+          I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of something amazing.
         </PageHeaderDescription>
       </PageHeader>
       {/* Ensured no centering classes on this div, removed mx-auto, further reduced top padding to pt-0 */}
-      <div className="max-w-2xl space-y-8 pt-0 pb-8"> 
+      <div className="max-w-2xl space-y-8 pb-8 pt-0"> 
         <section id="contact-links" className="w-full space-y-6"> {/* Keep text-center removed */}
           {/* Removed centering from button group div */}
           <div className="flex flex-col items-start gap-4 sm:flex-row"> 
@@ -58,7 +58,7 @@ export default function ContactPage() {
             </a>
           </div>
           {/* Ensured text-center is removed from this paragraph */}
-          <p className="text-sm text-muted-foreground"> 
+          <p className="text-muted-foreground text-sm"> 
             Feel free to reach out via any of these platforms. I look forward to hearing from you!
           </p>
         </section>

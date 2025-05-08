@@ -8,7 +8,7 @@ export default function AboutPage() {
   return (
     <Shell variant="default"> {/* Changed variant to default */}
       <PageHeader>
-        <PageHeaderHeading size="lg">Hi 👋, I'm Shariff</PageHeaderHeading>
+        <PageHeaderHeading size="lg">Hi 👋, I&apos;m Shariff</PageHeaderHeading>
         <PageHeaderDescription size="lg">
           A passionate software developer from Singapore, enthusiastic about building robust backend systems and architecting scalable solutions.
         </PageHeaderDescription>
@@ -34,7 +34,7 @@ export default function AboutPage() {
         <section id="fun-fact" className="space-y-4">
           <h2 className="font-heading text-2xl">Fun Fact ⚡</h2>
           <p>
-            I was formerly from the advertising industry, where I crafted creative solutions to drive business value. Now, I'm building them hands-on! 🤝
+            I was formerly from the advertising industry, where I crafted creative solutions to drive business value. Now, I&apos;m building them hands-on! 🤝
           </p>
         </section>
 
@@ -45,19 +45,19 @@ export default function AboutPage() {
                 You can structure this as a list or use a custom timeline component.
                 For each item, include: Role, Company, Dates, Key Responsibilities/Achievements.
             */}
-            <div className="mb-6 p-4 border-l-4 border-primary">
-              <h3 className="font-semibold text-lg">Your Most Recent Role</h3>
-              <p className="text-sm text-muted-foreground/80">Company Name | City, Country | Month Year – Month Year (or Present)</p>
-              <ul className="list-disc pl-5 mt-2 space-y-1">
+            <div className="border-primary mb-6 border-l-4 p-4">
+              <h3 className="text-lg font-semibold">Your Most Recent Role</h3>
+              <p className="text-muted-foreground/80 text-sm">Company Name | City, Country | Month Year – Month Year (or Present)</p>
+              <ul className="mt-2 list-disc space-y-1 pl-5">
                 <li>Responsibility/Achievement 1.</li>
                 <li>Responsibility/Achievement 2.</li>
                 <li>Responsibility/Achievement 3.</li>
               </ul>
             </div>
-            <div className="mb-6 p-4 border-l-4 border-muted">
-              <h3 className="font-semibold text-lg">Previous Role</h3>
-              <p className="text-sm text-muted-foreground/80">Company Name | City, Country | Month Year – Month Year</p>
-              <ul className="list-disc pl-5 mt-2 space-y-1">
+            <div className="border-muted mb-6 border-l-4 p-4">
+              <h3 className="text-lg font-semibold">Previous Role</h3>
+              <p className="text-muted-foreground/80 text-sm">Company Name | City, Country | Month Year – Month Year</p>
+              <ul className="mt-2 list-disc space-y-1 pl-5">
                 <li>Responsibility/Achievement 1.</li>
                 <li>Responsibility/Achievement 2.</li>
               </ul>

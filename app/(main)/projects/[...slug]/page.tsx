@@ -142,7 +142,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       alt={author.title}
                       width={42}
                       height={42}
-                      className="rounded-full bg-white border" // Added border for better visibility if avatar is white
+                      className="rounded-full border bg-white" // Added border for better visibility if avatar is white
                     />
                   )}
                   <div className="flex-1 text-left leading-tight">
@@ -152,7 +152,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         href={`https://twitter.com/${author.twitter}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-muted-foreground hover:underline text-[12px]"
+                        className="text-muted-foreground text-[12px] hover:underline"
                       >
                         @{author.twitter}
                       </Link>

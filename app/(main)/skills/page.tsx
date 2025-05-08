@@ -12,10 +12,10 @@ interface SkillCategoryProps {
 function SkillCategory({ title, skills }: SkillCategoryProps) {
   return (
     <div className="mb-6">
-      <h3 className="font-heading text-xl mb-3">{title}</h3>
-      <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <h3 className="font-heading mb-3 text-xl">{title}</h3>
+      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
         {skills.map((skill) => (
-          <li key={skill} className="bg-card p-3 rounded-md shadow-sm text-sm text-muted-foreground text-center">
+          <li key={skill} className="bg-card text-muted-foreground rounded-md p-3 text-center text-sm shadow-sm">
             {skill}
           </li>
         ))}
@@ -57,7 +57,7 @@ export default function SkillsPage() {
       <PageHeader>
         <PageHeaderHeading size="lg">Languages and Tools</PageHeaderHeading>
         <PageHeaderDescription size="lg">
-          A showcase of the technologies I'm proficient with and use to build solutions.
+          A showcase of the technologies I&apos;m proficient with and use to build solutions.
         </PageHeaderDescription>
       </PageHeader>
       <div className="space-y-8">
