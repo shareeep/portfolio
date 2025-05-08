@@ -8,6 +8,7 @@ import "@/styles/mdx.css"
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
 
 import { env } from "@/env.mjs"
 import { absoluteUrl, cn, formatDate } from "@/lib/utils"
@@ -165,14 +166,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ) : null}
       </div>
       {project.image && ( // Use project
-        <Image
-          src={project.image} // Use project
-          alt={project.title} // Use project
-          width={720}
-          height={405}
-          className="bg-muted my-8 rounded-md border transition-colors"
-          priority
-        />
+        <AspectRatio ratio={720 / 405} className="bg-muted my-8 w-full overflow-hidden rounded-md border">
+          <Image
+            src={project.image} // Use project
+            alt={project.title} // Use project
+            fill
+            className="object-cover transition-colors" // Added object-cover
+            priority
+          />
+        </AspectRatio>
       )}
       <Mdx code={project.body} /> 
       <hr className="mt-12" />

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
 import { compareDesc } from "date-fns"
 import { projects as allProjects } from "#site/content" // Updated import
 
@@ -38,14 +39,15 @@ export default async function ProjectsPage() { // Renamed component
               className="group relative flex flex-col space-y-2"
             >
               {project.image && ( // Renamed loop variable
-                <Image
-                  src={project.image} // Renamed loop variable
-                  alt={project.title} // Renamed loop variable
-                  width={804}
-                  height={452}
-                  className="bg-muted rounded-md border transition-colors"
-                  priority={index <= 1}
-                />
+                <AspectRatio ratio={804 / 452} className="bg-muted overflow-hidden rounded-md border">
+                  <Image
+                    src={project.image} // Renamed loop variable
+                    alt={project.title} // Renamed loop variable
+                    fill
+                    className="object-cover transition-colors" // Added object-cover
+                    priority={index <= 1}
+                  />
+                </AspectRatio>
               )}
               <h2 className="text-2xl font-extrabold">{project.title}</h2> 
               {project.description && ( // Renamed loop variable
