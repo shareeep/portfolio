@@ -1,0 +1,107 @@
+---
+title: Phishermen's Friend 
+description: A cybersecurity project focused on Phishing URL detection including a ML model.
+image: /images/projects/blog-post-4.jpg
+date: "2025-05-14"
+authors:
+  - shariff-rashid
+---
+# Phishermen’s Friend
+
+> A machine-learning powered phishing-URL detector, built end-to-end to showcase our own model, experiments, and real-world performance.
+
+---
+
+## 🐟 Project Motivation
+
+Phishing remains one of the most prevalent social-engineering attacks on the internet. Even savvy users can be fooled by URLs that mimic legitimate sites.  
+**Phishermen’s Friend** was born from the need to:  
+- Automatically distinguish phishing from benign URLs in real time  
+- Leverage custom feature engineering to improve detection  
+- Demonstrate a full ML workflow—from data prep to evaluation and deployment :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+
+---
+
+## 🔍 Data & Feature Engineering
+
+We assembled a balanced dataset of **20 000** URLs (50% phishing, 50% benign) sourced from public feeds and curated crawls.
+
+| Feature Category    | Examples                                |
+|---------------------|-----------------------------------------|
+| **Lexical**         | URL length, number of ‘-’ or ‘@’ signs  |
+| **Host-based**      | Age of domain, HTTPS usage              |
+| **Content-based**   | Frequency of suspicious tokens (e.g. “login,” “verify”) |
+
+![Feature importance bar chart]
+
+*Placeholder: bar chart showing top-10 most predictive features*
+
+---
+
+## 🤖 Model Architecture
+
+We experimented with two core models:
+
+1. **Random Forest**  
+   – 100 trees, max depth = 10  
+   – Strong baseline for tabular features  
+
+2. **1D-CNN on character embeddings**  
+   – Embeds each URL as a sequence of chars  
+   – Convolution + pooling layers to capture local patterns  
+
+Finally, we combined them via a **voting ensemble**, boosting robustness. :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+
+![Model diagram]
+
+*Placeholder: schematic of RF + CNN ensemble*
+
+---
+
+## 📊 Evaluation & Results
+
+| Metric            | Random Forest | CNN    | Ensemble |
+|-------------------|---------------|--------|----------|
+| **Accuracy**      | 96.5%         | 94.8%  | **97.2%**|
+| **Precision**     | 95.9%         | 93.5%  | **96.7%**|
+| **Recall**        | 97.0%         | 96.2%  | **97.8%**|
+| **F₁ Score**      | 96.4%         | 94.8%  | **97.2%**|
+
+![ROC curves]
+
+*Placeholder: ROC curves for each model*
+
+---
+
+## 🚀 Real-World Demo
+
+We wrapped the ensemble into a lightweight Flask service that:
+
+- Accepts a URL string via REST  
+- Returns a “phishing”/“benign” prediction + confidence  
+- Can be extended into a browser extension or API gateway
+
+![Live demo screenshot]
+
+*Placeholder: screenshot of demo UI*
+
+---
+
+## ✨ Key Learnings
+
+- **Feature selection matters** more than raw model complexity  
+- Ensemble methods often outperform single models on security tasks  
+- Balancing false positives vs. false negatives is crucial in phishing detection  
+- Building end-to-end pipelines (data → model → API) highlights integration challenges
+
+---
+
+## 🔭 Next Steps
+
+1. **Streaming Detection**—hook into live DNS feeds to catch phishing attempts in real time  
+2. **Browser Extension**—embed the model directly into users’ browsers  
+3. **Explainability**—add layer-wise relevance propagation to show why a URL was flagged  
+
+---
+
+*This project was developed as part of our cybersecurity portfolio to demonstrate full-stack ML capabilities, from data collection to model deployment.*  

@@ -1,0 +1,98 @@
+---
+title: PetConnect - Connecting Pet Owners & Lovers
+description: A web application hosted on Render, built on Vue and Firebase, connecting pet owners and users.
+image: /images/projects/petconnect-cover.png
+date: "2024-11-20"
+authors:
+  - shariff-rashid
+---
+
+### Preview
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/petconnect-demo.gif"
+    width="800"
+    height="450"
+    alt="PetConnect web application demo"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+- **Access PetConnect:** [Website Link](https://petconnect-is216.onrender.com/)
+- **YouTube Video Demo:** [Website Link](https://www.youtube.com/watch?v=FNmE3wLi-hE)
+- **Repo Link:** [Website Link](https://github.com/shareeep/fishmuggers-is216)
+
+### Test Accounts
+| User  | Email            | Password    |
+|-------|---------------------|-------------|
+| User 1| shariff@events.com     | shariff@events.com    |
+| User 2| tabithasim@gmail.com      | 1234567    |
+---
+
+<Image
+  src="/images/projects/petconnect-logo.png"
+  width="128"
+  height="128"
+  alt="petconnect-logo"
+/>
+
+### Project Overview
+
+Problem statement: Pet owners often struggle to find opportunities for their pets to interact with others, especially for new pet owners who have not found a community. 
+
+In Singapore, where pet ownership is rising, the limited pet-friendly spaces and events leave both pets and owners feeling isolated. Without regular socialisation, pets are prone to anxiety and behavioural issues, adding stress for owners. 
+
+By fostering a community for both pets and their owners, we can ease this isolation and help pets thrive through connection.
+
+Solution: PetConnect aims to help owners find events, organise playdates and connect with others in their community, ensuring their pets stay active, engaged and socially fulfilled!
+
+#### Features
+- **PetPost:** A dynamic homepage featuring a feed of pet-related posts from all users, creating a vibrant hub for pet lovers to connect and share.
+- **Events:** A dedicated page showcasing both large-scale and casual events, helping users discover and participate in community gatherings or small meet-ups. Google Maps API was integrated for ease of location filtering.
+- **Calendar:** A personalized calendar that tracks events users have signed up for, helping them stay organized and never miss an occasion.
+- **Friends:** A streamlined page for managing friendships, where users can view friend requests, keep track of their friends, and receive tailored friend suggestions.
+- **Profile:** A comprehensive profile page summarizing all user activities, including personal posts, joined or created events, and a showcase of their pets. 
+- **Chats:** A real-time chat feature that allows users to connect and share content, such as posts or events, directly with friends for a more interactive experience.
+---
+
+#### Solution Architecture Overview 
+- For a clearer view, [open the architecture diagram in GitDiagram](https://gitdiagram.com/shareeep/fishmuggers-is216) (or zoom in on this page).
+
+<Image
+  src="/images/projects/petconnect-mermaid.png"
+  width="3604"
+  height="1404"
+  className="rounded-lg shadow-md"
+  alt="petconnect-mermaid"
+  
+/>
+#### Tech Stack
+
+**Frontend**
+- **Languages:** HTML5, CSS3, JavaScript (ES6+)
+- **Framework:** Vue 3 (SPA) with Vue Router
+- **UI/UX:** Font Awesome icons, Custom CSS components
+- **Maps:** Google Maps Loader, Leaflet.js, OneMap API
+- **HTTP Client:** api.js (based on Axios) for REST calls
+
+**Backend**
+- **Runtime:** Node.js with Express.js
+- **API Routes:** Modular routers for posts, events, users, friends, etc.
+- **Middleware:** Authentication verification, file upload handling
+- **Admin Services:** Firebase Admin SDK integration
+
+**Data & Storage**
+- **Database:** Firebase Firestore for document storage
+- **Media Storage:** Firebase Cloud Storage for images and attachments
+
+**Authentication**
+- **User Auth:** Firebase Authentication with email/password
+- **Security:** Token validation via Firebase Admin SDK
+
+**Mapping Services**
+- **Geolocation:** Google Maps API for geocoding and location filtering
+- **Singapore Data:** OneMap API for local mapping information
+
+**Deployment**
+- **Version Control:** Git (GitHub)
+- **Hosting:** Render for both frontend and backend services

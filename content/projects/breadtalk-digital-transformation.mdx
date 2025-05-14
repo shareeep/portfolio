@@ -1,0 +1,109 @@
+---
+title: The New Talk in Town - BreadTalk
+description: A digital transformation proposal for BreadTalk, leveraging AI and robust data collection methods.
+image: /images/projects/blog-post-2.jpg
+date: "2025-05-14"
+authors:
+  - shariff-rashid
+---
+
+# BreadTalk Digital Transformation Initiative
+
+This project explores the digital transformation of BreadTalk, one of Singapore's leading bakery chains, through AI-driven solutions aimed at improving customer experience, streamlining operations, and enhancing business intelligence.
+
+## 📌 Project Objective
+To address operational inefficiencies and modernize customer experience at BreadTalk using data-driven solutions:
+- Reduce checkout queue time
+- Offer personalized recommendations
+- Modernize BreadTalk’s in-store and mobile experiences
+
+---
+
+## 🚀 Proposed Solutions
+
+### 1. BreadPickUp — Mobile Order for Pickup
+Allows users to pre-order their bread via the app and pick it up in-store.
+- Reduces wait time
+- Ensures product availability
+- Appeals to time-sensitive customers
+
+### 2. BreadSee — AI-Powered Mobile Checkout
+Computer vision system that identifies bread items on a tray for instant mobile payment.
+- YOLOv11s model trained on 6 bread classes
+- Eliminates manual checkout
+- Provides customer insights and minimizes human error
+
+### 3. BreadThink — Personalized Recommendations
+Recommender system using AutoRec (AutoEncoder-based collaborative filtering) to:
+- Offer data-driven promotions and suggestions
+- Improve customer loyalty
+- Increase average basket size
+
+---
+
+## 💡 Features Implemented
+
+| Feature                      | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| 🧠 AI Checkout (`BreadSee`) | Scan your tray using phone camera. Computer Vision detects bread and automates payment. |
+| 📦 Mobile Pickup (`BreadPickUp`) | Order in-app and collect in-store. Reduces queue and ensures item availability. |
+| 🎯 Recommendations (`BreadThink`) | Personalized bread suggestions based on purchase history using AutoRec.        |
+
+---
+
+## 🧠 Tech Stack
+
+| Area                     | Technology Used                  |
+|--------------------------|----------------------------------|
+| AI Model (Vision)        | YOLOv11s                         |
+| AI Model (Recommendation)| AutoRec Neural Network           |
+| Frontend Prototype       | Figma                            |
+| App Platform             | BreadTalk’s existing mobile app |
+| Backend                  | Microservices (CV + Rec Engine) |
+| Analytics                | In-app usage tracking, POS data |
+
+---
+
+## 📊 Model Performance Summary (BreadSee)
+
+| Class             | Precision | Recall | F1-Score |
+|------------------|-----------|--------|----------|
+| Coffi-O           | 0.95      | 0.95   | 0.95     |
+| Flosss            | 1.00      | 1.00   | 1.00     |
+| Plain Croissant   | 0.78      | 0.66   | 0.71     |
+| Sausage Standard  | 0.89      | 0.77   | 0.83     |
+| Sugar Donut       | 0.94      | 0.88   | 0.91     |
+| **Macro Avg.**    | **0.91**  | **0.85** | **0.88**  |
+
+---
+
+## 📅 Implementation Timeline
+
+| Quarter        | Milestone                                 |
+|----------------|--------------------------------------------|
+| Q3 '25         | Model training, app prototype integration  |
+| Q4 '25         | Staff training, store prep                 |
+| Q1 '26         | Marketing campaigns, app rollout testing   |
+| Q2 '26         | Full rollout and performance monitoring    |
+
+---
+
+## 🔐 Considerations
+
+- **Data Privacy**: Ensure PDPA compliance with secure storage and clear user consent.
+- **Inclusivity**: Provide traditional checkout options for less tech-savvy users.
+- **Continuous Learning**: Integrate RLHF for ongoing model improvement and accuracy.
+
+---
+
+## 📎 Resources & Links
+
+- [📂 Google Drive (Reports & Demos)](https://drive.google.com/drive/folders/1sXLpT1o-tVB-80PEe9bbW77Wral8WQ9B?usp=drive_link)
+- [📱 Figma Prototype](https://www.figma.com/proto/9KtdyjjkYRWB5YnlpFHfdK/BreadTalk?page-id=0%3A1&node-id=104-2523)
+
+---
+
+## 🧾 License
+
+This project is developed for educational purposes under the IS215 course and does not reflect actual BreadTalk operations.
+

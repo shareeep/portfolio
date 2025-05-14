@@ -54,8 +54,8 @@ export async function generateMetadata({
       images: [
         {
           url: ogUrl.toString(),
-          width: 1200,
-          height: 630,
+          width: 2400,
+          height: 1350,
           alt: page.title,
         },
       ],
