@@ -44,6 +44,7 @@ export async function generateMetadata({
   ogUrl.searchParams.set("mode", "light")
 
   return {
+    metadataBase: new URL(siteConfig.url),
     title: page.title,
     description: page.description,
     openGraph: {
@@ -59,12 +60,6 @@ export async function generateMetadata({
           alt: page.title,
         },
       ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.title,
-      description: page.description,
-      images: [ogUrl.toString()],
     },
   }
 }

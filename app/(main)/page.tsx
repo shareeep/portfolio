@@ -15,84 +15,116 @@ export default async function IndexPage() {
 
   return (
     <>
-      {/* New Bento Grid Hero Section */}
-      <section className="container mx-auto py-12 md:py-16 lg:py-20">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
-          {/* Box 1: Main Intro */}
-          <div className="bg-card flex min-h-56 flex-col items-start justify-center rounded-xl p-6 text-left shadow-lg sm:min-h-64 md:col-span-2 lg:col-span-2">
-            {/* You'll need to add your avatar image to public/images/avatars/shariff-rashid.png or update path */}
-            <Image src="/images/avatars/shariff-rashid.png" alt="Shariff Rashid" width={80} height={80} className="border-primary mb-4 rounded-full border-2" />
-            <h1 className="font-heading mb-2 text-3xl sm:text-4xl md:text-5xl">
-              Hi 👋, I&apos;m Shariff
+    {/* Updated section background to use theme variable */}
+    <section className="bg-background py-16">
+      <div className="container mx-auto grid grid-cols-1
+                      gap-6
+                      sm:grid-cols-2
+                      lg:grid-cols-4
+                      xl:grid-cols-6">
+        {/* 1) Main Intro: spans 4 on lg, 4 on xl. XS: icon centered above text. */}
+        {/* Updated card background and text colors */}
+        <div className="bg-card col-span-1 flex flex-col 
+                        justify-between rounded-2xl p-8 text-center shadow-md sm:col-span-2 sm:text-left lg:col-span-4 xl:col-span-4">
+          <div className="mt-4 flex flex-col items-center space-y-4 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
+            <Image
+              src="/images/avatars/shariff-rashid.png"
+              alt="Shariff Rashid"
+              width={200}
+              height={200}
+              className="border-primary mx-auto rounded-full border-4 sm:mx-0"
+            />
+            <h1 className="font-heading text-foreground text-4xl lg:text-5xl">
+              Hi 👋, I’m <span className="text-primary">Shariff</span>
             </h1>
-            <h3 className="text-muted-foreground mb-3 text-xl sm:text-2xl">
-              A passionate software developer from Singapore
-            </h3>
-            <p className="text-muted-foreground text-base sm:text-lg">
-              I&apos;m enthusiastic about building robust backend systems and architecting scalable solutions.
-            </p>
           </div>
 
-          {/* Box 2: GitHub Link */}
-          <div className="bg-card flex min-h-56 flex-col items-center justify-center rounded-xl p-6 text-center shadow-lg sm:min-h-64">
-            <Icons.gitHub className="text-foreground mb-3 size-8 md:size-12" /> {/* Using the GitHub icon */}
-            <h3 className="mb-1 text-lg font-semibold">My GitHub</h3>
-            <p className="text-muted-foreground/80 mb-3 text-xs">{siteConfig.links.github.replace("https://", "")}</p>
-            <Link href={siteConfig.links.github} target="_blank" rel="noreferrer" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
-              Explore My Repos
-            </Link>
-          </div>
-
-          {/* Box 3: Currently Learning */}
-          <div className="bg-card flex min-h-56 flex-col items-center justify-center rounded-xl p-6 text-center shadow-lg sm:min-h-64">
-            <Icons.laptop className="text-foreground mb-3 size-8 md:size-12" /> {/* Using an icon */}
-            <h3 className="mb-1 text-lg font-semibold">Currently Sharpening</h3>
-            <p className="text-muted-foreground text-sm">
-              Data Structures & Algorithms (DSA) and LeetCode skills.
-            </p>
-            <p className="text-muted-foreground mt-2 text-sm">
-              Learning Java & Spring Boot for Solutions Architect roles.
-            </p>
-          </div>
-          
-          {/* Box 4: Collaboration Interests */}
-          <div className="bg-card flex min-h-56 flex-col justify-start rounded-xl p-6 text-left shadow-lg sm:min-h-64 md:col-span-2 lg:col-span-2">
-            <h3 className="font-heading mb-3 text-xl sm:text-2xl">Collaboration Interests</h3>
-            <ul className="text-muted-foreground list-inside list-disc space-y-1 text-sm">
-              <li>Impactful projects, especially Hackathons for Social Good.</li>
-              <li>Innovative AI Projects leveraging the latest tech.</li>
-              <li>Open to discussing Docker, Microservices, AI Automations/Chatbots, Backend Development, or System Architecture.</li>
-            </ul>
-          </div>
-
-          {/* Box 5: Fun Fact */}
-          <div className="bg-card flex min-h-56 flex-col items-center justify-center rounded-xl p-6 text-center shadow-lg sm:min-h-64">
-             <Icons.pizza className="text-foreground mb-3 size-8 md:size-12" /> {/* Using a fun icon */}
-            <h3 className="mb-1 text-lg font-semibold">Fun Fact! ⚡</h3>
-            <p className="text-muted-foreground text-sm">
-              Formerly from the advertising industry, crafting creative solutions. Now, building them hands-on! 🤝
-            </p>
-          </div>
-
-           {/* Box 6: Call to Action / Contact */}
-           <div className="bg-card flex min-h-48 flex-col items-center justify-center rounded-xl p-6 text-center shadow-lg md:col-span-3 md:min-h-64 lg:col-span-4">
-            <h3 className="font-heading mb-3 text-2xl sm:text-3xl">Let&apos;s Build Something Amazing!</h3>
-            <p className="text-muted-foreground mb-4 max-w-xl sm:text-lg">
-              Got an idea or a challenge? I&apos;m always excited to connect and explore new possibilities.
-            </p>
-            <Link href="/contact" className={cn(buttonVariants({ size: "lg" }))}>
-              Reach Out
-            </Link>
-          </div>
+          <p className="text-muted-foreground mt-4 text-lg">
+            I enjoy building robust systems and architecting solutions.
+          </p>
         </div>
-      </section>
 
+        {/* 2) Currently Sharpening: Adjusted col-spans & centered content */}
+        {/* Updated card background and text colors */}
+        <div className="bg-card flex flex-col items-center justify-center rounded-2xl 
+                        p-6 text-center shadow-md sm:col-span-1 lg:col-span-2 xl:col-span-2">
+          <Icons.laptop className="text-primary mb-4 size-12" /> {/* Increased icon size */}
+          <h3 className="font-heading text-foreground mb-2 text-2xl">Current focus</h3>
+          <ul className="text-muted-foreground space-y-1 text-center sm:text-left">
+            <li className="flex items-center">
+              <Icons.brain className="text-primary/80 mr-2 size-5" /> {/* Added Icon */}
+              DSA & LeetCode challenges
+            </li>
+            <li className="flex items-center">
+              <Icons.server className="text-primary/80 mr-2 size-5" /> {/* Added Icon */}
+              Java & SpringBoot
+            </li>
+          </ul>
+        </div>
+
+        {/* 3) GitHub */}
+        {/* Updated card background, text, icon, and button colors */}
+        <div className="bg-card rounded-2xl p-6 text-center shadow-md lg:col-span-1 xl:col-span-3">
+          <Icons.gitHub className="text-primary mx-auto mb-3 size-10" />
+          <h3 className="text-foreground mb-1 text-xl font-semibold">My GitHub</h3>
+          <p className="text-muted-foreground mb-4 text-sm">
+            {siteConfig.links.github.replace('https://', '')}
+          </p>
+          <Link
+            href={siteConfig.links.github}
+            target="_blank"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            )}
+          >
+            Explore Repos
+          </Link>
+        </div>
+
+        {/* 4) Fun Fact */}
+        {/* Updated card background, text, and icon colors */}
+        <div className="bg-card rounded-2xl p-6 text-center shadow-md lg:col-span-1 xl:col-span-3">
+          <Icons.pizza className="text-primary mx-auto mb-3 size-10" />
+          <h3 className="text-foreground mb-2 text-xl font-semibold">Fun Fact!</h3>
+          <p className="text-muted-foreground mb-4 text-sm"> {/* Added mb-4 for spacing */}
+            From advertising copy to code—now I get to build the solutions I pitch.
+          </p>
+          <Link
+            href="/projects" // Changed href to projects page
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            )}
+          >
+            Explore Projects {/* Changed button text */}
+          </Link>
+        </div>
+
+        {/* 6) Call To Action */}
+        {/* Updated card background, text, and button colors */}
+        <div className="bg-card flex flex-col justify-center rounded-2xl p-8 shadow-md lg:col-span-4 xl:col-span-6">
+          <h3 className="font-heading text-foreground mb-4 text-2xl">Let’s Build Something Amazing!</h3>
+          <p className="text-muted-foreground mb-6">
+            Got an idea or a challenge? I’m always excited to connect and explore new possibilities.
+          </p>
+          <Link
+            href="/contact"
+            className={cn(buttonVariants({variant: "default", size: "lg"}), "bg-primary text-primary-foreground hover:bg-primary/90")}
+          >
+            Reach Out
+          </Link>
+        </div>
+      </div>
+    </section>
+
+      {/* Updated section background */}
       <section
         id="projects"
-        className="container space-y-8 bg-slate-50 py-8 md:py-12 lg:py-24 dark:bg-transparent"
+        className="bg-background container space-y-8 py-8 md:py-12 lg:py-24"
       >
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
+          <h2 className="font-heading text-foreground text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
             My Projects
           </h2>
           <p className="text-muted-foreground max-w-[85%] leading-normal sm:text-lg sm:leading-7">
@@ -136,19 +168,6 @@ export default async function IndexPage() {
             No projects published yet. Check back soon!
           </p>
         )}
-      </section>
-
-      <section id="contact" className="container py-8 md:py-12 lg:py-24">
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-          <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Get In Touch
-          </h2>
-          <p className="text-muted-foreground max-w-[85%] leading-normal sm:text-lg sm:leading-7">
-            Have a question or want to work together? Feel free to reach out.
-            You can find me on GitHub (link in the hero section) or send an email.
-          </p>
-          {/* You can add a contact form or email link here */}
-        </div>
       </section>
     </>
   )

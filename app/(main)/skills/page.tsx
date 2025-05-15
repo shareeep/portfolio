@@ -1,23 +1,42 @@
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header"
 import { Shell } from "@/components/shell"
+import {
+  SiPython, SiPhp, SiHtml5, SiCss3, SiJavascript, SiTypescript,
+  SiReact, SiVuedotjs, SiBootstrap, SiFlask, SiExpress,
+  SiPostgresql, SiMysql, SiAmazon, SiGooglecloud, // Removed SiAzuredevops
+  SiFirebase, SiDocker, SiRabbitmq, SiApachekafka, SiKubernetes,
+  SiGrafana, SiLinux, SiNginx, SiGit, SiFigma, SiPostman
+} from "react-icons/si";
+import { VscAzure } from "react-icons/vsc"; // Added VscAzure import
+import { IconType } from "react-icons";
 
-// You might want to create a dedicated component for skill categories or individual skills
-// e.g., import SkillCard from "@/components/skill-card"
+// Component for individual skill with icon
+interface SkillItemProps {
+  name: string;
+  icon?: IconType; // Icon component from react-icons
+}
+
+function SkillItem({ name, icon: Icon }: SkillItemProps) {
+  return (
+    <li className="bg-card text-muted-foreground flex flex-col items-center justify-center rounded-md p-4 text-center text-sm shadow-sm">
+      {Icon && <Icon className="mb-2 size-8" />} {/* Increased icon size and added margin */}
+      <span>{name}</span>
+    </li>
+  );
+}
 
 interface SkillCategoryProps {
   title: string;
-  skills: string[];
+  skills: Array<{ name: string; icon?: IconType }>;
 }
 
 function SkillCategory({ title, skills }: SkillCategoryProps) {
   return (
-    <div className="mb-6">
-      <h3 className="font-heading mb-3 text-xl">{title}</h3>
-      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+    <div className="mb-8"> {/* Increased bottom margin */}
+      <h3 className="font-heading mb-4 text-2xl">{title}</h3> {/* Increased font size and bottom margin */}
+      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"> {/* Adjusted grid and gap */}
         {skills.map((skill) => (
-          <li key={skill} className="bg-card text-muted-foreground rounded-md p-3 text-center text-sm shadow-sm">
-            {skill}
-          </li>
+          <SkillItem key={skill.name} name={skill.name} icon={skill.icon} />
         ))}
       </ul>
     </div>
@@ -28,48 +47,62 @@ export default function SkillsPage() {
   const skillCategories = [
     {
       title: "Programming Languages",
-      skills: ["Python", "PHP", "HTML", "CSS", "JavaScript", "TypeScript"],
+      skills: [
+        { name: "Python", icon: SiPython }, { name: "PHP", icon: SiPhp },
+        { name: "HTML", icon: SiHtml5 }, { name: "CSS", icon: SiCss3 },
+        { name: "JavaScript", icon: SiJavascript }, { name: "TypeScript", icon: SiTypescript },
+      ],
     },
     {
       title: "Frontend",
-      skills: ["React", "Vue", "Bootstrap"],
+      skills: [
+        { name: "React", icon: SiReact }, { name: "Vue", icon: SiVuedotjs },
+        { name: "Bootstrap", icon: SiBootstrap },
+      ],
     },
     {
       title: "Backend",
-      skills: ["Flask", "Express"],
+      skills: [
+        { name: "Flask", icon: SiFlask }, { name: "Express", icon: SiExpress },
+      ],
     },
     {
       title: "Databases",
-      skills: ["PostgreSQL", "MySQL"],
+      skills: [
+        { name: "PostgreSQL", icon: SiPostgresql }, { name: "MySQL", icon: SiMysql },
+      ],
     },
     {
       title: "Cloud & DevOps",
-      skills: ["AWS", "Azure", "GCP", "Firebase", "Docker", "RabbitMQ", "Kafka", "Kubernetes", "Grafana", "Linux", "Nginx", "Git"],
+      skills: [
+        { name: "AWS", icon: SiAmazon }, { name: "Azure", icon: VscAzure }, // Changed to VscAzure
+        { name: "GCP", icon: SiGooglecloud }, { name: "Firebase", icon: SiFirebase },
+        { name: "Docker", icon: SiDocker }, { name: "RabbitMQ", icon: SiRabbitmq },
+        { name: "Kafka", icon: SiApachekafka }, { name: "Kubernetes", icon: SiKubernetes },
+        { name: "Grafana", icon: SiGrafana }, { name: "Linux", icon: SiLinux },
+        { name: "Nginx", icon: SiNginx }, { name: "Git", icon: SiGit },
+      ],
     },
     {
       title: "Tools",
-      skills: ["Figma", "Postman"],
+      skills: [
+        { name: "Figma", icon: SiFigma }, { name: "Postman", icon: SiPostman },
+      ],
     },
   ];
 
   return (
-    <Shell variant="default"> {/* Changed variant to default */}
+    <Shell variant="default">
       <PageHeader>
         <PageHeaderHeading size="lg">Languages and Tools</PageHeaderHeading>
         <PageHeaderDescription size="lg">
           A showcase of the technologies I&apos;m proficient with and use to build solutions.
         </PageHeaderDescription>
       </PageHeader>
-      <div className="space-y-8">
+      <div className="space-y-6"> {/* Adjusted space-y */}
         {skillCategories.map((category) => (
           <SkillCategory key={category.title} title={category.title} skills={category.skills} />
         ))}
-        {/* 
-          Consider adding a note about skill icons if you plan to implement them later:
-          <p className="text-center text-sm text-muted-foreground pt-4">
-            Visual skill icons powered by <a href="https://skillicons.dev" target="_blank" rel="noopener noreferrer" className="underline">skillicons.dev</a>.
-          </p> 
-        */}
       </div>
     </Shell>
   )

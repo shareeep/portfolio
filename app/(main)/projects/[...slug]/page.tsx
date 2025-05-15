@@ -11,6 +11,7 @@ import Link from "next/link"
 import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
 
 import { env } from "@/env.mjs"
+import { siteConfig } from "@/config/site" // Added import
 import { absoluteUrl, cn, formatDate } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
@@ -54,6 +55,7 @@ export async function generateMetadata({
   ogUrl.searchParams.set("mode", "dark")
 
   return {
+    metadataBase: new URL(siteConfig.url), // Added this line
     title: project.title, // Use project
     description: project.description, // Use project
     authors: project.authors.map((author) => ({ // Use project
@@ -72,12 +74,6 @@ export async function generateMetadata({
           alt: project.title, // Use project
         },
       ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: project.title, // Use project
-      description: project.description, // Use project
-      images: [ogUrl.toString()],
     },
   }
 }
@@ -148,16 +144,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   )}
                   <div className="flex-1 text-left leading-tight">
                     <p className="font-medium">{author.title}</p>
-                    {author.twitter && ( // Conditionally render Twitter link if available
-                      <Link
-                        href={`https://twitter.com/${author.twitter}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-muted-foreground text-[12px] hover:underline"
-                      >
-                        @{author.twitter}
-                      </Link>
-                    )}
                   </div>
                 </div>
               );

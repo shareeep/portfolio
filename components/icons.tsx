@@ -21,9 +21,10 @@ import {
   Settings,
   SunMedium,
   Trash,
-  Twitter,
   User,
   X,
+  Brain, // Added Brain icon
+  Server, // Added Server icon
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -32,15 +33,23 @@ export const Icons = {
   logo: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 100"
-      width="24" // Default width, can be overridden by props
-      height="24" // Default height, can be overridden by props
-      fill="currentColor" // Or your desired color
-      {...props}
+      viewBox="0 0 100 100" // User's SVG also uses 100x100 viewBox
+      // width and height are passed via props, defaulting to 24x24 if not specified by caller
+      // fill="currentColor" is also passed via props or defaults in the component
+      {...props} // Spread props first to allow overriding defaults like fill, width, height
     >
-      <rect width="100" height="100" rx="10" ry="10" />
-      {/* Replace this rect with your actual SVG logo path(s) */}
-      {/* Example: <text x="50" y="60" fontSize="40" textAnchor="middle" fill="white">LOGO</text> */}
+      {/* User provided SVG content, adapted for currentColor */}
+      <g transform="translate(0,20)" stroke="currentColor" fill="none">
+        {/* Head */}
+        <circle cx="50" cy="35" r="20" strokeWidth="6" />
+        {/* Curly hair */}
+        {/* Using a thinner stroke for hair as 11 might be too thick when scaled down */}
+        <circle cx="50" cy="12" r="6" strokeWidth="11" />
+        <circle cx="40" cy="15" r="6" strokeWidth="11" />
+        <circle cx="60" cy="15" r="6" strokeWidth="11" />
+        <circle cx="33" cy="20" r="6" strokeWidth="11" />
+        <circle cx="67" cy="20" r="6" strokeWidth="11" />
+      </g>
     </svg>
   ),
   close: X,
@@ -63,6 +72,8 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
+  brain: Brain, // Added Brain
+  server: Server, // Added Server
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
@@ -80,6 +91,5 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  twitter: Twitter,
   check: Check,
 }

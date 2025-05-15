@@ -29,6 +29,7 @@ export const metadata = {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
+  metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
   keywords: ["Portfolio", "Developer", "Projects", "Shariff Rashid"],
   authors: [
@@ -46,19 +47,21 @@ export const metadata = {
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage], // Use the updated ogImage from siteConfig
-    // creator: "@yourtwitterhandle", // Placeholder, as twitter was commented out in author file
-  },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' }
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [
+      // Assuming 180x180 from generator, if not, remove sizes or use actual
+      { url: '/apple-touch-icon.png', sizes: '180x180' } 
+    ]
   },
   manifest: "/site.webmanifest", // Use relative path
+  other: {
+    "apple-mobile-web-app-title": "Shariff's Portfolio",
+  }
 }
 
 export const viewport = {

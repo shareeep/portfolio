@@ -33,9 +33,7 @@ export type SiteConfig = {
   url: string
   ogImage: string
   links: {
-    twitter?: string // Made optional again
     github: string
-    linkedin?: string // Added optional linkedin
   }
 }
 

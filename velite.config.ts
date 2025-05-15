@@ -66,7 +66,6 @@ const authors = defineCollection({
       title: s.string().max(99),
       description: s.string().max(999).optional(),
       avatar: s.string().max(99),
-      twitter: s.string().max(99),
       body: s.mdx(),
     })
     .transform(computedFields),

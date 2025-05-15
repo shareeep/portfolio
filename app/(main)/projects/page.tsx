@@ -5,9 +5,11 @@ import { compareDesc } from "date-fns"
 import { projects as allProjects } from "#site/content" // Updated import
 
 import { formatDate } from "@/lib/utils"
+import { siteConfig } from "@/config/site" // Added import
 
 export const metadata = {
   title: "Projects", // Updated title
+  metadataBase: new URL(siteConfig.url),
 }
 
 export default async function ProjectsPage() { // Renamed component
@@ -25,7 +27,7 @@ export default async function ProjectsPage() { // Renamed component
             Projects
           </h1>
           <p className="text-muted-foreground text-xl">
-            A collection of projects. Content is managed using Velite and MDX.
+            Some of the Projects I have worked on. Content is managed using Velite and MDX.
           </p>
         </div>
       </div>

@@ -18,7 +18,7 @@ Phishing remains one of the most prevalent social-engineering attacks on the int
 **Phishermen’s Friend** was born from the need to:  
 - Automatically distinguish phishing from benign URLs in real time  
 - Leverage custom feature engineering to improve detection  
-- Demonstrate a full ML workflow—from data prep to evaluation and deployment :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+- Demonstrate a full ML workflow—from data prep to evaluation and deployment
 
 ---
 
@@ -50,7 +50,7 @@ We experimented with two core models:
    – Embeds each URL as a sequence of chars  
    – Convolution + pooling layers to capture local patterns  
 
-Finally, we combined them via a **voting ensemble**, boosting robustness. :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+Finally, we combined them via a **voting ensemble**, boosting robustness.
 
 ![Model diagram]
 
@@ -75,7 +75,7 @@ Finally, we combined them via a **voting ensemble**, boosting robustness. :conte
 
 ## 🚀 Real-World Demo
 
-We wrapped the ensemble into a lightweight Flask service that:
+We used a Google Colab Notebook to train and test our model.
 
 - Accepts a URL string via REST  
 - Returns a “phishing”/“benign” prediction + confidence  
@@ -92,16 +92,5 @@ We wrapped the ensemble into a lightweight Flask service that:
 - **Feature selection matters** more than raw model complexity  
 - Ensemble methods often outperform single models on security tasks  
 - Balancing false positives vs. false negatives is crucial in phishing detection  
-- Building end-to-end pipelines (data → model → API) highlights integration challenges
-
----
-
-## 🔭 Next Steps
-
-1. **Streaming Detection**—hook into live DNS feeds to catch phishing attempts in real time  
-2. **Browser Extension**—embed the model directly into users’ browsers  
-3. **Explainability**—add layer-wise relevance propagation to show why a URL was flagged  
-
----
 
 *This project was developed as part of our cybersecurity portfolio to demonstrate full-stack ML capabilities, from data collection to model deployment.*  
