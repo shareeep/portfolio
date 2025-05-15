@@ -27,7 +27,7 @@ export default async function ProjectsPage() { // Renamed component
             Projects
           </h1>
           <p className="text-muted-foreground text-xl">
-            Some of the Projects I have worked on. Content is managed using Velite and MDX.
+            Here are some of the projects I have worked on. Content is managed using Velite and MDX.
           </p>
         </div>
       </div>

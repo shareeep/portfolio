@@ -36,33 +36,33 @@
   }
  
   .dark {
-    --background: 220 25% 10%; /* Very dark desaturated blue */
-    --foreground: 220 30% 94%; /* Light cool gray */
+    --background: 220 5% 10%; /* Very dark cool grey */
+    --foreground: 220 8% 94%; /* Light cool grey */
  
-    --card: 220 20% 15%; /* Darker blue/gray */
-    --card-foreground: 220 30% 94%; /* Light cool gray */
+    --card: 220 3% 15%; /* Darker cool grey */
+    --card-foreground: 220 8% 94%; /* Light cool grey */
  
-    --popover: 220 20% 15%; /* Darker blue/gray */
-    --popover-foreground: 220 30% 94%; /* Light cool gray */
+    --popover: 220 3% 15%; /* Darker cool grey */
+    --popover-foreground: 220 8% 94%; /* Light cool grey */
  
-    --primary: 220 70% 65%; /* Brighter, lighter blue */
-    --primary-foreground: 220 25% 10%; /* Very dark desaturated blue */
+    --primary: 220 5% 65%; /* Lighter cool grey */
+    --primary-foreground: 220 5% 10%; /* Very dark cool grey */
  
-    --secondary: 220 20% 20%; /* Dark gray */
-    --secondary-foreground: 220 25% 85%; /* Lighter gray */
+    --secondary: 220 3% 20%; /* Dark cool grey */
+    --secondary-foreground: 220 5% 85%; /* Lighter cool grey */
  
-    --muted: 220 15% 25%; /* Darker gray for muted text/elements */
-    --muted-foreground: 220 20% 65%; /* Medium-light gray */
+    --muted: 220 2% 25%; /* Darker cool grey for muted text/elements */
+    --muted-foreground: 220 3% 65%; /* Medium-light cool grey */
  
-    --accent: 220 70% 65%; /* Brighter, lighter blue (same as primary for now) */
-    --accent-foreground: 220 25% 10%; /* Very dark desaturated blue */
+    --accent: 220 5% 65%; /* Lighter cool grey (same as primary for now) */
+    --accent-foreground: 220 5% 10%; /* Very dark cool grey */
  
     --destructive: 0 60% 50%; /* A clearer red for dark mode */
     --destructive-foreground: 0 0% 100%; /* White */
  
-    --border: 220 15% 30%; /* Subtle dark border */
-    --input: 220 15% 30%; /* Subtle dark border */
-    --ring: 220 70% 65%; /* Brighter, lighter blue */
+    --border: 220 2% 30%; /* Subtle dark cool grey border */
+    --input: 220 2% 30%; /* Subtle dark cool grey border */
+    --ring: 220 5% 65%; /* Lighter cool grey */
   }
 }
  

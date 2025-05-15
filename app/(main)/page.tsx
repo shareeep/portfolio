@@ -16,7 +16,7 @@ export default async function IndexPage() {
   return (
     <>
     {/* Updated section background to use theme variable */}
-    <section className="bg-background py-16">
+    <section className="bg-background py-8">
       <div className="container mx-auto grid grid-cols-1
                       gap-6
                       sm:grid-cols-2
@@ -121,7 +121,7 @@ export default async function IndexPage() {
       {/* Updated section background */}
       <section
         id="projects"
-        className="bg-background container space-y-8 py-8 md:py-12 lg:py-24"
+        className="bg-background container space-y-8 py-6 md:py-10 lg:py-16"
       >
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-foreground text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
