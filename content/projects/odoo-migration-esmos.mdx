@@ -1,61 +1,70 @@
 ---
 title: ESMOS - Cloud Migration from SaaS to IaaS 
-description: A migration project leveraging Azure Web Services with Jira ticketing, ITIL alignement and DevSecOps practices.
+description: A migration project leveraging Azure Web Services with Jira ticketing, ITIL alignment and DevSecOps practices.
 image: /images/projects/esmos-cover.png
 date: "2025-04-02"
 authors:
   - shariff-rashid
 ---
-# An Infrastructure Migration Project using Azure with Kubernetes
 
-> A Change Management project demonstrating ITIL alignment, technical implementation on Azure, and successful migration of a SaaS-based meal ordering app to a resilient, scalable Azure IaaS setup for healthcare industry needs.
+Project Grade Received: "A" (Overall), "A+" (Presentation) 
 
-## 🧠 Overview
+## Overview
 
-Everyday Sustainable Meals Ordering System (ESMOS) is a subscription-based business committed to delivering fresh, gourmet-quality meals crafted from sustainable source ingredients. 
+Everyday Sustainable Meals Ordering System (ESMOS) is a subscription-based business committed to delivering fresh, gourmet-quality meals crafted from sustainable source ingredients. It is also a play on the module name ESM (Enterprise Solutions Management) and is a fictional company.
 
-It is also a play on the module name ESM (Enterprise Solutions Management) and is a fictional company.
-
-This project was conducted over multiple weeks as part of our IS214 (ESM) coursework. It involved proposing, managing, and executing a complete infrastructure change from an Odoo SaaS platform to an Azure-based IaaS deployment using DevSecOps and ITIL practices.
-
+My team migrated this meal ordering web application from the Odoo SaaS platform to an Azure IaaS setup, following ITIL practices and implementing DevSecOps to improve scalability, security, and reduce costs.
 
 - **Original Setup:** Odoo SaaS  
-- **New Setup:** Azure AKS, PostgreSQL, Azure Functions, Prometheus + Grafana  
-- **Use Case:** Meal planning system for 10,000+ users  
+- **New Setup:** Azure AKS with Odoo Community Image, Azure PostgreSQL, Azure Functions, Prometheus + Grafana  
+- **Main Use Case:** Scaling up the system for 10,000+ users  
 - **Project Goals:**
-  - Improve scalability and control
-  - Enhance security and compliance
+  - Improve scalability with Azure Kubernetes Service auto-scaling (HPA)
+  - Enhance security with PDPA compliance and protection against cyber attacks
+  - Implement data encryption at rest and in transit with Azure PostgreSQL
   - Reduce infrastructure costs
-  - Support up to 10000 users daily and 100 concurrent sessions
+  - Support 10000+ users daily with up to 50 concurrent sessions
 
----
 
-## 🔁 Project Phases
+## Project Phases
 
 ### 1. Change Proposal
 
-We began by drafting a Change Proposal outlining:
+We began by drafting a Change Proposal. We also had to take into account a previous incident whereby an attacker broke into a separate IaaS system of ours and modified data and took down our system. The change outline is as follows:
 - Key justifications: scalability, security, and resilience
-- Risk analysis: security vulnerabilities, data breaches
+- Risk analysis: security vulnerabilities, data breaches 
 - Cost comparison: S$0.20/user (SaaS) → S$0.12/user (Azure IaaS)
-- Deployment plan using Terraform, YAML, and Azure CLI
-
-📷 **[Insert Image Placeholder: Proposed System Architecture Diagram]**
-
-
----
+- Deployment strategy using Azure CLI, load testing tools & integration tests
 
 ### 2. Mid-Process Change Management Check-In
 
 Presented our updated progress and stakeholder communications, including:
 - Jira ticket lifecycle for tracking
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-jira.png"
+    width="800"
+    height="450"
+    alt="Jira tickets overview"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
 - Communication matrix (internal & external)
 - Migration schedule & timeline
-- Stakeholder approvals (CAB, Change Manager, CIO)
 
-📷 **[Insert Image Placeholder: Proposed Timeline]**
-📷 **[Insert Image Placeholder: Jira Ticket Snapshot]**  
-📷 **[Insert Image Placeholder: Communication Matrix Chart]**
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-timeline.png"
+    width="800"
+    height="450"
+    alt="Change migration timeline"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+
 
 ---
 
@@ -68,12 +77,17 @@ Final results and lessons learned were presented, highlighting:
 - Cost reduction of over **40%**
 - Load testing success (50 concurrent users, 0% error rate)
 
-📷 **[Insert Image Placeholder: Azure Monitoring Dashboard (Grafana)]**  
-📷 **[Insert Image Placeholder: Security Architecture and DevSecOps Layers]**
+## Tech Stack
 
----
-
-## 🛠️ Technical Stack
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-archi.png"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
 
 | Component              | Tool/Service Used                        |
 |------------------------|------------------------------------------|
@@ -86,15 +100,15 @@ Final results and lessons learned were presented, highlighting:
 
 ---
 
-## 🔐 Security & Compliance
+## Security & Compliance
 
-- **TLS Encryption:** Cert Manager + Let’s Encrypt  
-- **Access Control:** RBAC, NSG rules, AppArmor profiles  
+- **HTTPS Encryption:** Cert Manager + Let’s Encrypt with nip.io  
+- **Access Control:** RBAC, Strict NSG rules
 - **Observability:** Real-time alerts, metrics via Better Stack + Grafana  
 - **Compliance Ready:** Aligns with Singapore’s PDPA requirements  
 
 
-## 🔍 Behind the Scenes – Technical Narrative
+## Behind the Scenes – Technical Narrative
 
 > “Moving from SaaS to IaaS wasn’t plug-and-play…”
 
@@ -102,24 +116,87 @@ We took extra steps to ensure that we were prioritising efficiency, as well as a
 
 - **Version-controlled experiments:** Every manifest change pushed to Git, enabling quick bisects when deployments broke.  
 - **Kubernetes from scratch:** Opted for Azure CLI + YAML over Helm/IaC frameworks for rapid iteration and learning AKS internals, and less focus on the additional tool of Helm, especially as we were uncertain of costs outcomes if done poorly (we had a budget of $100 Azure credits).  
-- **DNS & WAF headache:** Free nip.io wildcard DNS conflicted with ModSecurity side-car; reversing our progress could have given us the answer but we stuck to what was working. Looking back, with a full team available we could have experimented further. 
-- **Session-affinity surprise:** HPA (Horizontal Pod Autoscaling) scaled pods, but user carts dropped on refresh. Added cookie-based sticky sessions. Additionally, we had to add a readiness delay for each pod when the system scaled, so that It would not trigger users to the Odoo setup page as it was still loading data.  
+- **DNS & WAF headache:** The free nip.io wildcard DNS conflicted with all the WAF solutions we tried as it had issues with the NGINX setup. Reversing our progress could have allowed us to experiment and find a working WAF solution but we stuck to the setup we had and could not get it working. Looking back, if we had delegated and called for more manpower, we could have experimented further. We still made sure it was sufficiently secured even without the WAF. 
+- **Session-affinity surprise:** HPA (Horizontal Pod Autoscaling) scaled pods, but user carts dropped on refresh. We then added cookie-based sticky sessions. Additionally, we had to add a readiness delay for each pod when the system scaled, so that It would not trigger users to the Odoo setup page as it was still loading data. 
 
----
 
-## 💡 Reflections & Lessons Learned
+## Key Learnings  
 
-- Emphasised **business-first change design** rather than a generic lift-and-shift  
-- Deferred non-critical security tools (WAF) to ensure timely deployment  
-- Jira + Slack allowed **full traceability** across changes  
-- Clear role definitions and version-controlled configs made the process auditable and reproducible  
+- Adopting a **business-focused approach** to change design, rather than a simple lift-and-shift strategy, ensured we remained aligned with core migration objectives
+- Strategically postponing non-essential security components (WAF) enabled timely delivery while maintaining adequate security measures for the initial deployment
+- Integrating Jira and Slack created comprehensive **change traceability**, enhancing team accountability and coordination
+- Establishing clear role assignments and implementing version-controlled configurations resulted in a fully auditable and reproducible process
 
----
+## Extra Details on the Techincal implementation
 
-## 📊 Outcome Highlights
 
-- ✅ **Zero post-migration bugs**  
-- 🔄 **Rollback readiness and backup validation**  
-- 📉 **Cost reduced from $2000/month to $1227.76/month**  
-- 🧪 **All tests passed on load, memory, and CPU metrics**  
-- 📈 **Smooth migration with less than 4 hours of downtime**  
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-1.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-2.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-3.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-4.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-5.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-6.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/esmos-tech-7.svg"
+    width="900"
+    height="500"
+    alt="New solution architecture"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
