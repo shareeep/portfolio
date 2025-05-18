@@ -33,7 +33,23 @@ Our platform connects customers placing orders with runners who deliver them.
   />
 </div>
 
+### Role-Selector (Image)
+We colour coded the roles to be blue for placing orders, and green for delivering orders.
+<div className="flex justify-center my-8">
+  <Image
+    src="/images/projects/campusg-role-selector.png"
+    width="800"
+    height="450"
+    alt="CampusG landing page & signin"
+    className="rounded-lg shadow-md"
+  />
+</div>
+
+
+
 ### Placing an Order: 
+After adding the order details, the place order button will trigger the "Create Order Saga". It sends off the work to the backend, and returns a HTTP 202 Code (Accepted). The user is loaded to the order history page to view the order details at a glance.
+
 <div className="flex justify-center my-8">
     <Image
         src="/images/projects/campusg-create-order-saga.gif"
@@ -44,7 +60,9 @@ Our platform connects customers placing orders with runners who deliver them.
     />
 </div>
 
-### Accepting an Order: 
+### Accepting an Order & Receiving Status Updates: 
+Via the green profile (runner), accepting an order via the available orders page will allow the runner to fulfil the order, and provide updates on the status of the order. The accept order button on the initial frame triggers the "Accept Order Saga".
+
 <div className="flex justify-center my-8">
     <Image
         src="/images/projects/campusg-accept-order-saga.gif"
@@ -56,6 +74,7 @@ Our platform connects customers placing orders with runners who deliver them.
 </div>
 
 ### Completing an Order: 
+After going through all the required status updates, the runner can confirm the delivery of the item, triggering the "Complete Order Saga".
 <div className="flex justify-center my-8">
     <Image
         src="/images/projects/campusg-complete-order-saga.gif"
@@ -66,7 +85,10 @@ Our platform connects customers placing orders with runners who deliver them.
     />
 </div>
 
-### User's dashboard:
+### User's Dashboard (Image):
+Users can see their expenditure and their earnings, as well as make profile adjustments. Here, users can also add their payment method.
+
+
 <div className="flex justify-center my-8">
     <Image
         src="/images/projects/campusg-profile-page.png"
