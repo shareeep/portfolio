@@ -102,38 +102,24 @@ Our platform connects customers placing orders with runners who deliver them.
 
 ## Technical Breakdown
 
-### Tech Stack
+### System Architecture & Tech Stack
 
-- **Frontend**: React + Vite built using Bolt.new, later integrated with Backend
-- **Containerisation**: Docker
-- **Backend**: Flask
-- **Message Broker**: Kafka
-- **Database**: PostgreSQL
-- **Workflow Orchestrator**: Temporal (for Saga pattern)
-- **Authentication**: Clerk Auth
-- **Payment Processing**: Stripe Payment (via Stripe API)
+The following table summarizes the core components of CampusG, the technologies used, and their respective roles within the system:
 
-### Architecture & System Components
+| Component              | Technology / Tool                | Role / Description                                                                 |
+|------------------------|----------------------------------|------------------------------------------------------------------------------------|
+| **Frontend**           | React + Vite (Bolt.new)          | User interface for customers and runners                                           |
+| **User Service**       | Flask, Clerk Auth, Stripe API    | Profile management, authentication, and payment integration                        |
+| **Order Service**      | Flask                            | Manages order lifecycle and states                                                 |
+| **Payment Service**    | Flask, Stripe API                | Handles payment processing and fund transfers                                      |
+| **Notification Service** | Kafka, Grafana                 | Event logging and monitoring                                                       |
+| **Timer Service**      | Outsystems (REST API)            | Manages order timeouts and cancellations                                           |
+| **Message Broker**     | Kafka                            | Event-driven communication between microservices                                   |
+| **Workflow Orchestrator** | Temporal                      | Orchestrates Accept/Complete Order sagas                                           |
+| **Database**           | PostgreSQL (per microservice)    | Persistent storage for each microservice                                           |
+| **Containerization**   | Docker                           | Service isolation and deployment                                                   |
+| **External Services**  | Clerk, Stripe, Outsystems        | Authentication, payments, and timer management                                     |
 
-Our system follows a microservices architecture with three main saga patterns for complex transactions.
-
-### System Architecture
-
-- **Core Services:**
-    - **Frontend:** React/Vite UI for customers and runners
-    - **User Service:** Flask app for profile management and Clerk + Stripe integration
-    - **Order Service:** Flask app managing order lifecycle and states
-    - **Payment Service:** Flask app with Stripe payment processing
-    - **Notification Service:** Kafka-based event logging with Grafana monitoring
-    - **Timer Service:** Outsystems-based REST API Manages order timeouts and cancellations
-
-- **Infrastructure & Technologies:**
-    - **Message Broker:** Kafka for event-driven communication
-    - **Workflow Engine:** Temporal for Accept/Complete Order sagas
-    - **Database:** PostgreSQL Databases for each Microservice
-    - **Containerization:** Docker for service isolation
-    - **External Services:** Clerk (Authentication), Stripe (Payments), Outsystems (Timer service)
-    
 ### Saga Orchestrators
 
 ---
