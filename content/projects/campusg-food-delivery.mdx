@@ -252,7 +252,7 @@ While planning the project, we discovered a post from AWS on the Saga Orchestrat
 
 In fact, this diagram that closely resembled the steps our services would need to go through, as it involved an ordering process where issues could occur across multiple services with various data states to manage.
 
-Additioanlly, as most of the team lacked Java experience, we sought Python-based tools to assist with this implementation. We initially used a Pub-Sub system with Kafka to implement one of our Sagas (orchestration via Saga but with choreography-style execution). Later, we discovered a orchestration tool called Temporal and implemented two additional Sagas with it, more closely resembling the AWS Step Functions diagram.
+Additionally, as most of the team lacked Java experience, we sought Python-based tools to assist with this implementation. We initially used a Pub-Sub system with Kafka to implement one of our Sagas (orchestration via Saga but with choreography-style execution). Later, we discovered a orchestration tool called Temporal and implemented two additional Sagas with it, more closely resembling the AWS Step Functions diagram.
 
 We opted against AWS Step Functions as we were building our solution to run locally, and developing a fully cloud-hosted solution seemed daunting at that point.
 
