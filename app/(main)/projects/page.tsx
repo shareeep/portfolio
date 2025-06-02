@@ -75,12 +75,16 @@ export default function ProjectsPage() {
       }
     });
     
+    // Set initial categorized tags and filtered projects
     setCategorizedTags({
       scope: Array.from(uniqueTags.scope).sort(),
       tools: Array.from(uniqueTags.tools).sort(),
       focus: Array.from(uniqueTags.focus).sort()
     });
-    
+  }, [publishedProjects]);
+
+  // Set initial filtered projects only once
+  useEffect(() => {
     setFilteredProjects(publishedProjects);
   }, [publishedProjects]);
 
@@ -103,6 +107,25 @@ export default function ProjectsPage() {
       return newSelected;
     });
   };
+
+  // Close all dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const dropdowns = ['scope-dropdown', 'tools-dropdown', 'focus-dropdown'];
+      dropdowns.forEach(id => {
+        const dropdown = document.getElementById(id);
+        const target = event.target as Node;
+        if (dropdown && !dropdown.contains(target) && dropdown.parentNode !== target.parentNode) {
+          dropdown.classList.add('hidden');
+        }
+      });
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []); // Empty dependency array means this runs once on mount
 
   // Clear all selected tags
   const clearTags = () => {
@@ -150,7 +173,7 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="text-muted-foreground text-xl">
-            Here are some of the projects I have worked on. Content is managed using Velite and MDX.
+            Here are some of the projects I have worked on.
           </p>
         </div>
       </div>
@@ -161,24 +184,69 @@ export default function ProjectsPage() {
           <h2 className="mb-3 text-xl font-bold">Filter by:</h2>
           
           <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "scope" | "tools" | "focus")}>
-            <TabsList className="mb-4">
-              <TabsTrigger value="scope">Domain/Scope</TabsTrigger>
-              <TabsTrigger value="tools">Tools & Technologies</TabsTrigger>
-              <TabsTrigger value="focus">Work Focus</TabsTrigger>
+            {/* Responsive TabsList that stacks vertically on very small screens */}
+            <TabsList className="mb-4 flex w-full flex-wrap max-[400px]:flex-col max-[400px]:gap-1 md:flex-nowrap">
+              <TabsTrigger
+                value="scope"
+                className="min-w-[80px] flex-1 text-sm text-blue-700 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900 sm:text-base dark:text-blue-300 dark:data-[state=active]:bg-blue-900/40 dark:data-[state=active]:text-blue-50"
+              >
+                Domain/Scope
+              </TabsTrigger>
+              <TabsTrigger
+                value="tools"
+                className="min-w-[80px] flex-1 text-sm text-green-700 data-[state=active]:bg-green-100 data-[state=active]:text-green-900 sm:text-base dark:text-green-300 dark:data-[state=active]:bg-green-900/40 dark:data-[state=active]:text-green-50"
+              >
+                Tools & Tech
+              </TabsTrigger>
+              <TabsTrigger
+                value="focus"
+                className="min-w-[80px] flex-1 text-sm text-purple-700 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-900 sm:text-base dark:text-purple-300 dark:data-[state=active]:bg-purple-900/40 dark:data-[state=active]:text-purple-50"
+              >
+                Work Focus
+              </TabsTrigger>
             </TabsList>
             
             <TabsContent value="scope" className="mb-3">
-              <div className="mb-3 flex flex-wrap gap-2">
-                {categorizedTags.scope.map(tag => (
+              <div className="mb-3 flex flex-wrap gap-1 sm:gap-2">
+                {categorizedTags.scope.slice(0, 10).map(tag => (
                   <Badge
                     key={tag}
                     variant={selectedTags.scope.includes(tag) ? "default" : "outline"}
-                    className={`cursor-pointer text-sm ${selectedTags.scope.includes(tag) ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" : ""}`}
+                    className={`cursor-pointer px-2 py-1 text-xs sm:px-3 sm:py-1 sm:text-sm ${selectedTags.scope.includes(tag) ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" : "border-blue-200 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-900/30 hover:dark:text-blue-300"}`}
                     onClick={() => toggleTag(tag)}
                   >
                     {tag}
                   </Badge>
                 ))}
+                {categorizedTags.scope.length > 10 && (
+                  <div className="relative inline-block">
+                    <Badge
+                      variant="outline"
+                      className="cursor-pointer border-blue-200 px-2 py-1 text-xs text-blue-600 hover:bg-blue-100 sm:px-3 sm:py-1 sm:text-sm dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-900/30"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        document.getElementById('scope-dropdown')?.classList.toggle('hidden');
+                      }}
+                    >
+                      +{categorizedTags.scope.length - 10} more
+                    </Badge>
+                    <div id="scope-dropdown" className="bg-background absolute z-10 mt-2 hidden max-h-72 w-[calc(100vw-2rem)] max-w-xs overflow-y-auto rounded-md border py-2 shadow-lg sm:w-64">
+                      {categorizedTags.scope.slice(10).map(tag => (
+                        <div
+                          key={tag}
+                          className={`cursor-pointer px-4 py-3 text-base hover:bg-blue-100 dark:hover:bg-blue-900/30 ${selectedTags.scope.includes(tag) ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" : "text-blue-600 dark:text-blue-400"}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleTag(tag);
+                            document.getElementById('scope-dropdown')?.classList.add('hidden');
+                          }}
+                        >
+                          {tag}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               {selectedTags.scope.length > 0 && (
                 <Button variant="ghost" size="sm" onClick={() => clearCategoryTags("scope")} className="mt-2">
@@ -188,17 +256,46 @@ export default function ProjectsPage() {
             </TabsContent>
             
             <TabsContent value="tools" className="mb-3">
-              <div className="mb-3 flex flex-wrap gap-2">
-                {categorizedTags.tools.map(tag => (
+              <div className="mb-3 flex flex-wrap gap-1 sm:gap-2">
+                {categorizedTags.tools.slice(0, 10).map(tag => (
                   <Badge
                     key={tag}
                     variant={selectedTags.tools.includes(tag) ? "default" : "outline"}
-                    className={`cursor-pointer text-sm ${selectedTags.tools.includes(tag) ? "bg-green-600/40 text-green-900 dark:text-green-50" : ""}`}
+                    className={`cursor-pointer px-2 py-1 text-xs sm:px-3 sm:py-1 sm:text-sm ${selectedTags.tools.includes(tag) ? "bg-green-600/40 text-green-900 dark:text-green-50" : "border-green-200 text-green-600 hover:bg-green-100 hover:text-green-700 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-900/30 hover:dark:text-green-300"}`}
                     onClick={() => toggleTag(tag)}
                   >
                     {tag}
                   </Badge>
                 ))}
+                {categorizedTags.tools.length > 10 && (
+                  <div className="relative inline-block">
+                    <Badge
+                      variant="outline"
+                      className="cursor-pointer border-green-200 px-2 py-1 text-xs text-green-600 hover:bg-green-100 sm:px-3 sm:py-1 sm:text-sm dark:border-green-800 dark:text-green-400 dark:hover:bg-green-900/30"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        document.getElementById('tools-dropdown')?.classList.toggle('hidden');
+                      }}
+                    >
+                      +{categorizedTags.tools.length - 10} more
+                    </Badge>
+                    <div id="tools-dropdown" className="bg-background absolute z-10 mt-2 hidden max-h-72 w-[calc(100vw-2rem)] max-w-xs overflow-y-auto rounded-md border py-2 shadow-lg sm:w-64">
+                      {categorizedTags.tools.slice(10).map(tag => (
+                        <div
+                          key={tag}
+                          className={`cursor-pointer px-4 py-3 text-base hover:bg-green-100 dark:hover:bg-green-900/30 ${selectedTags.tools.includes(tag) ? "bg-green-600/40 text-green-900 dark:text-green-50" : "text-green-600 dark:text-green-400"}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleTag(tag);
+                            document.getElementById('tools-dropdown')?.classList.add('hidden');
+                          }}
+                        >
+                          {tag}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               {selectedTags.tools.length > 0 && (
                 <Button variant="ghost" size="sm" onClick={() => clearCategoryTags("tools")} className="mt-2">
@@ -208,17 +305,46 @@ export default function ProjectsPage() {
             </TabsContent>
             
             <TabsContent value="focus" className="mb-3">
-              <div className="mb-3 flex flex-wrap gap-2">
-                {categorizedTags.focus.map(tag => (
+              <div className="mb-3 flex flex-wrap gap-1 sm:gap-2">
+                {categorizedTags.focus.slice(0, 10).map(tag => (
                   <Badge
                     key={tag}
                     variant={selectedTags.focus.includes(tag) ? "default" : "outline"}
-                    className={`cursor-pointer text-sm ${selectedTags.focus.includes(tag) ? "bg-purple-600/40 text-purple-900 dark:text-purple-50" : ""}`}
+                    className={`cursor-pointer px-2 py-1 text-xs sm:px-3 sm:py-1 sm:text-sm ${selectedTags.focus.includes(tag) ? "bg-purple-600/40 text-purple-900 dark:text-purple-50" : "border-purple-200 text-purple-600 hover:bg-purple-100 hover:text-purple-700 dark:border-purple-800 dark:text-purple-400 dark:hover:bg-purple-900/30 hover:dark:text-purple-300"}`}
                     onClick={() => toggleTag(tag)}
                   >
                     {tag}
                   </Badge>
                 ))}
+                {categorizedTags.focus.length > 10 && (
+                  <div className="relative inline-block">
+                    <Badge
+                      variant="outline"
+                      className="cursor-pointer border-purple-200 px-2 py-1 text-xs text-purple-600 hover:bg-purple-100 sm:px-3 sm:py-1 sm:text-sm dark:border-purple-800 dark:text-purple-400 dark:hover:bg-purple-900/30"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        document.getElementById('focus-dropdown')?.classList.toggle('hidden');
+                      }}
+                    >
+                      +{categorizedTags.focus.length - 10} more
+                    </Badge>
+                    <div id="focus-dropdown" className="bg-background absolute z-10 mt-2 hidden max-h-72 w-[calc(100vw-2rem)] max-w-xs overflow-y-auto rounded-md border py-2 shadow-lg sm:w-64">
+                      {categorizedTags.focus.slice(10).map(tag => (
+                        <div
+                          key={tag}
+                          className={`cursor-pointer px-4 py-3 text-base hover:bg-purple-100 dark:hover:bg-purple-900/30 ${selectedTags.focus.includes(tag) ? "bg-purple-600/40 text-purple-900 dark:text-purple-50" : "text-purple-600 dark:text-purple-400"}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleTag(tag);
+                            document.getElementById('focus-dropdown')?.classList.add('hidden');
+                          }}
+                        >
+                          {tag}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               {selectedTags.focus.length > 0 && (
                 <Button variant="ghost" size="sm" onClick={() => clearCategoryTags("focus")} className="mt-2">
@@ -239,17 +365,17 @@ export default function ProjectsPage() {
               </div>
               <div className="mt-2 flex flex-wrap gap-2">
                 {selectedTags.scope.map(tag => (
-                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-blue-600/40 text-sm text-blue-900 dark:text-blue-50">
+                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-blue-600/40 text-xs text-blue-900 sm:text-sm dark:text-blue-50">
                     {tag} <span onClick={() => toggleTag(tag)} className="ml-1 text-xs font-bold">×</span>
                   </Badge>
                 ))}
                 {selectedTags.tools.map(tag => (
-                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-green-600/40 text-sm text-green-900 dark:text-green-50">
+                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-green-600/40 text-xs text-green-900 sm:text-sm dark:text-green-50">
                     {tag} <span onClick={() => toggleTag(tag)} className="ml-1 text-xs font-bold">×</span>
                   </Badge>
                 ))}
                 {selectedTags.focus.map(tag => (
-                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-purple-600/40 text-sm text-purple-900 dark:text-purple-50">
+                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-purple-600/40 text-xs text-purple-900 sm:text-sm dark:text-purple-50">
                     {tag} <span onClick={() => toggleTag(tag)} className="ml-1 text-xs font-bold">×</span>
                   </Badge>
                 ))}

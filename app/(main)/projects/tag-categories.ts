@@ -44,14 +44,12 @@ export const tagCategories = {
     "Figma"
   ],
   focus: [
-    "Digital Transformation", 
-    "Solution Architecture", 
-    "Web Application", 
+    "Digital Transformation",
+    "Solution Architecture",
+    "Web Application",
     "Mobile Application",
     "Machine Learning",
-    "Computer Vision",
-    "Recommender Systems",
-    "Cloud Migration", 
+    "Cloud Migration",
     "Design Thinking",
     "Prototyping",
     "DevSecOps"
@@ -111,14 +109,11 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "Web Application": "focus",
   "Mobile Application": "focus",
   "Machine Learning": "focus",
-  "Computer Vision": "focus",
-  "Recommender Systems": "focus",
   "Cloud Migration": "focus",
-  "Design Thinking": "focus", 
+  "Design Thinking": "focus",
   "Prototyping": "focus",
   "DevSecOps": "focus",
   "AutoRec": "focus",
-  "User Research": "focus",
   "UX Design": "focus",
   "Cybersecurity": "focus"
 };
