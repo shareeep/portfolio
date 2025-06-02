@@ -1,3 +1,4 @@
+import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
@@ -7,6 +8,8 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { formatDate } from "@/lib/utils" // Assuming a formatDate utility exists
 import { Icons } from "@/components/icons" // Import Icons
+import { Badge } from "@/components/ui/badge" // Import Badge for tags
+import { getTagCategory, categorizeProjectTags } from "./projects/tag-categories" // Import tag categorization utilities
 
 export default async function IndexPage() {
   const sortedPublishedProjects = projects
@@ -151,6 +154,57 @@ export default async function IndexPage() {
                   </AspectRatio>
                 )}
                 <h3 className="font-heading text-xl">{project.title}</h3>
+                {project.tags && project.tags.length > 0 && (
+                  <div className="mb-2 mt-1 flex flex-wrap gap-1">
+                    {/* Display representative tags from each category */}
+                    {(() => {
+                      // Categorize the project tags
+                      const categorized = categorizeProjectTags(project.tags);
+                      
+                      // Create an array to hold representative tags
+                      const representativeTags: React.ReactNode[] = [];
+                      
+                      // Add one tag from each category if available
+                      if (categorized.scope.length > 0) {
+                        representativeTags.push(
+                          <Badge key={`scope-${categorized.scope[0]}`} variant="secondary" className="bg-blue-600/40 text-xs text-blue-900 dark:text-blue-50">
+                            {categorized.scope[0]}
+                          </Badge>
+                        );
+                      }
+                      
+                      if (categorized.tools.length > 0) {
+                        representativeTags.push(
+                          <Badge key={`tools-${categorized.tools[0]}`} variant="secondary" className="bg-green-600/40 text-xs text-green-900 dark:text-green-50">
+                            {categorized.tools[0]}
+                          </Badge>
+                        );
+                      }
+                      
+                      if (categorized.focus.length > 0) {
+                        representativeTags.push(
+                          <Badge key={`focus-${categorized.focus[0]}`} variant="secondary" className="bg-purple-600/40 text-xs text-purple-900 dark:text-purple-50">
+                            {categorized.focus[0]}
+                          </Badge>
+                        );
+                      }
+                      
+                      // If there are more tags than what we're showing
+                      const totalTags = project.tags.length;
+                      const shownTags = representativeTags.length;
+                      
+                      if (totalTags > shownTags) {
+                        representativeTags.push(
+                          <Badge key="more" variant="outline" className="text-xs">
+                            +{totalTags - shownTags} more
+                          </Badge>
+                        );
+                      }
+                      
+                      return representativeTags;
+                    })()}
+                  </div>
+                )}
                 {project.description && (
                   <p className="text-muted-foreground text-sm">{project.description}</p>
                 )}

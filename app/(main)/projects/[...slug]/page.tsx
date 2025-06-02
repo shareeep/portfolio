@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 // Updated import: using 'projects' and 'Project' type
-import { authors as allAuthors, projects as allProjects, type Project } from "#site/content" 
+import { authors as allAuthors, projects as allProjects, type Project } from "#site/content"
+import { getTagCategory } from "../tag-categories" // Import tag categorization utility
 
 import { Mdx } from "@/components/mdx-components"
 
@@ -9,6 +10,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
+import { Badge } from "@/components/ui/badge" // Import Badge for tags
 
 import { env } from "@/env.mjs"
 import { siteConfig } from "@/config/site" // Added import
@@ -122,8 +124,29 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </time>
         )}
         <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
-          {project.title} 
+          {project.title}
         </h1>
+        {project.tags && project.tags.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1">
+            {project.tags.map((tag) => {
+              const category = getTagCategory(tag);
+              const colorClass =
+                category === "scope" ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" :
+                category === "tools" ? "bg-green-600/40 text-green-900 dark:text-green-50" :
+                "bg-purple-600/40 text-purple-900 dark:text-purple-50";
+              
+              return (
+                <Badge
+                  key={tag}
+                  variant="secondary"
+                  className={`text-sm ${colorClass}`}
+                >
+                  {tag}
+                </Badge>
+              );
+            })}
+          </div>
+        )}
         {authors?.length ? (
           <div className="mt-4 flex space-x-4">
             {authors.map((author) => {

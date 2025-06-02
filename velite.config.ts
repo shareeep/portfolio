@@ -52,6 +52,7 @@ const projects = defineCollection({ // Renamed from posts
       published: s.boolean().default(true),
       image: s.string().max(99).optional(), // Made image optional just in case
       authors: s.array(s.string()),
+      tags: s.array(s.string()).optional(), // New field for tags
       body: s.mdx(),
     })
     .transform(computedFields),

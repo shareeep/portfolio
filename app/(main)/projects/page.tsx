@@ -1,23 +1,146 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
 import { compareDesc } from "date-fns"
 import { projects as allProjects } from "#site/content" // Updated import
+import { useState, useEffect } from "react"
 
 import { formatDate } from "@/lib/utils"
 import { siteConfig } from "@/config/site" // Added import
+import { Badge } from "@/components/ui/badge" // Import Badge for tags
+import { Button } from "@/components/ui/button" // Import Button for clear filters
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  tagCategories,
+  tagCategoryMap,
+  getTagCategory,
+  categorizeProjectTags
+} from "./tag-categories"
 
-export const metadata = {
-  title: "Projects", // Updated title
-  metadataBase: new URL(siteConfig.url),
-}
+// We need to move metadata to a separate file since we're using client components
+// Created via static metadata.ts file (will create it after this)
 
-export default async function ProjectsPage() { // Renamed component
-  const projects = allProjects // Renamed variable
-    .filter((project) => project.published) // Renamed loop variable
+export default function ProjectsPage() {
+  // State for categorized tags
+  const [categorizedTags, setCategorizedTags] = useState<{
+    scope: string[];
+    tools: string[];
+    focus: string[];
+  }>({
+    scope: [],
+    tools: [],
+    focus: []
+  });
+  
+  // State for selected tags by category
+  const [selectedTags, setSelectedTags] = useState<{
+    scope: string[];
+    tools: string[];
+    focus: string[];
+  }>({
+    scope: [],
+    tools: [],
+    focus: []
+  });
+  
+  // State for active filter tab
+  const [activeTab, setActiveTab] = useState<"scope" | "tools" | "focus">("scope");
+  
+  // State for filtered projects
+  const [filteredProjects, setFilteredProjects] = useState<typeof publishedProjects>([]);
+
+  // Get all published projects and sort them by date
+  const publishedProjects = allProjects
+    .filter((project) => project.published)
     .sort((a, b) => {
       return compareDesc(new Date(a.date), new Date(b.date))
-    })
+    });
+
+  // Extract and categorize all unique tags from projects
+  useEffect(() => {
+    const uniqueTags = {
+      scope: new Set<string>(),
+      tools: new Set<string>(),
+      focus: new Set<string>()
+    };
+    
+    publishedProjects.forEach(project => {
+      if (project.tags && project.tags.length > 0) {
+        project.tags.forEach(tag => {
+          const category = getTagCategory(tag);
+          uniqueTags[category].add(tag);
+        });
+      }
+    });
+    
+    setCategorizedTags({
+      scope: Array.from(uniqueTags.scope).sort(),
+      tools: Array.from(uniqueTags.tools).sort(),
+      focus: Array.from(uniqueTags.focus).sort()
+    });
+    
+    setFilteredProjects(publishedProjects);
+  }, [publishedProjects]);
+
+  // Toggle tag selection
+  const toggleTag = (tag: string) => {
+    const category = getTagCategory(tag);
+    
+    setSelectedTags(prev => {
+      // Create a copy of the previous state
+      const newSelected = { ...prev };
+      
+      // If tag is already selected, remove it
+      if (newSelected[category].includes(tag)) {
+        newSelected[category] = newSelected[category].filter(t => t !== tag);
+      } else {
+        // Otherwise add it
+        newSelected[category] = [...newSelected[category], tag];
+      }
+      
+      return newSelected;
+    });
+  };
+
+  // Clear all selected tags
+  const clearTags = () => {
+    setSelectedTags({
+      scope: [],
+      tools: [],
+      focus: []
+    });
+  };
+  
+  // Clear selected tags for a specific category
+  const clearCategoryTags = (category: "scope" | "tools" | "focus") => {
+    setSelectedTags(prev => ({
+      ...prev,
+      [category]: []
+    }));
+  };
+
+  // Filter projects based on selected tags
+  useEffect(() => {
+    const allSelectedTags = [
+      ...selectedTags.scope,
+      ...selectedTags.tools,
+      ...selectedTags.focus
+    ];
+    
+    if (allSelectedTags.length === 0) {
+      // If no tags selected, show all projects
+      setFilteredProjects(publishedProjects);
+    } else {
+      // Filter projects that have ALL selected tags (AND logic)
+      const filtered = publishedProjects.filter(project => {
+        if (!project.tags) return false;
+        return allSelectedTags.every(tag => project.tags?.includes(tag) || false);
+      });
+      setFilteredProjects(filtered);
+    }
+  }, [selectedTags, publishedProjects]);
 
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
@@ -31,11 +154,116 @@ export default async function ProjectsPage() { // Renamed component
           </p>
         </div>
       </div>
-      <hr className="my-8" />
-      {projects?.length ? ( // Renamed variable
+      
+      {/* Tag filter section */}
+      {(categorizedTags.scope.length > 0 || categorizedTags.tools.length > 0 || categorizedTags.focus.length > 0) && (
+        <div className="my-6">
+          <h2 className="mb-3 text-xl font-bold">Filter by:</h2>
+          
+          <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "scope" | "tools" | "focus")}>
+            <TabsList className="mb-4">
+              <TabsTrigger value="scope">Domain/Scope</TabsTrigger>
+              <TabsTrigger value="tools">Tools & Technologies</TabsTrigger>
+              <TabsTrigger value="focus">Work Focus</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="scope" className="mb-3">
+              <div className="mb-3 flex flex-wrap gap-2">
+                {categorizedTags.scope.map(tag => (
+                  <Badge
+                    key={tag}
+                    variant={selectedTags.scope.includes(tag) ? "default" : "outline"}
+                    className={`cursor-pointer text-sm ${selectedTags.scope.includes(tag) ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" : ""}`}
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              {selectedTags.scope.length > 0 && (
+                <Button variant="ghost" size="sm" onClick={() => clearCategoryTags("scope")} className="mt-2">
+                  Clear scope filters
+                </Button>
+              )}
+            </TabsContent>
+            
+            <TabsContent value="tools" className="mb-3">
+              <div className="mb-3 flex flex-wrap gap-2">
+                {categorizedTags.tools.map(tag => (
+                  <Badge
+                    key={tag}
+                    variant={selectedTags.tools.includes(tag) ? "default" : "outline"}
+                    className={`cursor-pointer text-sm ${selectedTags.tools.includes(tag) ? "bg-green-600/40 text-green-900 dark:text-green-50" : ""}`}
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              {selectedTags.tools.length > 0 && (
+                <Button variant="ghost" size="sm" onClick={() => clearCategoryTags("tools")} className="mt-2">
+                  Clear tools filters
+                </Button>
+              )}
+            </TabsContent>
+            
+            <TabsContent value="focus" className="mb-3">
+              <div className="mb-3 flex flex-wrap gap-2">
+                {categorizedTags.focus.map(tag => (
+                  <Badge
+                    key={tag}
+                    variant={selectedTags.focus.includes(tag) ? "default" : "outline"}
+                    className={`cursor-pointer text-sm ${selectedTags.focus.includes(tag) ? "bg-purple-600/40 text-purple-900 dark:text-purple-50" : ""}`}
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              {selectedTags.focus.length > 0 && (
+                <Button variant="ghost" size="sm" onClick={() => clearCategoryTags("focus")} className="mt-2">
+                  Clear focus filters
+                </Button>
+              )}
+            </TabsContent>
+          </Tabs>
+          
+          {/* Active filters section */}
+          {(selectedTags.scope.length > 0 || selectedTags.tools.length > 0 || selectedTags.focus.length > 0) && (
+            <div className="mt-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-md font-medium">Active filters:</h3>
+                <Button variant="ghost" size="sm" onClick={clearTags}>
+                  Clear all filters
+                </Button>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {selectedTags.scope.map(tag => (
+                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-blue-600/40 text-sm text-blue-900 dark:text-blue-50">
+                    {tag} <span onClick={() => toggleTag(tag)} className="ml-1 text-xs font-bold">×</span>
+                  </Badge>
+                ))}
+                {selectedTags.tools.map(tag => (
+                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-green-600/40 text-sm text-green-900 dark:text-green-50">
+                    {tag} <span onClick={() => toggleTag(tag)} className="ml-1 text-xs font-bold">×</span>
+                  </Badge>
+                ))}
+                {selectedTags.focus.map(tag => (
+                  <Badge key={tag} variant="default" className="flex cursor-pointer items-center gap-1 bg-purple-600/40 text-sm text-purple-900 dark:text-purple-50">
+                    {tag} <span onClick={() => toggleTag(tag)} className="ml-1 text-xs font-bold">×</span>
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      
+      <hr className="my-6" />
+      
+      {filteredProjects.length ? (
         <div className="grid gap-10 sm:grid-cols-2">
-          {/* TODO: Update this map to use ProjectItem component if it exists */}
-          {projects.map((project, index) => ( // Renamed variable and loop variable
+          {filteredProjects.map((project, index) => (
             <article // This might be replaced by <ProjectItem key={...} project={...} />
               key={project.slug} // Renamed loop variable
               className="group relative flex flex-col space-y-2"
@@ -51,7 +279,28 @@ export default async function ProjectsPage() { // Renamed component
                   />
                 </AspectRatio>
               )}
-              <h2 className="text-2xl font-extrabold">{project.title}</h2> 
+              <h2 className="text-2xl font-extrabold">{project.title}</h2>
+              {project.tags && project.tags.length > 0 && (
+                <div className="my-2 flex flex-wrap gap-1">
+                  {project.tags.map((tag) => {
+                    const category = getTagCategory(tag);
+                    const colorClass =
+                      category === "scope" ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" :
+                      category === "tools" ? "bg-green-600/40 text-green-900 dark:text-green-50" :
+                      "bg-purple-600/40 text-purple-900 dark:text-purple-50";
+                    
+                    return (
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className={`text-xs ${colorClass}`}
+                      >
+                        {tag}
+                      </Badge>
+                    );
+                  })}
+                </div>
+              )}
               {project.description && ( // Renamed loop variable
                 <p className="text-muted-foreground">{project.description}</p> // Renamed loop variable
               )}

@@ -20,3 +20,45 @@ Key interests and focus areas reflected in this portfolio:
 - Styled with Tailwind CSS
 - Content managed with MDX
 - Responsive Design
+- Categorized project tag system with filtering capabilities
+
+## Project Tag System
+
+This portfolio features a comprehensive tag system to help recruiters and visitors quickly identify the technologies and skills showcased in each project:
+
+### Tag Categories
+
+Tags are organized into three main categories:
+
+- **Scope/Domain**: Frontend, Backend, AI/ML, UI/UX, Cloud, Security, etc.
+- **Tools/Technologies**: React, Vue.js, Flask, PostgreSQL, Docker, AWS, etc.
+- **Work Focus**: Web Application, Digital Transformation, Solution Architecture, etc.
+
+### Filtering Capabilities
+
+The projects page features a tabbed interface that lets visitors:
+
+- Filter projects by scope, tools, or work focus
+- See active filters with easy removal options
+- Find projects that match specific technical requirements
+
+### Home Page Display
+
+The home page shows representative tags from each category with color coding:
+- Blue for Scope/Domain tags
+- Green for Tools/Technologies tags
+- Purple for Work Focus tags
+
+### Adding Tags to Projects
+
+Tags are defined in each project's MDX frontmatter:
+
+```yaml
+---
+title: "Project Title"
+# other frontmatter fields...
+tags: ["Frontend", "React", "Web Application"]
+---
+```
+
+The tag categorization system automatically sorts these tags into the appropriate categories.
