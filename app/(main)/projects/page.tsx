@@ -2,15 +2,15 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { compareDesc } from "date-fns"
-import { projects as allProjects } from "#site/content" // Updated import
-import { useState, useEffect } from "react"
+import { projects as allProjects } from "#site/content"
+import { useState, useEffect, useMemo } from "react"
 
 import { formatDate } from "@/lib/utils"
-import { siteConfig } from "@/config/site" // Added import
-import { Badge } from "@/components/ui/badge" // Import Badge for tags
-import { Button } from "@/components/ui/button" // Import Button for clear filters
+import { siteConfig } from "@/config/site"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   tagCategories,
@@ -18,9 +18,6 @@ import {
   getTagCategory,
   categorizeProjectTags
 } from "./tag-categories"
-
-// We need to move metadata to a separate file since we're using client components
-// Created via static metadata.ts file (will create it after this)
 
 export default function ProjectsPage() {
   // State for categorized tags
@@ -60,14 +57,16 @@ export default function ProjectsPage() {
   });
   
   // State for filtered projects
-  const [filteredProjects, setFilteredProjects] = useState<typeof publishedProjects>([]);
+  const [filteredProjects, setFilteredProjects] = useState<typeof allProjects>([]);
 
-  // Get all published projects and sort them by date
-  const publishedProjects = allProjects
-    .filter((project) => project.published)
-    .sort((a, b) => {
-      return compareDesc(new Date(a.date), new Date(b.date))
-    });
+  // Memoize published projects to prevent infinite re-renders
+  const publishedProjects = useMemo(() => {
+    return allProjects
+      .filter((project) => project.published)
+      .sort((a, b) => {
+        return compareDesc(new Date(a.date), new Date(b.date))
+      });
+  }, []);
 
   // Extract and categorize all unique tags from projects
   useEffect(() => {
@@ -92,10 +91,8 @@ export default function ProjectsPage() {
       tools: Array.from(uniqueTags.tools).sort(),
       focus: Array.from(uniqueTags.focus).sort()
     });
-  }, [publishedProjects]);
-
-  // Set initial filtered projects only once
-  useEffect(() => {
+    
+    // Set initial filtered projects
     setFilteredProjects(publishedProjects);
   }, [publishedProjects]);
 
