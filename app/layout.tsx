@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Analytics />
           <Toaster />
           <TailwindIndicator />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
