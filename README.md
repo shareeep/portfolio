@@ -1,6 +1,9 @@
 # Shariff's Portfolio
 
-Welcome to the repository for my portfolio website!
+Welcome to the repository of my portfolio website! Here, I make frequent changes to the development (dev) branch before merging to main (prod). Feel free to fork and use it as a template for your own portfolio.
+
+## About
+
 This site showcases my projects and journey as a software developer.
 
 ## Description & Features
@@ -25,7 +28,7 @@ Run the development server:
 pnpm dev
 ```
 
-Website will be running on [http://localhost:3000](http://localhost:3000).
+Website will be running on [http://localhost:3000](http://localhost:3000)
 
 ## Deployment
 
