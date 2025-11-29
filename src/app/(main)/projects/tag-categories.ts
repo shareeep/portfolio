@@ -19,7 +19,16 @@ export const tagCategories = {
     "DevOps", 
     "Cloud",
     "Security",
-    "Data Analysis"
+    "Data Analysis",
+    "Big Data",
+    "Data Engineering",
+    "NLP",
+    "Generative AI",
+    "Gen AI",
+    "Computer Vision",
+    "Project Management",
+    "Agile",
+    "Quality Assurance"
   ],
   tools: [
     "React", 
@@ -41,7 +50,23 @@ export const tagCategories = {
     "AWS", 
     "Azure",
     "YOLO",
-    "Figma"
+    "Figma",
+    "Apache Spark",
+    "PySpark",
+    "AWS Glue",
+    "AWS Athena",
+    "AWS EMR",
+    "YOLOv11",
+    "Transformers",
+    "BERT",
+    "LoRA",
+    "PyTorch",
+    "Ollama",
+    "FastAPI",
+    "Next.js",
+    "Jira",
+    "GitHub Actions",
+    "RAG"
   ],
   focus: [
     "Digital Transformation",
@@ -52,7 +77,20 @@ export const tagCategories = {
     "Cloud Migration",
     "Design Thinking",
     "Prototyping",
-    "DevSecOps"
+    "DevSecOps",
+    "Hate Speech",
+    "Sarcasm Detection",
+    "Multi-task Learning",
+    "Fine-tuning",
+    "Recommender Systems",
+    "User Research",
+    "Scrum",
+    "CI/CD",
+    "Feature Engineering",
+    "Classification",
+    "URL Analysis",
+    "Privacy",
+    "Healthcare"
   ]
 };
 
@@ -69,6 +107,15 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "Cloud": "scope",
   "Security": "scope",
   "Data Analysis": "scope",
+  "Big Data": "scope",
+  "Data Engineering": "scope",
+  "NLP": "scope",
+  "Generative AI": "scope",
+  "Gen AI": "scope",
+  "Computer Vision": "scope",
+  "Project Management": "scope",
+  "Agile": "scope",
+  "Quality Assurance": "scope",
   
   // Tools & Technologies
   "React": "tools",
@@ -102,6 +149,21 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "Classification": "tools",
   "URL Analysis": "tools",
   "Feature Engineering": "tools",
+  "Apache Spark": "tools",
+  "PySpark": "tools",
+  "AWS Glue": "tools",
+  "AWS Athena": "tools",
+  "AWS EMR": "tools",
+  "Transformers": "tools",
+  "BERT": "tools",
+  "LoRA": "tools",
+  "PyTorch": "tools",
+  "Ollama": "tools",
+  "FastAPI": "tools",
+  "Next.js": "tools",
+  "Jira": "tools",
+  "GitHub Actions": "tools",
+  "RAG": "tools",
   
   // Work Focus
   "Digital Transformation": "focus",
@@ -115,7 +177,17 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "DevSecOps": "focus",
   "AutoRec": "focus",
   "UX Design": "focus",
-  "Cybersecurity": "focus"
+  "Cybersecurity": "focus",
+  "Hate Speech": "focus",
+  "Sarcasm Detection": "focus",
+  "Multi-task Learning": "focus",
+  "Fine-tuning": "focus",
+  "Recommender Systems": "focus",
+  "User Research": "focus",
+  "Scrum": "focus",
+  "CI/CD": "focus",
+  "Privacy": "focus",
+  "Healthcare": "focus"
 };
 
 /**
