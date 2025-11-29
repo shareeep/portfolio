@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 // Updated import: using 'projects' and 'Project' type
 import { authors as allAuthors, projects as allProjects, type Project } from "#site/content"
-import { getTagCategory } from "../tag-categories" // Import tag categorization utility
+import { getTagCategory, sortTags } from "../tag-categories" // Import tag categorization utility
 
 import { Mdx } from "@/components/mdx-components"
 
@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </h1>
         {project.tags && project.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1">
-            {project.tags.map((tag) => {
+            {sortTags(project.tags).map((tag) => {
               const category = getTagCategory(tag);
               const colorClass =
                 category === "scope" ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" :

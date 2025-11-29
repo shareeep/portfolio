@@ -16,7 +16,8 @@ import {
   tagCategories,
   tagCategoryMap,
   getTagCategory,
-  categorizeProjectTags
+  categorizeProjectTags,
+  sortTags
 } from "./tag-categories"
 
 export default function ProjectsPage() {
@@ -345,7 +346,7 @@ export default function ProjectsPage() {
               <h2 className="text-2xl font-extrabold">{project.title}</h2>
               {project.tags && project.tags.length > 0 && (
                 <div className="my-2 flex flex-wrap gap-1">
-                  {project.tags.map((tag) => {
+                  {sortTags(project.tags).map((tag) => {
                     const category = getTagCategory(tag);
                     const colorClass =
                       category === "scope" ? "bg-blue-600/40 text-blue-900 dark:text-blue-50" :

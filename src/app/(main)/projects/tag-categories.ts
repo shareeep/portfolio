@@ -24,7 +24,6 @@ export const tagCategories = {
     "Data Engineering",
     "NLP",
     "Generative AI",
-    "Gen AI",
     "Computer Vision",
     "Project Management",
     "Agile",
@@ -56,7 +55,6 @@ export const tagCategories = {
     "AWS Glue",
     "AWS Athena",
     "AWS EMR",
-    "YOLOv11",
     "Transformers",
     "BERT",
     "LoRA",
@@ -69,28 +67,26 @@ export const tagCategories = {
     "RAG"
   ],
   focus: [
-    "Digital Transformation",
     "Solution Architecture",
-    "Web Application",
-    "Mobile Application",
-    "Machine Learning",
     "Cloud Migration",
-    "Design Thinking",
-    "Prototyping",
     "DevSecOps",
-    "Hate Speech",
-    "Sarcasm Detection",
-    "Multi-task Learning",
-    "Fine-tuning",
-    "Recommender Systems",
-    "User Research",
-    "Scrum",
     "CI/CD",
+    "Scrum",
+    "Design Thinking",
+    "User Research",
+    "Prototyping",
+    "Fine-tuning",
+    "RAG",
+    "Multi-task Learning",
+    "Recommender Systems",
     "Feature Engineering",
     "Classification",
-    "URL Analysis",
-    "Privacy",
-    "Healthcare"
+    "Microservices",
+    "Data Pipelines",
+    "Predictive Modelling",
+    "NER",
+    "Prompt Engineering",
+    "Serverless"
   ]
 };
 
@@ -111,7 +107,6 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "Data Engineering": "scope",
   "NLP": "scope",
   "Generative AI": "scope",
-  "Gen AI": "scope",
   "Computer Vision": "scope",
   "Project Management": "scope",
   "Agile": "scope",
@@ -137,7 +132,6 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "AWS": "tools",
   "Azure": "tools",
   "YOLO": "tools",
-  "YOLOv11": "tools",
   "Figma": "tools",
   "Clerk Auth": "tools",
   "Stripe API": "tools",
@@ -145,10 +139,6 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "ITIL": "tools",
   "IaaS": "tools",
   "Odoo": "tools",
-  "Microservices": "tools",
-  "Classification": "tools",
-  "URL Analysis": "tools",
-  "Feature Engineering": "tools",
   "Apache Spark": "tools",
   "PySpark": "tools",
   "AWS Glue": "tools",
@@ -163,31 +153,29 @@ export const tagCategoryMap: Record<string, "scope" | "tools" | "focus"> = {
   "Next.js": "tools",
   "Jira": "tools",
   "GitHub Actions": "tools",
-  "RAG": "tools",
+  "LLM": "tools",
   
-  // Work Focus
-  "Digital Transformation": "focus",
+  // Work Focus (Technical Methodologies & Architecture)
   "Solution Architecture": "focus",
-  "Web Application": "focus",
-  "Mobile Application": "focus",
-  "Machine Learning": "focus",
   "Cloud Migration": "focus",
-  "Design Thinking": "focus",
-  "Prototyping": "focus",
   "DevSecOps": "focus",
-  "AutoRec": "focus",
-  "UX Design": "focus",
-  "Cybersecurity": "focus",
-  "Hate Speech": "focus",
-  "Sarcasm Detection": "focus",
-  "Multi-task Learning": "focus",
-  "Fine-tuning": "focus",
-  "Recommender Systems": "focus",
-  "User Research": "focus",
-  "Scrum": "focus",
   "CI/CD": "focus",
-  "Privacy": "focus",
-  "Healthcare": "focus"
+  "Scrum": "focus",
+  "Design Thinking": "focus",
+  "User Research": "focus",
+  "Prototyping": "focus",
+  "Fine-tuning": "focus",
+  "RAG": "focus",
+  "Multi-task Learning": "focus",
+  "Recommender Systems": "focus",
+  "Feature Engineering": "focus",
+  "Classification": "focus",
+  "Microservices": "focus",
+  "Data Pipelines": "focus",
+  "Predictive Modelling": "focus",
+  "NER": "focus",
+  "Prompt Engineering": "focus",
+  "Serverless": "focus"
 };
 
 /**
@@ -232,4 +220,30 @@ export function getRepresentativeTags(tags: string[]) {
     tools: categorized.tools[0] || null,
     focus: categorized.focus[0] || null
   };
+}
+
+/**
+ * Sort tags by category priority: Scope (Blue) -> Tools (Green) -> Focus (Purple)
+ * @param tags Array of tags to sort
+ * @returns Sorted array of tags
+ */
+export function sortTags(tags: string[]): string[] {
+  const categoryPriority = {
+    scope: 0,
+    tools: 1,
+    focus: 2
+  };
+
+  return [...tags].sort((a, b) => {
+    const catA = getTagCategory(a);
+    const catB = getTagCategory(b);
+    
+    // First sort by category priority
+    if (categoryPriority[catA] !== categoryPriority[catB]) {
+      return categoryPriority[catA] - categoryPriority[catB];
+    }
+    
+    // Then sort alphabetically within category
+    return a.localeCompare(b);
+  });
 }
