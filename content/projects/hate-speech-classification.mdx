@@ -1,0 +1,84 @@
+---
+title: Hate Speech Classification with Transformers
+description: An investigation into fine-tuning strategies (Full vs. LoRA) for hate speech classification using RoBERTa, BERT, and HateBERT on the HateXplain dataset.
+image: /images/projects/hate-speech-classification-cover.png
+date: "2025-10-18"
+authors:
+  - shariff-rashid
+tags: ["NLP", "Transformers", "BERT", "LoRA", "Fine-tuning", "Hate Speech", "Machine Learning", "Gen AI"]]
+---
+
+## Introduction
+
+This project investigates various approaches to classifying hate speech, with an emphasis on fine-tuning techniques such as full fine-tuning and LoRA (Low-Rank Adaptation). For comparative purposes, I also evaluate a model pre-trained specifically on a hate speech dataset. Additionally, experiments were done to determine the best set of training parameters to be used.
+
+## Dataset: HateXplain
+
+The primary objective is to categorize text into three distinct classes: **"hatespeech"**, **"normal"**, or **"offensive"**.
+
+*   **Normal:** Non-abusive and neutral.
+*   **Hate:** Expresses prejudice or harm towards a specific group (e.g., based on race, religion, gender).
+*   **Offensive:** Abusive language, slurs, or rudeness that does not clearly target a specific group with prejudice.
+
+The dataset is approximately divided into roughly 15,000 for training, 2,000 for testing, and 2,000 for validation.
+
+## Model Choice and Design Decisions
+
+For this text classification task, encoder-only transformer models such as **RoBERTa** and **BERT** were chosen. Unlike decoder-only models, encoder models process input text non-autoregressively, building a rich representation ideal for classification.
+
+**Key Design Decisions:**
+1.  **Pre-trained Models:** Leveraging `roberta-base` and `bert-base-uncased` to reduce computational resources.
+2.  **Fine-tuning Approaches:** Comparing Full Fine-tuning vs. LoRA (Low-Rank Adaptation).
+3.  **Weighted Cross-Entropy Loss:** Implemented to address class imbalance (Hate: ~4.7k, Normal: ~6.2k, Offensive: ~4.3k).
+4.  **Evaluation Metrics:** Accuracy and Macro F1-score (crucial for imbalanced datasets).
+
+## Experiments
+
+### Experiment 1: Evaluation Across Four Transformer Models
+I evaluated four models under identical training conditions (LR=2e-5, 4 Epochs, Batch Size=16).
+
+| Model | Macro F1 | Accuracy |
+| :--- | :--- | :--- |
+| **RoBERTa Base** | **0.689** | **0.694** |
+| BERT Base Uncased | 0.681 | 0.687 |
+| GroNLP/HateBERT | 0.680 | 0.686 |
+| ELECTRA Base | 0.679 | 0.688 |
+
+**Result:** RoBERTa Base achieved the best performance, surpassing even the domain-specific HateBERT.
+
+### Experiment 2: Pre-trained vs. Fine-tuned RoBERTa Base
+Comparing the "off-the-shelf" RoBERTa against my fine-tuned version:
+
+| Model | Macro F1 (Before) | Accuracy (Before) | Macro F1 (After) | Accuracy (After) |
+| :--- | :--- | :--- | :--- | :--- |
+| RoBERTa Base | 0.268 | 0.364 | **0.689** | **0.695** |
+
+**Result:** Fine-tuning yielded a massive improvement, doubling the performance metrics and highlighting the necessity of task-specific adaptation.
+
+### Experiment 3: Parameter-Efficient Fine-Tuning (PEFT) Using LoRA
+I applied LoRA to RoBERTa Base, training only **0.71%** of parameters (887,811 out of ~125M).
+*   *Config:* LR=2e-4, 8 Epochs (capped due to overfitting).
+
+**Key Observations:**
+1.  **Training Speed:** LoRA was *not* faster (7 mins vs 7 mins for full FT) due to the increased epoch count needed for convergence.
+2.  **Performance:** Final Macro F1 was **0.630**, slightly lower than full fine-tuning (0.689).
+
+**Conclusion:** While LoRA saves memory, for smaller encoder models like RoBERTa, full fine-tuning still yields the best accuracy/generalization balance.
+
+### Experiment 4: Benchmarking with Pre-trained HateXplain Model
+I compared my models against `Hate-speech-CNERG/bert-base-uncased-hatexplain`, a model pre-fine-tuned on this exact dataset.
+
+| Model | Macro F1 | Accuracy |
+| :--- | :--- | :--- |
+| **My Fine-tuned RoBERTa** | **0.689** | **0.695** |
+| Pre-trained HateXplain BERT | 0.680 | 0.684 |
+| LoRA RoBERTa | 0.631 | 0.640 |
+
+**Result:** My fine-tuned RoBERTa outperformed the existing community baseline, underscoring the benefit of updated configurations and careful hyperparameter tuning.
+
+## Key Learning Points
+
+*   **Model Selection:** RoBERTa consistently outperformed BERT and domain-specific variants like HateBERT for this task.
+*   **LoRA Trade-offs:** LoRA is excellent for memory efficiency but doesn't always guarantee faster training or better performance on smaller encoder models. It is likely better suited for larger LLMs (e.g., Llama, Mistral).
+*   **Reproducibility:** Engaging with academic literature (e.g., the HateXplain paper) was useful for grounding hyperparameter choices (Learning Rates, Batch Sizes) in empirical evidence.
+*   **Future Work:** Experimenting with larger models (RoBERTa-Large, DeBERTa) where PEFT methods like LoRA might show more significant efficiency gains.
