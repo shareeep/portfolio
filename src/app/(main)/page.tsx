@@ -3,29 +3,22 @@ import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-// Assuming a formatDate utility exists
 import { buttonVariants } from "@/components/ui/button"
 import { IconCloud } from "@/components/ui/icon-cloud"
 import { HomeHero } from "@/components/home-hero"
 import { Icons } from "@/components/icons"
 import { ProjectsTreeView } from "@/components/projects-tree-view"
 
-// Import tag categorization utilities
-
 export default async function IndexPage() {
   const linkedInUrl = "https://www.linkedin.com/in/shariffrashid"
-  const emailAddress = "muhd.shariff01@gmail.com"
 
   const slugs = [
     "python",
     "typescript",
     "react",
-    "express",
     "nodedotjs",
     "postgresql",
     "mysql",
-    "amazonaws",
-    "microsoftazure",
     "googlecloud",
     "docker",
     "rabbitmq",
@@ -59,7 +52,7 @@ export default async function IndexPage() {
         className="bg-background container grid gap-6 md:gap-8 py-6 md:py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-12"
       >
         <div className="border-border bg-card relative flex min-h-[320px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border p-5 md:p-6">
-          <IconCloud images={iconImages} />
+          <IconCloud images ={iconImages} />
           <div className="border-border w-full border-t pt-4 text-center">
             <Link
               href="/capoo"
@@ -69,11 +62,11 @@ export default async function IndexPage() {
             </Link>
           </div>
         </div>
-        <div className="space-y-6">
+        <div className="space-y-6 text-center md:text-left">
           <p className="text-muted-foreground text-sm sm:text-base">
             connect with me! i'm always happy to talk :-)
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center gap-3 md:justify-start">
             <a
               href={linkedInUrl}
               target="_blank"

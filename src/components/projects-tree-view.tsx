@@ -34,6 +34,7 @@ export function ProjectsTreeView() {
   const [expandedProjectSlug, setExpandedProjectSlug] = useState<string | null>(
     null
   )
+  const [isMobile, setIsMobile] = useState(false)
 
   const publishedProjects = useMemo(() => {
     return allProjects
@@ -61,6 +62,16 @@ export function ProjectsTreeView() {
 
     return buckets
   }, [publishedProjects])
+
+  useEffect(() => {
+    const updateIsMobile = () => {
+      if (typeof window === "undefined") return
+      setIsMobile(window.innerWidth < 768)
+    }
+    updateIsMobile()
+    window.addEventListener("resize", updateIsMobile)
+    return () => window.removeEventListener("resize", updateIsMobile)
+  }, [])
 
   useEffect(() => {
     if (activeFolder) return
@@ -110,7 +121,7 @@ export function ProjectsTreeView() {
         name: PROJECT_TYPE_LABELS[type],
         tooltip: PROJECT_TYPE_TOOLTIP[type],
         type: "folder",
-        defaultExpanded: type === "AI/ML",
+        defaultExpanded: !isMobile && type === "AI/ML",
         isActive: activeFolder === type,
         onSelect: () => {
           setActiveFolder(type)
@@ -129,7 +140,7 @@ export function ProjectsTreeView() {
         })),
       }
     })
-  }, [projectsByType, activeFolder, expandedProjectSlug])
+  }, [projectsByType, activeFolder, expandedProjectSlug, isMobile])
 
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]">
@@ -141,7 +152,13 @@ export function ProjectsTreeView() {
         </div>
         <div className="space-y-2">
           {treeNodes.map((node) => (
-            <TreeNodeTooltip key={node.id} node={node} />
+            <TreeNodeTooltip
+              key={node.id}
+              node={{
+                ...node,
+                defaultExpanded: isMobile ? false : node.defaultExpanded,
+              }}
+            />
           ))}
         </div>
       </div>
@@ -222,73 +239,75 @@ export function ProjectsTreeView() {
               })()}
             </article>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {gridProjectsWithoutExpanded.map((project, index) => {
-                const projectType = (project.projectType ||
-                  "SWE") as ProjectType
-                const isActive =
-                  expandedProjectSlug === project.slugAsParams ||
-                  expandedProject.slugAsParams === project.slugAsParams
-                return (
-                  <article
-                    key={project.slugAsParams}
-                    className={cn(
-                      "flex flex-col gap-3 rounded-xl border border-border/60 bg-background/80 p-4 shadow-sm",
-                      isActive &&
-                        "border-border/80 bg-muted/20 ring-1 ring-border/40"
-                    )}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground text-[10px] uppercase tracking-[0.3em]">
-                        {PROJECT_TYPE_LABELS[projectType]}
-                      </span>
-                    </div>
-                    {project.image && (
-                      <AspectRatio
-                        ratio={804 / 452}
-                        className="bg-muted overflow-hidden rounded-md border"
-                      >
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                          priority={index === 0}
-                        />
-                      </AspectRatio>
-                    )}
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-muted-foreground text-xs">
-                        {formatDate(project.date)}
-                      </span>
-                    </div>
-                    <h3 className="font-heading text-xl">{project.title}</h3>
-                    {project.description && (
-                      <p className="text-muted-foreground text-sm">
-                        {project.description}
-                      </p>
-                    )}
-                    <div className="flex items-center justify-between">
-                      <button
-                        type="button"
-                        className="text-sm font-medium underline underline-offset-4"
-                        onClick={() => {
-                          setExpandedProjectSlug(project.slugAsParams)
-                          setActiveFolder(projectType)
-                        }}
-                      >
-                        Expand
-                      </button>
-                      <Link
-                        href={`/${project.slugAsParams}`}
-                        className="text-sm font-medium underline underline-offset-4"
-                      >
-                        View all details
-                      </Link>
-                    </div>
-                  </article>
-                )
-              })}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+              {(isMobile ? [] : gridProjectsWithoutExpanded).map(
+                (project, index) => {
+                  const projectType = (project.projectType ||
+                    "SWE") as ProjectType
+                  const isActive =
+                    expandedProjectSlug === project.slugAsParams ||
+                    expandedProject.slugAsParams === project.slugAsParams
+                  return (
+                    <article
+                      key={project.slugAsParams}
+                      className={cn(
+                        "flex flex-col gap-3 rounded-xl border border-border/60 bg-background/80 p-4 shadow-sm",
+                        isActive &&
+                          "border-border/80 bg-muted/20 ring-1 ring-border/40"
+                      )}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground text-[10px] uppercase tracking-[0.3em]">
+                          {PROJECT_TYPE_LABELS[projectType]}
+                        </span>
+                      </div>
+                      {project.image && (
+                        <AspectRatio
+                          ratio={804 / 452}
+                          className="bg-muted overflow-hidden rounded-md border"
+                        >
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                            priority={index === 0}
+                          />
+                        </AspectRatio>
+                      )}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-muted-foreground text-xs">
+                          {formatDate(project.date)}
+                        </span>
+                      </div>
+                      <h3 className="font-heading text-xl">{project.title}</h3>
+                      {project.description && (
+                        <p className="text-muted-foreground text-sm">
+                          {project.description}
+                        </p>
+                      )}
+                      <div className="flex items-center justify-between">
+                        <button
+                          type="button"
+                          className="text-sm font-medium underline underline-offset-4"
+                          onClick={() => {
+                            setExpandedProjectSlug(project.slugAsParams)
+                            setActiveFolder(projectType)
+                          }}
+                        >
+                          Expand
+                        </button>
+                        <Link
+                          href={`/${project.slugAsParams}`}
+                          className="text-sm font-medium underline underline-offset-4"
+                        >
+                          View all details
+                        </Link>
+                      </div>
+                    </article>
+                  )
+                }
+              )}
             </div>
           </div>
         ) : (

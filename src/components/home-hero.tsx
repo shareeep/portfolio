@@ -118,8 +118,8 @@ export function HomeHero() {
                   className="border-border/60"
                 >
                   <AccordionTrigger className="text-left">
-                    <div className="flex flex-wrap items-start gap-3 text-left">
-                      <div className="relative size-12 shrink-0 overflow-hidden rounded-full border border-border/60 bg-muted/40">
+                    <div className="flex w-full items-start gap-3 text-left">
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border/60 bg-muted/40">
                         {card.logo ? (
                           <Image
                             src={card.logo}
@@ -132,12 +132,12 @@ export function HomeHero() {
                           <div className="size-full rounded-full bg-muted" />
                         )}
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="font-heading text-base text-foreground">
+                      <div className="flex min-w-0 flex-1 flex-col gap-2">
+                        <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-3">
+                          <span className="font-heading text-base text-foreground leading-tight">
                             {card.role}
                           </span>
-                          <span className="text-muted-foreground text-xs uppercase tracking-[0.25em]">
+                          <span className="text-muted-foreground text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] w-full sm:w-auto text-left">
                             {card.meta}
                           </span>
                         </div>
