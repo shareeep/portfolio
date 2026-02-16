@@ -9,6 +9,10 @@ interface CapooClientProps {
 export function CapooClient({ art }: CapooClientProps) {
   const [blocks, setBlocks] = React.useState(3)
   const sentinelRef = React.useRef<HTMLDivElement | null>(null)
+  const normalizedArt = React.useMemo(
+    () => art.replace(/^\n+/, "").replace(/\n+$/, ""),
+    [art]
+  )
 
   React.useEffect(() => {
     const sentinel = sentinelRef.current
@@ -32,9 +36,9 @@ export function CapooClient({ art }: CapooClientProps) {
       {Array.from({ length: blocks }).map((_, index) => (
         <pre
           key={index}
-          className="text-foreground w-max whitespace-pre font-mono text-[10px] leading-[1.1] sm:text-[11px] sm:leading-[1.15]"
+          className="text-foreground w-full max-w-[720px] overflow-x-auto whitespace-pre font-mono text-[9px] leading-[1.05] sm:text-[10px] sm:leading-[1.1] md:text-[11px] md:leading-[1.15] m-0 first:mt-0 -mt-[2px]"
         >
-          {art}
+          {normalizedArt}
         </pre>
       ))}
       <div ref={sentinelRef} className="h-10" />

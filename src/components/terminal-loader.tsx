@@ -142,10 +142,15 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={lsOutputDelayMs}
-            className="text-blue-700"
+            className="text-blue-700 block text-sm leading-relaxed sm:text-base sm:leading-normal"
             startOnView={false}
           >
-            work_experience  my_projects  my_skills  contact_me
+            <span className="flex flex-wrap gap-x-3 gap-y-1">
+              <span>work_experience</span>
+              <span>my_projects</span>
+              <span>my_skills</span>
+              <span>contact_me</span>
+            </span>
           </AnimatedSpan>
           <TypingAnimation
             delay={pwdDelayMs}
