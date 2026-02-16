@@ -15,7 +15,6 @@ import Link from "next/link"
 import { env } from "@/env.mjs"
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn, formatDate } from "@/lib/utils"
-import { getTagCategory, sortTags } from "@/app/(main)/projects/tag-categories"
 
 interface PageProps {
   params: Promise<{
@@ -111,28 +110,6 @@ export default async function PagePage({ params }: PageProps) {
         <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
           {project.title}
         </h1>
-        {project.tags && project.tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-1">
-            {sortTags(project.tags).map((tag) => {
-              const category = getTagCategory(tag)
-              const colorClass =
-                category === "scope"
-                  ? "bg-blue-600/40 text-blue-900"
-                  : category === "tools"
-                    ? "bg-green-600/40 text-green-900"
-                    : "bg-purple-600/40 text-purple-900"
-
-              return (
-                <span
-                  key={tag}
-                  className={`rounded-full px-2 py-1 text-sm ${colorClass}`}
-                >
-                  {tag}
-                </span>
-              )
-            })}
-          </div>
-        )}
       </div>
       {project.image && (
         <AspectRatio

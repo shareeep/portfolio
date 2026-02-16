@@ -6,10 +6,9 @@ import { cn } from "@/lib/utils"
 // Assuming a formatDate utility exists
 import { buttonVariants } from "@/components/ui/button"
 import { IconCloud } from "@/components/ui/icon-cloud"
-import { LightRays } from "@/components/ui/light-rays"
 import { HomeHero } from "@/components/home-hero"
 import { Icons } from "@/components/icons"
-import { ProjectsFilters } from "@/components/projects-filters"
+import { ProjectsTreeView } from "@/components/projects-tree-view"
 
 // Import tag categorization utilities
 
@@ -44,24 +43,22 @@ export default async function IndexPage() {
   )
   return (
     <div className="relative">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <LightRays className="h-full w-full" />
-      </div>
-
       <HomeHero />
 
       <section
         id="projects"
-        className="bg-background container py-6 md:py-10 lg:py-16"
+        className="bg-background container py-6 md:py-8 lg:py-12"
       >
-        <ProjectsFilters />
+        <div className="space-y-4 md:space-y-6">
+          <ProjectsTreeView />
+        </div>
       </section>
 
       <section
         id="skills-contact"
-        className="bg-background container grid gap-8 py-6 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-16"
+        className="bg-background container grid gap-6 md:gap-8 py-6 md:py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-12"
       >
-        <div className="border-border bg-card relative flex min-h-[360px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border p-6">
+        <div className="border-border bg-card relative flex min-h-[320px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border p-5 md:p-6">
           <IconCloud images={iconImages} />
           <div className="border-border w-full border-t pt-4 text-center">
             <Link

@@ -12,7 +12,9 @@ export default async function MainLayout({ children }: MainLayoutProps) {
   return (
     <TerminalLoaderWrapper>
       <div className="flex min-h-screen flex-col">
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 space-y-6 md:space-y-8 lg:space-y-10">
+          {children}
+        </main>
         <SiteFooter />
       </div>
     </TerminalLoaderWrapper>

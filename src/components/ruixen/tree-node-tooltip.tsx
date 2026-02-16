@@ -1,23 +1,27 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { Folder, File } from "lucide-react";
+import React, { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { File, Folder } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/ui/tooltip"
 
 export type TreeNode = {
-  id: string;
-  name: string;
-  tooltip?: string;
-  type: "folder" | "file";
-  children?: TreeNode[];
-};
+  id: string
+  name: string
+  tooltip?: string
+  type: "folder" | "file"
+  children?: TreeNode[]
+  onSelect?: () => void
+  defaultExpanded?: boolean
+  isActive?: boolean
+}
 
 const demoData: TreeNode[] = [
   {
@@ -62,16 +66,25 @@ const demoData: TreeNode[] = [
       },
     ],
   },
-];
+]
 
 export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(node.defaultExpanded ?? false)
 
-  const isFolder = node.type === "folder";
+  const isFolder = node.type === "folder"
 
   const toggle = () => {
-    if (isFolder) setExpanded((prev) => !prev);
-  };
+    if (isFolder) setExpanded((prev) => !prev)
+  }
+
+  const handleClick = () => {
+    if (isFolder) {
+      toggle()
+      node.onSelect?.()
+      return
+    }
+    node.onSelect?.()
+  }
 
   return (
     <div>
@@ -79,27 +92,29 @@ export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
         <Tooltip>
           <TooltipTrigger asChild>
             <button
-              onClick={toggle}
+              onClick={handleClick}
               className={cn(
-                "flex items-center gap-2 px-2 py-1 rounded-md w-full text-left",
-                "hover:bg-accent hover:text-accent-foreground transition-colors",
+                "flex items-center gap-2 px-2 py-1.5 rounded-md w-full text-left text-sm",
+                "hover:bg-muted/60 hover:text-foreground transition-colors",
+                node.isActive && "bg-muted/30 text-foreground"
               )}
             >
               {isFolder ? (
                 <Folder
-                  size={16}
                   className={cn(
-                    "text-muted-foreground",
-                    expanded && "text-blue-500",
+                    "h-4 w-4 shrink-0 text-muted-foreground",
+                    expanded && "text-blue-500"
                   )}
                 />
               ) : (
-                <File size={16} className="text-muted-foreground" />
+                <File className="h-4 w-4 shrink-0 text-muted-foreground" />
               )}
               <span className="truncate">{node.name}</span>
             </button>
           </TooltipTrigger>
-          <TooltipContent side="right">{node.tooltip}</TooltipContent>
+          {node.tooltip && (
+            <TooltipContent side="right">{node.tooltip}</TooltipContent>
+          )}
         </Tooltip>
       </TooltipProvider>
 
@@ -112,7 +127,7 @@ export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="ml-4 border-l pl-2 space-y-1"
+              className="ml-3 mt-1 border-l border-border/60 pl-3 pt-1 space-y-1"
             >
               {node.children?.map((child) => (
                 <TreeNodeTooltip key={child.id} node={child} />
@@ -122,5 +137,5 @@ export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
         </AnimatePresence>
       )}
     </div>
-  );
+  )
 }

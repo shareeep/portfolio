@@ -40,7 +40,8 @@ const computedFields = <T extends { slug: string }>(data: T) => ({
 //     .transform(computedFields),
 // })
 
-const projects = defineCollection({ // Renamed from posts
+const projects = defineCollection({
+  // Renamed from posts
   name: "Project", // Renamed from Post
   pattern: "projects/**/*.mdx", // Updated pattern
   schema: s
@@ -51,6 +52,9 @@ const projects = defineCollection({ // Renamed from posts
       date: s.isodate(),
       published: s.boolean().default(true),
       image: s.string().max(99).optional(), // Made image optional just in case
+      projectType: s.enum(["AI/ML", "SWE", "DESIGN", "DATA"]).default("SWE"),
+      shortTitle: s.string().max(60).optional(),
+      highlights: s.array(s.string().max(160)).optional(),
       authors: s.array(s.string()),
       tags: s.array(s.string()).optional(), // New field for tags
       body: s.mdx(),

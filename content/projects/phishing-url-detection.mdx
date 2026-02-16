@@ -1,22 +1,36 @@
 ---
 title: Phisherman's Friend - Phishing URL Detection
+shortTitle: "Phishing URL Detection"
 description: A cybersecurity project with a machine-learning powered E2E phishing-URL detector.
 image: /images/projects/phishing-url-cover.png
 date: "2025-04-06"
 authors:
   - shariff-rashid
-tags: ["AI/ML", "Security", "Data Analysis", "Python", "Feature Engineering", "Classification"]
+tags:
+  [
+    "AI/ML",
+    "Security",
+    "Data Analysis",
+    "Python",
+    "Feature Engineering",
+    "Classification",
+  ]
+projectType: "AI/ML"
+highlights:
+  - Engineered feature set for URL classification
+  - Built end-to-end phishing detection workflow
+  - Delivered model + analysis for real-world phishing examples
 ---
 
-Project grade received: "A+" 
+Project grade received: "A+"
 
 - [Presentation Slides](https://www.canva.com/design/DAGha-W5RV0/3yGhJ7aocPj_Yl3h2agAew/view?utm_content=DAGha-W5RV0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf922b36a33)
 
 - [Google Colab Notebook with ML Model](https://colab.research.google.com/drive/1VeVwEkgnrtGI6bLE0hF5vKeaNiIiDYu0?usp=sharing)
 
-
 ## Overview
-Phishing remains one of the most prevalent social-engineering attacks on the internet. Even savvy users can be fooled by URLs that mimic legitimate sites.  
+
+Phishing remains one of the most prevalent social-engineering attacks on the internet. Even savvy users can be fooled by URLs that mimic legitimate sites.
 
 In this project, we explored phishing-URL detection through a relatable case study of links sent to impersonate government websites in Singapore. In this case, we anchored our solutions around this link:
 
@@ -46,14 +60,13 @@ On the left is the actual website, the right is the phishing link, same as in th
 
 An important observation is that the phishing link uses HTTPS (indicated by the padlock icon in browsers). While HTTPS encrypts the connection between user and website, it only verifies domain ownership—not the legitimacy of the organization. Attackers can obtain valid HTTPS certificates for deceptive domains, creating a false sense of security for users who trust the padlock icon as a sign of website authenticity.
 
-## Project Objective 
+## Project Objective
 
-We explored the various methods of phishing-URL detection, starting with basic methods like list-based detection, followed by traditional ML, and then deep learning methods, as well as a hybrid approach. 
+We explored the various methods of phishing-URL detection, starting with basic methods like list-based detection, followed by traditional ML, and then deep learning methods, as well as a hybrid approach.
 
 We also made our own ML powered phishing-URL detector, built end-to-end to showcase the detection of our chosen case study url as a phishing link, compared to the official webpage.
 
 In this project overview, I will focus on the ML model built. The overall content on other detection methods and more can be found in the slides, which is linked above.
-
 
 ## Our Demo Model
 
@@ -69,11 +82,11 @@ The notebook implements a comprehensive phishing URL detection system using deep
 
 We extracted three categories of features:
 
-| Feature Category    | Examples                                | Why It Matters |
-|---------------------|-----------------------------------------|----------------|
-| **Lexical**         | URL length, special character frequency | Phishing URLs often contain unusual character patterns |
-| **Host-based**      | Domain age, HTTPS usage, subdomain count | Phishing sites typically use newer domains with complex subdomains |
-| **Content-based**   | Frequency of suspicious tokens (e.g., "login," "verify") | Social engineering keywords are common in phishing |
+| Feature Category  | Examples                                                 | Why It Matters                                                     |
+| ----------------- | -------------------------------------------------------- | ------------------------------------------------------------------ |
+| **Lexical**       | URL length, special character frequency                  | Phishing URLs often contain unusual character patterns             |
+| **Host-based**    | Domain age, HTTPS usage, subdomain count                 | Phishing sites typically use newer domains with complex subdomains |
+| **Content-based** | Frequency of suspicious tokens (e.g., "login," "verify") | Social engineering keywords are common in phishing                 |
 
 ### 3. Character-Level URL Encoding
 
@@ -97,7 +110,7 @@ Our model processes URLs as character sequences with:
 - Achieved 94.8% accuracy on test data
 - Monitored losses to prevent over-fitting
 
-### 6. Model Visualization 
+### 6. Model Visualization
 
 The most innovative aspect of our approach is the visualization of what the model "sees":
 
@@ -140,6 +153,7 @@ When testing against our case study phishing URL that impersonated the Singapore
 </div>
 
 The comparative analysis above reveals critical differences between the URLs:
+
 - **Suspicious Subdomain**: The phishing URL uses a deceptive subdomain "cleim-your-bodget-6fm4.up" (medium risk)
 - **Excessive Hyphens**: The phishing URL contains 3 hyphens compared to 0 in the legitimate URL
 
