@@ -21,11 +21,11 @@ export const Pill = ({
     className={cn(
       "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-normal",
       variant === "default" &&
-        "border-transparent bg-primary text-primary-foreground shadow",
+        "bg-primary text-primary-foreground border-transparent shadow",
       variant === "secondary" &&
-        "border-transparent bg-secondary text-secondary-foreground",
+        "bg-secondary text-secondary-foreground border-transparent",
       variant === "destructive" &&
-        "border-transparent bg-destructive text-destructive-foreground shadow",
+        "bg-destructive text-destructive-foreground border-transparent shadow",
       variant === "outline" && "text-foreground",
       className
     )}
@@ -44,7 +44,7 @@ export const PillAvatar = ({
   className,
   ...props
 }: PillAvatarProps) => (
-  <Avatar className={cn("-ml-1 h-4 w-4", className)}>
+  <Avatar className={cn("-ml-1 size-4", className)}>
     <AvatarImage {...props} />
     <AvatarFallback>{fallback}</AvatarFallback>
   </Avatar>
@@ -55,7 +55,7 @@ export type PillButtonProps = ComponentProps<typeof Button>
 export const PillButton = ({ className, ...props }: PillButtonProps) => (
   <Button
     className={cn(
-      "-my-2 -mr-2 size-6 rounded-full p-0.5 hover:bg-foreground/5",
+      "hover:bg-foreground/5 -my-2 -mr-2 size-6 rounded-full p-0.5",
       className
     )}
     size="icon"
@@ -98,7 +98,7 @@ export const PillIndicator = ({
     {pulse && (
       <span
         className={cn(
-          "absolute inline-flex h-full w-full animate-ping rounded-full opacity-75",
+          "absolute inline-flex size-full animate-ping rounded-full opacity-75",
           variant === "success" && "bg-emerald-400",
           variant === "error" && "bg-rose-400",
           variant === "warning" && "bg-amber-400",
@@ -126,7 +126,7 @@ export type PillDeltaProps = {
 export const PillDelta = ({ className, delta }: PillDeltaProps) => {
   if (!delta) {
     return (
-      <MinusIcon className={cn("size-3 text-muted-foreground", className)} />
+      <MinusIcon className={cn("text-muted-foreground size-3", className)} />
     )
   }
 
@@ -150,7 +150,7 @@ export const PillIcon = ({
   ...props
 }: PillIconProps) => (
   <Icon
-    className={cn("size-3 text-muted-foreground", className)}
+    className={cn("text-muted-foreground size-3", className)}
     size={12}
     {...props}
   />
@@ -168,7 +168,7 @@ export const PillAvatarGroup = ({
 }: PillAvatarGroupProps) => (
   <div
     className={cn(
-      "-space-x-1 flex items-center",
+      "flex items-center -space-x-1",
       "[&>*:not(:first-of-type)]:[mask-image:radial-gradient(circle_9px_at_-4px_50%,transparent_99%,white_100%)]",
       className
     )}

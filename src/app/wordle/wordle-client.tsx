@@ -93,7 +93,7 @@ export function WordleClient({ initialSolution }: WordleClientProps) {
           <button
             type="button"
             onClick={handleNewWord}
-            className="border-border text-foreground bg-card/80 group inline-flex items-center gap-2 rounded-full border px-3 py-[6px] text-sm font-medium shadow-sm backdrop-blur transition hover:-translate-y-[1px] hover:shadow active:scale-[0.98]"
+            className="border-border text-foreground bg-card/80 group inline-flex items-center gap-2 rounded-full border px-3 py-[6px] text-sm font-medium shadow-sm backdrop-blur transition hover:-translate-y-px hover:shadow active:scale-[0.98]"
           >
             <span
               aria-hidden

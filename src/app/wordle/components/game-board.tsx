@@ -11,7 +11,7 @@ type Props = {
 
 export function GameBoard({ board, state }: Props) {
   return (
-    <div className="border-border/70 bg-card/70 mx-auto flex w-full max-w-[28rem] flex-col gap-3 rounded-2xl border p-3 shadow-sm backdrop-blur sm:p-4">
+    <div className="border-border/70 bg-card/70 mx-auto flex w-full max-w-md flex-col gap-3 rounded-2xl border p-3 shadow-sm backdrop-blur sm:p-4">
       {board.map((row, rowIndex) => {
         const isCurrentRow = rowIndex === state.turn && state.outcome === null
         const currentGuessLetters = isCurrentRow

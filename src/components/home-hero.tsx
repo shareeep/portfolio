@@ -80,7 +80,7 @@ const experienceCards: ExperienceCard[] = [
 export function HomeHero() {
   return (
     <section className="bg-background">
-      <div className="container flex flex-col gap-4 md:gap-5 py-6 md:py-8">
+      <div className="container flex flex-col gap-4 py-6 md:gap-5 md:py-8">
         <div className="border-border bg-card rounded-2xl border p-4 md:p-5">
           <TypingAnimation
             words={[
@@ -119,7 +119,7 @@ export function HomeHero() {
                 >
                   <AccordionTrigger className="text-left">
                     <div className="flex w-full items-start gap-3 text-left">
-                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border/60 bg-muted/40">
+                      <div className="border-border/60 bg-muted/40 relative size-12 shrink-0 overflow-hidden rounded-full border">
                         {card.logo ? (
                           <Image
                             src={card.logo}
@@ -129,24 +129,24 @@ export function HomeHero() {
                             className="object-cover"
                           />
                         ) : (
-                          <div className="size-full rounded-full bg-muted" />
+                          <div className="bg-muted size-full rounded-full" />
                         )}
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col gap-2">
                         <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-3">
-                          <span className="font-heading text-base text-foreground leading-tight">
+                          <span className="font-heading text-foreground text-base leading-tight">
                             {card.role}
                           </span>
-                          <span className="text-muted-foreground text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] w-full sm:w-auto text-left">
+                          <span className="text-muted-foreground w-full text-left text-xs uppercase tracking-[0.25em] sm:w-auto sm:tracking-[0.3em]">
                             {card.meta}
                           </span>
                         </div>
-                        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                        <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
                           <span>{card.title}</span>
                           {card.location && <span>· {card.location}</span>}
                         </div>
                         {card.team && (
-                          <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                          <span className="text-muted-foreground text-xs uppercase tracking-[0.25em]">
                             {card.team}
                           </span>
                         )}
@@ -161,7 +161,7 @@ export function HomeHero() {
                         </p>
                       )}
                       <div>
-                        <ul className="mt-2 space-y-2 text-sm text-foreground">
+                        <ul className="text-foreground mt-2 space-y-2 text-sm">
                           {card.highlights.map((highlight) => (
                             <li key={highlight}>• {highlight}</li>
                           ))}

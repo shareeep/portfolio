@@ -94,7 +94,7 @@ export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
             <button
               onClick={handleClick}
               className={cn(
-                "flex items-center gap-2 px-2 py-1.5 rounded-md w-full text-left text-sm",
+                "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm",
                 "hover:bg-muted/60 hover:text-foreground transition-colors",
                 node.isActive && "bg-muted/30 text-foreground"
               )}
@@ -102,12 +102,12 @@ export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
               {isFolder ? (
                 <Folder
                   className={cn(
-                    "h-4 w-4 shrink-0 text-muted-foreground",
+                    "text-muted-foreground size-4 shrink-0",
                     expanded && "text-blue-500"
                   )}
                 />
               ) : (
-                <File className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <File className="text-muted-foreground size-4 shrink-0" />
               )}
               <span className="truncate">{node.name}</span>
             </button>
@@ -127,7 +127,7 @@ export default function TreeNodeTooltip({ node }: { node: TreeNode }) {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="ml-3 mt-1 border-l border-border/60 pl-3 pt-1 space-y-1"
+              className="border-border/60 ml-3 mt-1 space-y-1 border-l pl-3 pt-1"
             >
               {node.children?.map((child) => (
                 <TreeNodeTooltip key={child.id} node={child} />

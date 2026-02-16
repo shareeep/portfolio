@@ -87,7 +87,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-200 ease-out",
+        "bg-background fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-200 ease-out",
         isExiting ? "pointer-events-none opacity-0" : "opacity-100",
         className
       )}
@@ -114,7 +114,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={checkDelayMs}
-            className="text-green-700 text-xs"
+            className="text-xs text-green-700"
             startOnView={false}
           >
             ✔ checking the mainframe
@@ -128,7 +128,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={connectedDelayMs}
-            className="text-green-700 text-xs"
+            className="text-xs text-green-700"
             startOnView={false}
           >
             ✔ successfully connected to ap-southeast-1
@@ -142,7 +142,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={lsOutputDelayMs}
-            className="text-blue-700 block text-xs"
+            className="block text-xs text-blue-700"
             startOnView={false}
           >
             <span className="flex flex-wrap gap-x-3 gap-y-1">
@@ -161,7 +161,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={pwdOutputDelayMs}
-            className="text-blue-700 text-xs"
+            className="text-xs text-blue-700"
             startOnView={false}
           >
             /shariff/portfolio/home

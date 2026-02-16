@@ -73,43 +73,43 @@ export function ProjectsTreeView() {
     return () => window.removeEventListener("resize", updateIsMobile)
   }, [])
 
-  useEffect(() => {
-    if (activeFolder) return
-    if (projectsByType["AI/ML"].length > 0) {
-      setActiveFolder("AI/ML")
-      setExpandedProjectSlug(projectsByType["AI/ML"][0]?.slugAsParams ?? null)
-      return
-    }
-    if (projectsByType.SWE.length > 0) {
-      setActiveFolder("SWE")
-      setExpandedProjectSlug(projectsByType.SWE[0]?.slugAsParams ?? null)
-      return
-    }
-    setActiveFolder(null)
+  const effectiveActiveFolder = useMemo(() => {
+    if (activeFolder) return activeFolder
+    if (projectsByType["AI/ML"].length > 0) return "AI/ML"
+    if (projectsByType.SWE.length > 0) return "SWE"
+    if (projectsByType.DESIGN.length > 0) return "DESIGN"
+    if (projectsByType.DATA.length > 0) return "DATA"
+    return null
   }, [activeFolder, projectsByType])
 
+  const effectiveExpandedProjectSlug = useMemo(() => {
+    if (expandedProjectSlug) return expandedProjectSlug
+    if (!effectiveActiveFolder) return null
+    return projectsByType[effectiveActiveFolder][0]?.slugAsParams ?? null
+  }, [expandedProjectSlug, effectiveActiveFolder, projectsByType])
+
   const gridProjects = useMemo(() => {
-    if (activeFolder) return projectsByType[activeFolder]
+    if (effectiveActiveFolder) return projectsByType[effectiveActiveFolder]
     return projectsByType["AI/ML"].length > 0
       ? projectsByType["AI/ML"]
       : publishedProjects
-  }, [activeFolder, projectsByType, publishedProjects])
+  }, [effectiveActiveFolder, projectsByType, publishedProjects])
 
   const gridProjectsWithoutExpanded = useMemo(() => {
-    if (!expandedProjectSlug) return gridProjects.slice(0, 2)
+    if (!effectiveExpandedProjectSlug) return gridProjects.slice(0, 2)
     return gridProjects
-      .filter((project) => project.slugAsParams !== expandedProjectSlug)
+      .filter((project) => project.slugAsParams !== effectiveExpandedProjectSlug)
       .slice(0, 2)
-  }, [gridProjects, expandedProjectSlug])
+  }, [gridProjects, effectiveExpandedProjectSlug])
 
   const expandedProject = useMemo(() => {
-    if (!expandedProjectSlug) return null
+    if (!effectiveExpandedProjectSlug) return null
     return (
       publishedProjects.find(
-        (project) => project.slugAsParams === expandedProjectSlug
+        (project) => project.slugAsParams === effectiveExpandedProjectSlug
       ) ?? null
     )
-  }, [expandedProjectSlug, publishedProjects])
+  }, [effectiveExpandedProjectSlug, publishedProjects])
 
   const treeNodes: TreeNode[] = useMemo(() => {
     const orderedTypes: ProjectType[] = ["AI/ML", "SWE", "DESIGN", "DATA"]
@@ -122,7 +122,7 @@ export function ProjectsTreeView() {
         tooltip: PROJECT_TYPE_TOOLTIP[type],
         type: "folder",
         defaultExpanded: !isMobile && type === "AI/ML",
-        isActive: activeFolder === type,
+        isActive: effectiveActiveFolder === type,
         onSelect: () => {
           setActiveFolder(type)
           setExpandedProjectSlug(firstSlug)
@@ -136,11 +136,16 @@ export function ProjectsTreeView() {
             setExpandedProjectSlug(project.slugAsParams)
             setActiveFolder(type)
           },
-          isActive: expandedProjectSlug === project.slugAsParams,
+          isActive: effectiveExpandedProjectSlug === project.slugAsParams,
         })),
       }
     })
-  }, [projectsByType, activeFolder, expandedProjectSlug, isMobile])
+  }, [
+    projectsByType,
+    effectiveActiveFolder,
+    effectiveExpandedProjectSlug,
+    isMobile,
+  ])
 
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]">
@@ -169,7 +174,7 @@ export function ProjectsTreeView() {
       >
         {expandedProject ? (
           <div className="flex flex-col gap-8">
-            <article className="rounded-2xl border border-border/70 bg-background/80 p-5">
+            <article className="border-border/70 bg-background/80 rounded-2xl border p-5">
               {(() => {
                 const projectType = (expandedProject.projectType ||
                   "SWE") as ProjectType
@@ -192,8 +197,8 @@ export function ProjectsTreeView() {
                           {expandedProject.description}
                         </p>
                       )}
-                      <div className="rounded-xl border border-border/60 bg-background/60 p-4 text-sm text-muted-foreground">
-                        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                      <div className="border-border/60 bg-background/60 text-muted-foreground rounded-xl border p-4 text-sm">
+                        <p className="text-muted-foreground text-xs uppercase tracking-[0.3em]">
                           Quick breakdown
                         </p>
                         {expandedProject.highlights &&
@@ -204,7 +209,7 @@ export function ProjectsTreeView() {
                             ))}
                           </ul>
                         ) : (
-                          <p className="mt-3 text-sm text-muted-foreground">
+                          <p className="text-muted-foreground mt-3 text-sm">
                             Highlights coming soon.
                           </p>
                         )}
@@ -245,15 +250,15 @@ export function ProjectsTreeView() {
                   const projectType = (project.projectType ||
                     "SWE") as ProjectType
                   const isActive =
-                    expandedProjectSlug === project.slugAsParams ||
+                    effectiveExpandedProjectSlug === project.slugAsParams ||
                     expandedProject.slugAsParams === project.slugAsParams
                   return (
                     <article
                       key={project.slugAsParams}
                       className={cn(
-                        "flex flex-col gap-3 rounded-xl border border-border/60 bg-background/80 p-4 shadow-sm",
+                        "border-border/60 bg-background/80 flex flex-col gap-3 rounded-xl border p-4 shadow-sm",
                         isActive &&
-                          "border-border/80 bg-muted/20 ring-1 ring-border/40"
+                          "border-border/80 bg-muted/20 ring-border/40 ring-1"
                       )}
                     >
                       <div className="flex items-center justify-between">
@@ -311,7 +316,7 @@ export function ProjectsTreeView() {
             </div>
           </div>
         ) : (
-          <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-dashed border-border/60 bg-background/60 px-4 text-center">
+          <div className="border-border/60 bg-background/60 flex min-h-[220px] items-center justify-center rounded-xl border border-dashed px-4 text-center">
             <p className="text-muted-foreground text-sm">
               Select a project from the left to preview it here.
             </p>

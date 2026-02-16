@@ -49,7 +49,7 @@ export default async function IndexPage() {
 
       <section
         id="skills-contact"
-        className="bg-background container grid gap-6 md:gap-8 py-6 md:py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-12"
+        className="bg-background container grid gap-6 py-6 md:gap-8 md:py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-12"
       >
         <div className="border-border bg-card relative flex min-h-[320px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border p-5 md:p-6">
           <IconCloud images={iconImages} />
@@ -71,7 +71,7 @@ export default async function IndexPage() {
         </div>
         <div className="space-y-6 text-center md:text-left">
           <p className="text-muted-foreground text-sm sm:text-base">
-            connect with me! i'm always happy to talk :-)
+            connect with me! i&apos;m always happy to talk :-)
           </p>
           <div className="flex items-center justify-center gap-3 md:justify-start">
             <a

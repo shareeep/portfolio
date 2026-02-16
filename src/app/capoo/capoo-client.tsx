@@ -36,7 +36,7 @@ export function CapooClient({ art }: CapooClientProps) {
       {Array.from({ length: blocks }).map((_, index) => (
         <pre
           key={index}
-          className="text-foreground w-full max-w-[720px] overflow-x-auto whitespace-pre font-mono text-[9px] leading-[1.05] sm:text-[10px] sm:leading-[1.1] md:text-[11px] md:leading-[1.15] m-0 first:mt-0 -mt-[2px]"
+          className="text-foreground m-0 mt-[-2px] w-full max-w-[720px] overflow-x-auto whitespace-pre font-mono text-[9px] leading-[1.05] first:mt-0 sm:text-[10px] sm:leading-[1.1] md:text-[11px] md:leading-[1.15]"
         >
           {normalizedArt}
         </pre>

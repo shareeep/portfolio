@@ -128,6 +128,7 @@ export function TypingAnimation({
     loop,
     typingSpeed,
     deletingSpeed,
+    pauseDelays,
     pauseDelay,
     delay,
   ])
