@@ -52,13 +52,20 @@ export default async function IndexPage() {
         className="bg-background container grid gap-6 md:gap-8 py-6 md:py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-12"
       >
         <div className="border-border bg-card relative flex min-h-[320px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border p-5 md:p-6">
-          <IconCloud images ={iconImages} />
+          <IconCloud images={iconImages} />
           <div className="border-border w-full border-t pt-4 text-center">
             <Link
               href="/capoo"
               className="text-muted-foreground hover:text-foreground text-xs uppercase tracking-[0.3em]"
             >
               Capoo
+            </Link>
+            <span className="text-muted-foreground mx-2 text-xs">•</span>
+            <Link
+              href="/wordle"
+              className="text-muted-foreground hover:text-foreground text-xs uppercase tracking-[0.3em]"
+            >
+              Wordle
             </Link>
           </div>
         </div>
