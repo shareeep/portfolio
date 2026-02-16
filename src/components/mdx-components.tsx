@@ -1,7 +1,6 @@
 import * as React from "react"
+import * as runtime from "react/jsx-runtime"
 import Image from "next/image"
-import * as runtime from 'react/jsx-runtime'
-
 
 import { cn } from "@/lib/utils"
 import { Callout } from "@/components/callout"
@@ -100,11 +99,23 @@ const components = {
   img: ({
     className,
     alt,
+    src,
+    width,
+    height,
     ...props
-  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md border", className)} alt={alt} {...props} />
-  ),
+  }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    if (!src) return null
+    return (
+      <Image
+        src={src}
+        alt={alt ?? ""}
+        width={typeof width === "string" ? Number(width) : width}
+        height={typeof height === "string" ? Number(height) : height}
+        className={cn("rounded-md border", className)}
+        {...props}
+      />
+    )
+  },
   hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">
@@ -158,21 +169,28 @@ const components = {
   Card: MdxCard,
 }
 
-interface MdxProps {
+interface MdxContentProps {
   code: string
   components?: Record<string, React.ComponentType>
 }
 
-export function MDXContent({ code, components }: MdxProps) {
+const MDXContentInner = React.memo(function MDXContentInner({
+  code,
+  components: externalComponents,
+}: MdxContentProps) {
   const Component = useMDXComponent(code)
-  return <Component components={{ Image, ...components }} />
+  return <Component components={{ Image, ...externalComponents }} />
+})
+
+export function MDXContent(props: MdxContentProps) {
+  return <MDXContentInner {...props} />
 }
 
 interface MdxProps {
   code: string
 }
 
-export function Mdx({ code }: MdxProps) {
+const MdxInner = React.memo(function MdxInner({ code }: MdxProps) {
   const Component = useMDXComponent(code)
 
   return (
@@ -180,4 +198,8 @@ export function Mdx({ code }: MdxProps) {
       <Component components={components} />
     </div>
   )
+})
+
+export function Mdx(props: MdxProps) {
+  return <MdxInner {...props} />
 }

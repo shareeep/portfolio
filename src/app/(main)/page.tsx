@@ -1,228 +1,111 @@
 import React from "react"
 import Link from "next/link"
-import Image from "next/image"
-import { AspectRatio } from "@/components/ui/aspect-ratio" // Added import
-import { projects } from "#site/content"
+
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+// Assuming a formatDate utility exists
 import { buttonVariants } from "@/components/ui/button"
-import { formatDate } from "@/lib/utils" // Assuming a formatDate utility exists
-import { Icons } from "@/components/icons" // Import Icons
-import { Badge } from "@/components/ui/badge" // Import Badge for tags
-import { getTagCategory, categorizeProjectTags } from "./projects/tag-categories" // Import tag categorization utilities
+import { IconCloud } from "@/components/ui/icon-cloud"
+import { LightRays } from "@/components/ui/light-rays"
+import { HomeHero } from "@/components/home-hero"
+import { Icons } from "@/components/icons"
+import { ProjectsFilters } from "@/components/projects-filters"
+
+// Import tag categorization utilities
 
 export default async function IndexPage() {
-  const sortedPublishedProjects = projects
-    .filter((project) => project.published)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const linkedInUrl = "https://www.linkedin.com/in/shariffrashid"
+  const emailAddress = "muhd.shariff01@gmail.com"
 
+  const slugs = [
+    "python",
+    "typescript",
+    "react",
+    "express",
+    "nodedotjs",
+    "postgresql",
+    "mysql",
+    "amazonaws",
+    "microsoftazure",
+    "googlecloud",
+    "docker",
+    "rabbitmq",
+    "apachekafka",
+    "kubernetes",
+    "grafana",
+    "linux",
+    "nginx",
+    "git",
+    "postman",
+  ]
+
+  const iconImages = slugs.map(
+    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+  )
   return (
-    <>
-    {/* Updated section background to use theme variable */}
-    <section className="bg-background py-8">
-      <div className="container mx-auto grid grid-cols-1
-                      gap-6
-                      sm:grid-cols-2
-                      lg:grid-cols-4
-                      xl:grid-cols-6">
-        {/* 1) Main Intro: spans 4 on lg, 4 on xl. XS: icon centered above text. */}
-        {/* Updated card background and text colors */}
-        <div className="bg-card col-span-1 flex flex-col 
-                        justify-between rounded-2xl p-8 text-center shadow-md sm:col-span-2 sm:text-left lg:col-span-4 xl:col-span-4">
-          <div className="mt-4 flex flex-col items-center space-y-4 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
-            <Image
-              src="/images/avatars/shariff-rashid.png"
-              alt="Shariff Rashid"
-              width={200}
-              height={200}
-              className="border-primary mx-auto rounded-full border-4 sm:mx-0"
-            />
-            <h1 className="font-heading text-foreground text-4xl lg:text-5xl">
-              Hi 👋, I’m <span className="text-primary">Shariff</span>
-            </h1>
-          </div>
-
-          <p className="text-muted-foreground mt-4 text-lg">
-            I enjoy building robust systems and architecting solutions.
-          </p>
-        </div>
-
-        {/* 2) Currently Sharpening: Adjusted col-spans & centered content */}
-        {/* Updated card background and text colors */}
-        <div className="bg-card flex flex-col items-center justify-center rounded-2xl 
-                        p-6 text-center shadow-md sm:col-span-1 lg:col-span-2 xl:col-span-2">
-          <Icons.laptop className="text-primary mb-4 size-12" /> {/* Increased icon size */}
-          <h3 className="font-heading text-foreground mb-2 text-2xl">Current focus</h3>
-          <ul className="text-muted-foreground space-y-1 text-center sm:text-left">
-            <li className="flex items-center">
-              <Icons.brain className="text-primary/80 mr-2 size-5" /> {/* Added Icon */}
-              DSA & LeetCode challenges
-            </li>
-            <li className="flex items-center">
-              <Icons.server className="text-primary/80 mr-2 size-5" /> {/* Added Icon */}
-              Java & SpringBoot
-            </li>
-          </ul>
-        </div>
-
-        {/* 3) GitHub */}
-        {/* Updated card background, text, icon, and button colors */}
-        <div className="bg-card rounded-2xl p-6 text-center shadow-md lg:col-span-1 xl:col-span-3">
-          <Icons.gitHub className="text-primary mx-auto mb-3 size-10" />
-          <h3 className="text-foreground mb-1 text-xl font-semibold">My GitHub</h3>
-          <p className="text-muted-foreground mb-4 text-sm">
-            {siteConfig.links.github.replace('https://', '')}
-          </p>
-          <Link
-            href={siteConfig.links.github}
-            target="_blank"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            )}
-          >
-            Explore Repos
-          </Link>
-        </div>
-
-        {/* 4) Fun Fact */}
-        {/* Updated card background, text, and icon colors */}
-        <div className="bg-card rounded-2xl p-6 text-center shadow-md lg:col-span-1 xl:col-span-3">
-          <Icons.pizza className="text-primary mx-auto mb-3 size-10" />
-          <h3 className="text-foreground mb-2 text-xl font-semibold">Fun Fact!</h3>
-          <p className="text-muted-foreground mb-4 text-sm"> {/* Added mb-4 for spacing */}
-            From advertising copy to code—now I get to build the solutions I pitch.
-          </p>
-          <Link
-            href="/projects" // Changed href to projects page
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            )}
-          >
-            Explore Projects {/* Changed button text */}
-          </Link>
-        </div>
-
-        {/* 6) Call To Action */}
-        {/* Updated card background, text, and button colors */}
-        <div className="bg-card flex flex-col justify-center rounded-2xl p-8 shadow-md lg:col-span-4 xl:col-span-6">
-          <h3 className="font-heading text-foreground mb-4 text-2xl">Let’s Build Something Amazing!</h3>
-          <p className="text-muted-foreground mb-6">
-            Got an idea or a challenge? I’m always excited to connect and explore new possibilities.
-          </p>
-          <Link
-            href="/contact"
-            className={cn(buttonVariants({variant: "default", size: "lg"}), "bg-primary text-primary-foreground hover:bg-primary/90")}
-          >
-            Reach Out
-          </Link>
-        </div>
+    <div className="relative">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <LightRays className="h-full w-full" />
       </div>
-    </section>
 
-      {/* Updated section background */}
+      <HomeHero />
+
       <section
         id="projects"
-        className="bg-background container space-y-8 py-6 md:py-10 lg:py-16"
+        className="bg-background container py-6 md:py-10 lg:py-16"
       >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <h2 className="font-heading text-foreground text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            My Projects
-          </h2>
-          <p className="text-muted-foreground max-w-[85%] leading-normal sm:text-lg sm:leading-7">
-            Here are some of the projects I&apos;ve worked on. Click on them to learn more.
-          </p>
-        </div>
-
-        {sortedPublishedProjects?.length > 0 ? (
-          <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-5xl lg:grid-cols-3">
-            {sortedPublishedProjects.map((project) => (
-              <article
-                key={project.slug}
-                className="bg-background group relative flex flex-col space-y-2 overflow-hidden rounded-lg border p-4"
-              >
-                {project.image && (
-                  <AspectRatio ratio={804 / 452} className="bg-muted overflow-hidden rounded-md border">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-                      priority={false} // Set to true for LCP images if applicable
-                    />
-                  </AspectRatio>
-                )}
-                <h3 className="font-heading text-xl">{project.title}</h3>
-                {project.tags && project.tags.length > 0 && (
-                  <div className="mb-2 mt-1 flex flex-wrap gap-1">
-                    {/* Display representative tags from each category */}
-                    {(() => {
-                      // Categorize the project tags
-                      const categorized = categorizeProjectTags(project.tags);
-                      
-                      // Create an array to hold representative tags
-                      const representativeTags: React.ReactNode[] = [];
-                      
-                      // Add one tag from each category if available
-                      if (categorized.scope.length > 0) {
-                        representativeTags.push(
-                          <Badge key={`scope-${categorized.scope[0]}`} variant="secondary" className="bg-blue-600/40 text-xs text-blue-900 dark:text-blue-50">
-                            {categorized.scope[0]}
-                          </Badge>
-                        );
-                      }
-                      
-                      if (categorized.tools.length > 0) {
-                        representativeTags.push(
-                          <Badge key={`tools-${categorized.tools[0]}`} variant="secondary" className="bg-green-600/40 text-xs text-green-900 dark:text-green-50">
-                            {categorized.tools[0]}
-                          </Badge>
-                        );
-                      }
-                      
-                      if (categorized.focus.length > 0) {
-                        representativeTags.push(
-                          <Badge key={`focus-${categorized.focus[0]}`} variant="secondary" className="bg-purple-600/40 text-xs text-purple-900 dark:text-purple-50">
-                            {categorized.focus[0]}
-                          </Badge>
-                        );
-                      }
-                      
-                      // If there are more tags than what we're showing
-                      const totalTags = project.tags.length;
-                      const shownTags = representativeTags.length;
-                      
-                      if (totalTags > shownTags) {
-                        representativeTags.push(
-                          <Badge key="more" variant="outline" className="text-xs">
-                            +{totalTags - shownTags} more
-                          </Badge>
-                        );
-                      }
-                      
-                      return representativeTags;
-                    })()}
-                  </div>
-                )}
-                {project.description && (
-                  <p className="text-muted-foreground text-sm">{project.description}</p>
-                )}
-                <p className="text-muted-foreground text-sm">
-                  {formatDate(project.date)} 
-                </p>
-                <Link href={`/projects/${project.slugAsParams}`} className="absolute inset-0">
-                  <span className="sr-only">View Project</span>
-                </Link>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className="text-muted-foreground mx-auto max-w-[58rem] text-center">
-            No projects published yet. Check back soon!
-          </p>
-        )}
+        <ProjectsFilters />
       </section>
-    </>
+
+      <section
+        id="skills-contact"
+        className="bg-background container grid gap-8 py-6 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-center lg:py-16"
+      >
+        <div className="border-border bg-card relative flex min-h-[360px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border p-6">
+          <IconCloud images={iconImages} />
+          <div className="border-border w-full border-t pt-4 text-center">
+            <Link
+              href="/capoo"
+              className="text-muted-foreground hover:text-foreground text-xs uppercase tracking-[0.3em]"
+            >
+              Capoo
+            </Link>
+          </div>
+        </div>
+        <div className="space-y-6">
+          <p className="text-muted-foreground text-sm sm:text-base">
+            connect with me! i'm always happy to talk :-)
+          </p>
+          <div className="flex items-center gap-3">
+            <a
+              href={linkedInUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "border-border bg-card text-foreground hover:bg-muted"
+              )}
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
+              <Icons.linkedIn className="size-5" />
+            </a>
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "border-border bg-card text-foreground hover:bg-muted"
+              )}
+              aria-label="GitHub"
+              title="GitHub"
+            >
+              <Icons.gitHub className="size-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }

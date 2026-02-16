@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   ArrowRight,
+  Brain, // Added Brain icon
   Check,
   ChevronLeft,
   ChevronRight,
@@ -11,20 +12,20 @@ import {
   HelpCircle,
   Image,
   Laptop,
+  Linkedin,
   Loader2,
-  type LucideIcon,
   LucideProps,
   Moon,
   MoreVertical,
   Pizza,
   Plus,
+  Server, // Added Server icon
   Settings,
   SunMedium,
   Trash,
   User,
   X,
-  Brain, // Added Brain icon
-  Server, // Added Server icon
+  type LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -92,4 +93,5 @@ export const Icons = {
     </svg>
   ),
   check: Check,
+  linkedIn: Linkedin,
 }

@@ -17,15 +17,13 @@ import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn, formatDate } from "@/lib/utils"
 import { getTagCategory, sortTags } from "@/app/(main)/projects/tag-categories"
 
-interface PageProps {
-  params: Promise<{
-    slug: string[]
-  }>
+interface ProjectSlugPageProps {
+  params: Promise<{ projectSlug: string }>
 }
 
-async function getProjectFromParams(params: PageProps["params"]) {
+async function getProjectFromParams(params: ProjectSlugPageProps["params"]) {
   const resolvedParams = await params
-  const slug = resolvedParams?.slug?.join("/")
+  const slug = resolvedParams?.projectSlug
   const project = allProjects.find((entry) => entry.slugAsParams === slug)
 
   if (!project) {
@@ -37,7 +35,7 @@ async function getProjectFromParams(params: PageProps["params"]) {
 
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: ProjectSlugPageProps): Promise<Metadata> {
   const project = await getProjectFromParams(params)
 
   if (!project) {
@@ -45,7 +43,6 @@ export async function generateMetadata({
   }
 
   const url = env.NEXT_PUBLIC_APP_URL
-
   const ogUrl = new URL(`${url}/api/og`)
   ogUrl.searchParams.set("heading", project.title)
   ogUrl.searchParams.set("type", "Project")
@@ -55,6 +52,9 @@ export async function generateMetadata({
     metadataBase: new URL(siteConfig.url),
     title: project.title,
     description: project.description,
+    authors: project.authors.map((author) => ({
+      name: author,
+    })),
     openGraph: {
       title: project.title,
       description: project.description,
@@ -63,8 +63,8 @@ export async function generateMetadata({
       images: [
         {
           url: ogUrl.toString(),
-          width: 2400,
-          height: 1350,
+          width: 1200,
+          height: 630,
           alt: project.title,
         },
       ],
@@ -72,15 +72,17 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
-  const projectParams = allProjects.map((project) => ({
-    slug: project.slugAsParams.split("/"),
+export async function generateStaticParams(): Promise<
+  { projectSlug: string }[]
+> {
+  return allProjects.map((project) => ({
+    projectSlug: project.slugAsParams,
   }))
-
-  return projectParams
 }
 
-export default async function PagePage({ params }: PageProps) {
+export default async function ProjectSlugPage({
+  params,
+}: ProjectSlugPageProps) {
   const project = await getProjectFromParams(params)
 
   if (!project) {
