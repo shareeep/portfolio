@@ -124,14 +124,14 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
             duration={typingDurationMs}
             startOnView={false}
           >
-            $ apt-get update... sudo sudo
+            $ sudo apt-get update...
           </TypingAnimation>
           <AnimatedSpan
             delay={connectedDelayMs}
             className="text-green-700 text-xs"
             startOnView={false}
           >
-            ✔ successfully connected to ap-southeast-1!
+            ✔ successfully connected to ap-southeast-1
           </AnimatedSpan>
           <TypingAnimation
             delay={lsDelayMs}
@@ -142,7 +142,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={lsOutputDelayMs}
-            className="text-blue-700 block text-sm leading-relaxed sm:text-base sm:leading-normal"
+            className="text-blue-700 block text-xs"
             startOnView={false}
           >
             <span className="flex flex-wrap gap-x-3 gap-y-1">
@@ -161,7 +161,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
           </TypingAnimation>
           <AnimatedSpan
             delay={pwdOutputDelayMs}
-            className="text-green-700"
+            className="text-blue-700 text-xs"
             startOnView={false}
           >
             /shariff/portfolio/home
