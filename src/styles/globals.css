@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans:
+      -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-heading:
+      -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --background: 38 38% 88%; /* Warm beige */
+    --foreground: 28 20% 14%; /* Deep warm brown */
+
+    --card: 40 40% 94%; /* Soft cream */
+    --card-foreground: 28 20% 14%; /* Deep warm brown */
+
+    --popover: 40 40% 94%; /* Soft cream */
+    --popover-foreground: 28 20% 14%; /* Deep warm brown */
+
+    --primary: 28 45% 30%; /* Warm brown */
+    --primary-foreground: 40 40% 94%; /* Soft cream */
+
+    --secondary: 36 30% 84%; /* Pale sand */
+    --secondary-foreground: 28 18% 26%; /* Warm taupe */
+
+    --muted: 36 25% 82%; /* Muted sand */
+    --muted-foreground: 28 14% 40%; /* Soft brown */
+
+    --accent: 84 20% 35%; /* Olive */
+    --accent-foreground: 40 40% 94%; /* Soft cream */
+
+    --destructive: 0 55% 45%; /* Warm red */
+    --destructive-foreground: 40 40% 94%; /* Soft cream */
+
+    --border: 34 18% 75%; /* Warm beige border */
+    --input: 34 18% 75%; /* Warm beige border */
+    --ring: 84 20% 35%; /* Olive */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 5% 10%; /* Very dark cool grey */
+    --foreground: 220 8% 94%; /* Light cool grey */
+
+    --card: 220 3% 15%; /* Darker cool grey */
+    --card-foreground: 220 8% 94%; /* Light cool grey */
+
+    --popover: 220 3% 15%; /* Darker cool grey */
+    --popover-foreground: 220 8% 94%; /* Light cool grey */
+
+    --primary: 220 5% 65%; /* Lighter cool grey */
+    --primary-foreground: 220 5% 10%; /* Very dark cool grey */
+
+    --secondary: 220 3% 20%; /* Dark cool grey */
+    --secondary-foreground: 220 5% 85%; /* Lighter cool grey */
+
+    --muted: 220 2% 25%; /* Darker cool grey for muted text/elements */
+    --muted-foreground: 220 3% 65%; /* Medium-light cool grey */
+
+    --accent: 220 5% 65%; /* Lighter cool grey (same as primary for now) */
+    --accent-foreground: 220 5% 10%; /* Very dark cool grey */
+
+    --destructive: 0 60% 50%; /* A clearer red for dark mode */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 220 2% 30%; /* Subtle dark cool grey border */
+    --input: 220 2% 30%; /* Subtle dark cool grey border */
+    --ring: 220 5% 65%; /* Lighter cool grey */
+  }
+  .theme {
+    --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground overflow-y-scroll;
+  }
+}
+
+.animate-blink-cursor {
+  animation: blink-cursor 1.2s step-end infinite;
+}
+
+@theme inline {
+  @keyframes blink-cursor {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+}

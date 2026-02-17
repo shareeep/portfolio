@@ -1,0 +1,20 @@
+:root {
+  --exact: #16a34a;
+  --present: #f59e0b;
+  --miss: #d4d4d4;
+}
+
+.wordle-gradient {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(22, 163, 74, 0.12),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(245, 158, 11, 0.16),
+      transparent 30%
+    ),
+    radial-gradient(circle at 50% 80%, rgba(52, 211, 153, 0.1), transparent 35%);
+}

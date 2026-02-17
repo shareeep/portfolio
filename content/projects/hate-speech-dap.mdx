@@ -1,0 +1,103 @@
+---
+title: Hate Speech Classification - 11th DAP Project
+shortTitle: "Hate Speech - Embeddings"
+description: Investigating the intersection of sarcasm and hate speech detection using various NLP techniques, ranging from traditional ML to LLMs.
+image: /images/projects/hate-speech-dap.png
+date: "2025-11-01"
+authors:
+  - shariff-rashid
+tags:
+  [
+    "AI/ML",
+    "NLP",
+    "BERT",
+    "LLM",
+    "Multi-task Learning",
+    "PyTorch",
+    "Ollama",
+    "RAG",
+  ]
+projectType: "AI/ML"
+---
+
+## Overview
+
+Developed as part of the **11th DAP (Data Associates Program) under SMUBIA (Business Intelligence & Analytics Club)**, this project addresses the pervasive issue of hate speech on social media platforms.
+
+Hate speech is a pervasive issue on social media platforms, with billions of users generating vast amounts of content daily. While automated moderation tools exist, they often struggle with **implicit hate**, particularly when it involves **sarcasm** or **irony**.
+
+This project, "Hate Speech DAP," aims to bridge this gap by developing a **sarcasm-aware hate speech classification system**. Instead of treating hate speech detection as a standalone task, we explore methods to explicitly model sarcasm as a co-signal, calibrating the model's decision-making process to better understand context-heavy language.
+
+## Problem Statement & Motivation
+
+The core challenge lies in the nuance of language. A sentence can contain hateful words but be used in a reclaimed or non-hateful context, while a seemingly polite sentence can be deeply hateful through sarcasm.
+
+Current limitations include:
+
+- **Context-heavy language:** Models often fail to grasp the "tone" of the text.
+- **Implicit Hate:** Sarcasm and irony are frequently used to mask hate speech, evading traditional classifiers.
+- **Data Scarcity:** There is a lack of datasets that explicitly label both hate speech and sarcasm simultaneously.
+
+Drawing inspiration from recent research (_Hate Speech Detection by Using Rationales for Judging Sarcasm_), we aim to treat sarcasm as its own prediction head/task and use that signal to inform the hate speech classification.
+
+## Methodology
+
+Our approach moves beyond simple text classification by integrating multi-task learning and modern LLM techniques.
+
+### 1. Multi-Task Learning (BERT)
+
+We propose a shared encoder architecture with two distinct output heads:
+
+- **Hate Head:** Predicts 3 classes (Hate, Offensive, Normal).
+- **Sarcasm Head:** Predicts 2 classes (Sarcastic, Not Sarcastic).
+
+By training these heads jointly (fine-tuning on HateXplain for hate and iSarcasmEval for sarcasm), the shared encoder learns representations that are sensitive to both semantic toxicity and ironic tone.
+
+## TBC 2, 3
+
+### 2. LLM & Agentic Workflows
+
+Beyond traditional BERT models, we plan explore the capabilities of Large Language Models (LLMs) and Small Language Models (SLMs) running locally. This involves testing prompt engineering strategies and "Agentic" workflows where models can reason about the text before classifying it.
+
+### 3. Knowledge Graph RAG (KG-RAG)
+
+To further enhance context understanding, we plan to explore **Knowledge Graph Augmented Generation**. By mapping entities and concepts in the text to a knowledge graph, the model can retrieve relevant context (e.g., slurs, dog whistles, or cultural references) to aid in classification.
+
+## Datasets
+
+We utilize a combination of datasets to cover the intersection of hate and sarcasm:
+
+- **HateXplain:** The core dataset for hate detection, providing labels for Hate, Offensive, and Normal speech, along with rationales.
+- **iSarcasmEval:** Used to train the sarcasm detection head (Binary Sarcasm and Subtypes).
+- **Implicit Hate:** A crucial dataset for testing the "Hateful + Sarcastic" intersection, specifically filtering for implicit hate with irony mechanisms.
+- **TweetEval-Irony & ToxiGen:** Supplementary datasets for robustness and domain stress testing.
+
+## Project Milestones
+
+The project is structured into four key phases of technical exploration:
+
+### Milestone 1: BERT Baseline
+
+- Establish a strong baseline using `bert-base-cased` fine-tuned on HateXplain.
+- Evaluate performance using Accuracy and Macro-F1.
+- Analyze confusion matrices to understand common misclassifications (e.g., confusing Offensive with Hate).
+
+### Milestone 2: Prompt Engineering & SLMs
+
+- Move beyond BERT to generative models.
+- Compare **OpenAI API** calls against local **Small Language Models (SLMs)** (e.g., Llama-3-8B, Mistral) running on **Ollama**.
+- Experiment with System Prompting techniques (Few-shot, Chain-of-Thought) to elicit better reasoning for sarcasm detection.
+
+### Milestone 2.5: Agentic Local Models
+
+- Implement agentic workflows where local models act as "judges."
+- Allow the model to break down the classification task: _Is this sarcastic? -> If yes, does the sarcasm convey hate? -> Final Verdict._
+
+### Milestone 3: KG-RAG + Prompt Engineering
+
+- Integrate **Knowledge Graphs** into the retrieval process (KG-RAG).
+- Combine RAG with advanced Prompt Engineering (PE) to provide the model with external context about specific terms or phrases, reducing hallucination and improving detection of dog whistles.
+
+## Future Outlook
+
+The ultimate goal is to observe a measurable improvement in accuracy and F1 scores on "implicit hate" subsets compared to SOTA approaches. By successfully integrating sarcasm detection, we hope to create a more robust and explainable moderation tool.

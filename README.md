@@ -1,20 +1,26 @@
-# Shariff Rashid's Portfolio
+# Shariff's Portfolio
 
-Welcome to the repository for my personal portfolio website!
+## Setup
 
-## About This Project
+Install dependencies:
 
-This site showcases my journey as a passionate software developer from Singapore. Here you'll find my projects, skills, and ways to connect.
+```bash
+pnpm i
+```
 
-## Features
+Run the development server:
 
-- A fork of the Taxonomy Repo with Velite (for content management using .Md files)
-- Built with Next.js
-- Styled with Tailwind CSS
-- Responsive Design
-- Categorized project tag system with filtering capabilities
+```bash
+pnpm dev
+```
+
+Website will be running on [http://localhost:3000](http://localhost:3000)
+
+## Commands
+
+- `pnpm lint:fix` - Run ESLint and auto-fix issues
 
 ## Deployment
 
-- Custom domain purchased on Cloudflare
-- Deployed on Vercel with 2 branches -> a development and production environment respectively
+- Custom domain on Cloudflare
+- CI/CD via Vercel with 2 branches -> a development and production environment respectively
