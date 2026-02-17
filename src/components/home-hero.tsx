@@ -30,9 +30,9 @@ const experienceCards: ExperienceCard[] = [
     logo: "/images/htxsg_logo.jpeg",
     summary: "Enterprise Group - xDigital, working on AI Products",
     highlights: [
-      "Fullstack development in TypeScript with services powered by React and NestJS.",
-      "Built CI workflows in GitLab and robust Playwright E2E tests to surface regressions.",
-      "Built a custom MCP server to integrate app functionality with an agentic AI push.",
+      "Building a custom MCP server exposing key app functionalities as tool contracts for future agentic AI integration.",
+      "Developing features across a full-stack TypeScript codebase for an AI-powered procurement report system serving Whole-of-Government (WoG).",
+      "Implemented Playwright E2E suites in GitLab CI to enforce regression coverage across critical user flows ahead of the late-January launch.",
     ],
   },
   {
