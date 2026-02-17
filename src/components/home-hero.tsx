@@ -94,7 +94,8 @@ export function HomeHero() {
             pauseDelay={2000}
             cursorStyle="underscore"
             startOnView={false}
-            className="text-foreground font-heading text-3xl sm:text-4xl md:text-5xl"
+            as="div"
+            className="text-foreground font-heading block min-h-[2.6em] w-full text-left text-3xl leading-tight sm:text-4xl md:min-h-0 md:text-5xl"
           />
         </div>
 

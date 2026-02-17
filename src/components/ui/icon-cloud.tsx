@@ -24,6 +24,8 @@ function easeOutCubic(t: number): number {
 export function IconCloud({ icons, images }: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [rotation, setRotation] = useState({ x: 0, y: 0 })
+  const [disableAnimation, setDisableAnimation] = useState(false)
+  const [isInViewport, setIsInViewport] = useState(true)
   const [isDragging, setIsDragging] = useState(false)
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
@@ -40,6 +42,41 @@ export function IconCloud({ icons, images }: IconCloudProps) {
   const rotationRef = useRef(rotation)
   const iconCanvasesRef = useRef<HTMLCanvasElement[]>([])
   const imagesLoadedRef = useRef<boolean[]>([])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      "(max-width: 767px), (prefers-reduced-motion: reduce)"
+    )
+
+    const updateAnimationPreference = () => {
+      setDisableAnimation(mediaQuery.matches)
+    }
+
+    updateAnimationPreference()
+    mediaQuery.addEventListener("change", updateAnimationPreference)
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateAnimationPreference)
+    }
+  }, [])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting && entry.intersectionRatio > 0)
+      },
+      { threshold: 0 }
+    )
+
+    observer.observe(canvas)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
   // Create icon canvases once when icons/images change
   useEffect(() => {
@@ -214,7 +251,7 @@ export function IconCloud({ icons, images }: IconCloudProps) {
     const ctx = canvas?.getContext("2d")
     if (!canvas || !ctx) return
 
-    const animate = () => {
+    const drawFrame = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       const centerX = canvas.width / 2
@@ -225,27 +262,29 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       const distance = Math.sqrt(dx * dx + dy * dy)
       const speed = 0.003 + (distance / maxDistance) * 0.01
 
-      if (targetRotation) {
-        const elapsed = performance.now() - targetRotation.startTime
-        const progress = Math.min(1, elapsed / targetRotation.duration)
-        const easedProgress = easeOutCubic(progress)
+      if (!disableAnimation) {
+        if (targetRotation) {
+          const elapsed = performance.now() - targetRotation.startTime
+          const progress = Math.min(1, elapsed / targetRotation.duration)
+          const easedProgress = easeOutCubic(progress)
 
-        rotationRef.current = {
-          x:
-            targetRotation.startX +
-            (targetRotation.x - targetRotation.startX) * easedProgress,
-          y:
-            targetRotation.startY +
-            (targetRotation.y - targetRotation.startY) * easedProgress,
-        }
+          rotationRef.current = {
+            x:
+              targetRotation.startX +
+              (targetRotation.x - targetRotation.startX) * easedProgress,
+            y:
+              targetRotation.startY +
+              (targetRotation.y - targetRotation.startY) * easedProgress,
+          }
 
-        if (progress >= 1) {
-          setTargetRotation(null)
-        }
-      } else if (!isDragging) {
-        rotationRef.current = {
-          x: rotationRef.current.x + (dy / canvas.height) * speed,
-          y: rotationRef.current.y + (dx / canvas.width) * speed,
+          if (progress >= 1) {
+            setTargetRotation(null)
+          }
+        } else if (!isDragging) {
+          rotationRef.current = {
+            x: rotationRef.current.x + (dy / canvas.height) * speed,
+            y: rotationRef.current.y + (dx / canvas.width) * speed,
+          }
         }
       }
 
@@ -268,7 +307,6 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         ctx.globalAlpha = opacity
 
         if (icons || images) {
-          // Only try to render icons/images if they exist
           if (
             iconCanvasesRef.current[index] &&
             imagesLoadedRef.current[index]
@@ -276,7 +314,6 @@ export function IconCloud({ icons, images }: IconCloudProps) {
             ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 40, 40)
           }
         } else {
-          // Show numbered circles if no icons/images are provided
           ctx.beginPath()
           ctx.arc(0, 0, 20, 0, Math.PI * 2)
           ctx.fillStyle = "#4444ff"
@@ -290,6 +327,19 @@ export function IconCloud({ icons, images }: IconCloudProps) {
 
         ctx.restore()
       })
+    }
+
+    if (disableAnimation) {
+      drawFrame()
+      return
+    }
+
+    if (!isInViewport) {
+      return
+    }
+
+    const animate = () => {
+      drawFrame()
       animationFrameRef.current = requestAnimationFrame(animate)
     }
 
@@ -300,7 +350,16 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [icons, images, iconPositions, isDragging, mousePos, targetRotation])
+  }, [
+    icons,
+    images,
+    iconPositions,
+    isDragging,
+    mousePos,
+    targetRotation,
+    disableAnimation,
+    isInViewport,
+  ])
 
   return (
     <canvas

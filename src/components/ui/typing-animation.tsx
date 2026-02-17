@@ -164,10 +164,16 @@ export function TypingAnimation({
     >
       {displayedText}
       {shouldShowCursor && (
-        <span
-          className={cn("inline-block", blinkCursor && "animate-blink-cursor")}
-        >
-          {getCursorChar()}
+        <span className="inline-flex whitespace-nowrap align-baseline">
+          {"\u2060"}
+          <span
+            className={cn(
+              "inline-block",
+              blinkCursor && "animate-blink-cursor"
+            )}
+          >
+            {getCursorChar()}
+          </span>
         </span>
       )}
     </MotionComponent>
