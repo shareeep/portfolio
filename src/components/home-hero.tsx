@@ -32,7 +32,6 @@ const experienceCards: ExperienceCard[] = [
     highlights: [
       "Fullstack development in TypeScript with services powered by React and NestJS.",
       "Built CI workflows in GitLab and robust Playwright E2E tests to surface regressions.",
-      "Contributed to product development (details TBD).",
       "Built a custom MCP server to integrate app functionality with an agentic AI push.",
     ],
   },
