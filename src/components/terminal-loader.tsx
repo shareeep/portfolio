@@ -164,7 +164,7 @@ export function TerminalLoader({ onComplete, className }: TerminalLoaderProps) {
             className="text-xs text-blue-700"
             startOnView={false}
           >
-            /shariff/portfolio/home
+            /Users/shariff/home
           </AnimatedSpan>
           <TypingAnimation
             delay={loadingDelayMs}
