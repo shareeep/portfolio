@@ -21,6 +21,7 @@ const projects = defineCollection({
       image: s.string().max(99).optional(),
       projectType: s.enum(["AI/ML", "SWE", "DESIGN", "DATA"]).default("SWE"),
       shortTitle: s.string().max(60).optional(),
+      homepageOrder: s.number().int().min(1).optional(),
       highlights: s.array(s.string().max(160)).optional(),
       authors: s.array(s.string()),
       tags: s.array(s.string()).optional(),

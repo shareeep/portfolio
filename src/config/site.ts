@@ -1,10 +1,14 @@
 export const siteConfig = {
-  name: "Shariff's Portfolio",
-  description: "Shariff Rashid's portfolio. I build AI solutions.",
+  name: "Shariff Rashid",
+  description:
+    "Data scientist and software engineer building applied AI systems and dependable software.",
   url: "https://shariffrashid.com",
-  ogImage: "https://shariffrashid.com/og-placeholder.jpg",
+  location: "Singapore",
+  email: "muhd.shariff01@gmail.com",
   links: {
     github: "https://github.com/shareeep",
+    linkedin: "https://linkedin.com/in/shariff-rashid",
+    resume: "/resume.pdf",
   },
 } as const
 

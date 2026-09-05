@@ -1,0 +1,73 @@
+---
+title: iPiD Growth Intelligence Platform
+shortTitle: "iPiD Growth Intelligence"
+description: A team-built, evidence-led workflow that turns fragmented account, market, regulatory, and GTM signals into cited and reviewable business outputs.
+date: "2026-05-01"
+homepageOrder: 1
+authors:
+  - shariff-rashid
+tags:
+  [
+    "AI/ML",
+    "GTM Engineering",
+    "RAG",
+    "LLM",
+    "Context Engineering",
+    "Human-in-the-loop",
+  ]
+projectType: "AI/ML"
+highlights:
+  - Team-built evidence workflow for B2B fintech account research and ABM briefs
+  - Claim-level citations, review trails, and reusable context across research runs
+  - Safeguards for stale evidence, hallucinations, and sensitive sponsor data
+---
+
+## Project facts
+
+This Final Year Project explores how an agentic AI workflow can support B2B fintech growth intelligence. The team designed a system that brings fragmented account, market, regulatory, and go-to-market signals into a cited, reviewable research flow.
+
+The workflow covers source discovery, signal extraction, claim-level citation, human review, and approved export. Research runs retain source cards, run logs, reviewer feedback, and reusable context so business outputs can be traced back to their evidence.
+
+## GTM Engineering at heart
+
+The project is a GTM Engineering problem: it connects research automation with the operating controls needed to produce useful account research and account-based marketing briefs. The goal is not autonomous publishing. It is to shorten the path from scattered evidence to a grounded draft that a person can inspect, correct, and approve.
+
+## Engineering challenges
+
+### Keeping claims grounded
+
+Useful briefs combine many source types, but every synthesized claim needs a visible evidence trail. The workflow therefore treats citation and review state as part of a claim rather than as decoration added after generation.
+
+```text
+for source in approved_sources:
+    evidence = discover_and_extract(source)
+    signals = classify_relevant_signals(evidence)
+
+for claim in draft_brief(signals):
+    claim.citations = find_supporting_evidence(claim, signals)
+    claim.status = "cited" if claim.citations else "needs-review"
+
+publish_only(review_and_approve(claims))
+```
+
+This pseudocode is illustrative. It describes the engineering shape of the workflow without reproducing proprietary implementation details.
+
+### Managing freshness and uncertainty
+
+Market and regulatory evidence changes over time. Evidence therefore needs timestamps, reason codes, and explicit review states so stale or weakly supported material cannot look equivalent to current, cited material.
+
+```text
+if evidence.is_stale() or evidence.confidence < review_threshold:
+    claim.status = "needs-review"
+    claim.reason = explain_uncertainty(evidence)
+else:
+    claim.status = "cited"
+```
+
+### Protecting sponsor data
+
+The design applies access controls, data minimisation, review trails, and an explicit ban on autonomous external publishing. These constraints make human approval a system boundary rather than an optional step.
+
+## Outcome
+
+The project demonstrates how source discovery, retrieval, generation, and review can be composed into a GTM workflow where evidence remains inspectable. The emphasis is on the engineering challenges and controls behind grounded business outputs, not on displaying the underlying product.

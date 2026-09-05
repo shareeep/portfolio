@@ -1,62 +1,49 @@
-import { notFound } from "next/navigation"
-import { projects as allProjects } from "#site/content"
-
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { Mdx } from "@/components/mdx-components"
-
 import "@/styles/mdx.css"
 
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
+import { projects } from "#site/content"
 
-import { getSiteUrl, siteConfig } from "@/config/site"
-import { absoluteUrl, cn, formatDate } from "@/lib/utils"
+import { getSiteUrl } from "@/config/site"
+import { absoluteUrl, formatDate } from "@/lib/utils"
+import { Mdx } from "@/components/mdx-components"
 
-interface ProjectSlugPageProps {
+interface ProjectPageProps {
   params: Promise<{ projectSlug: string }>
 }
 
-async function getProjectFromParams(params: ProjectSlugPageProps["params"]) {
-  const resolvedParams = await params
-  const slug = resolvedParams?.projectSlug
-  const project = allProjects.find((entry) => entry.slugAsParams === slug)
-
-  if (!project) {
-    return null
-  }
-
-  return project
+async function getProject(params: ProjectPageProps["params"]) {
+  const { projectSlug } = await params
+  return projects.find(
+    (project) => project.published && project.slugAsParams === projectSlug
+  )
 }
 
 export async function generateMetadata({
   params,
-}: ProjectSlugPageProps): Promise<Metadata> {
-  const project = await getProjectFromParams(params)
+}: ProjectPageProps): Promise<Metadata> {
+  const project = await getProject(params)
 
-  if (!project) {
-    return {}
-  }
+  if (!project) return {}
 
+  const canonicalUrl = absoluteUrl(`/${project.slugAsParams}`)
   const ogUrl = new URL("/api/og", getSiteUrl())
   ogUrl.searchParams.set("heading", project.title)
   ogUrl.searchParams.set("type", "Project")
-  ogUrl.searchParams.set("mode", "dark")
+  ogUrl.searchParams.set("mode", "light")
 
   return {
-    metadataBase: new URL(siteConfig.url),
     title: project.title,
     description: project.description,
-    authors: project.authors.map((author) => ({
-      name: author,
-    })),
+    alternates: { canonical: canonicalUrl },
+    authors: project.authors.map((author) => ({ name: author })),
     openGraph: {
       title: project.title,
       description: project.description,
       type: "article",
-      url: absoluteUrl(project.slug),
+      url: canonicalUrl,
       images: [
         {
           url: ogUrl.toString(),
@@ -69,70 +56,49 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams(): Promise<
-  { projectSlug: string }[]
-> {
-  return allProjects.map((project) => ({
-    projectSlug: project.slugAsParams,
-  }))
+export function generateStaticParams() {
+  return projects
+    .filter((project) => project.published)
+    .map((project) => ({ projectSlug: project.slugAsParams }))
 }
 
-export default async function ProjectSlugPage({
-  params,
-}: ProjectSlugPageProps) {
-  const project = await getProjectFromParams(params)
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const project = await getProject(params)
 
-  if (!project) {
-    notFound()
-  }
+  if (!project) notFound()
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
-      <Link
-        href="/"
-        className={cn(
-          buttonVariants({ variant: "ghost" }),
-          "absolute left-[-200px] top-14 hidden xl:inline-flex"
-        )}
-      >
-        <Icons.chevronLeft className="mr-2 size-4" />
-        Back to home
+    <article className="project-page page-section">
+      <Link href="/#projects" className="back-link">
+        ← Back to projects
       </Link>
-      <div>
-        {project.date && (
-          <time
-            dateTime={project.date}
-            className="text-muted-foreground block text-sm"
-          >
-            Published on {formatDate(project.date)}
-          </time>
-        )}
-        <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
-          {project.title}
-        </h1>
-      </div>
+
+      <header>
+        <p className="eyebrow">
+          {project.projectType} · {formatDate(project.date)}
+        </p>
+        <h1>{project.title}</h1>
+        {project.description && <p>{project.description}</p>}
+      </header>
+
       {project.image && (
-        <AspectRatio
-          ratio={720 / 405}
-          className="bg-muted my-8 w-full overflow-hidden rounded-md border"
-        >
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition-colors"
-            priority
-          />
-        </AspectRatio>
+        <Image
+          src={project.image}
+          alt={project.title}
+          width={1200}
+          height={675}
+          className="project-cover"
+          priority
+        />
       )}
-      <Mdx code={project.body} />
-      <hr className="mt-12" />
-      <div className="flex justify-center py-6 lg:py-10">
-        <Link href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
-          <Icons.chevronLeft className="mr-2 size-4" />
-          Back to home
-        </Link>
+
+      <div className="project-body">
+        <Mdx code={project.body} />
       </div>
+
+      <Link href="/#projects" className="back-link project-back-link">
+        ← Back to projects
+      </Link>
     </article>
   )
 }

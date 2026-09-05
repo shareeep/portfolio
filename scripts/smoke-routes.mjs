@@ -40,9 +40,57 @@ async function expectResponse(pathname, options = {}) {
   return response
 }
 
+async function expectDocument(pathname, markers) {
+  const response = await expectResponse(pathname)
+  const body = await response.text()
+
+  for (const marker of markers) {
+    if (!body.includes(marker)) {
+      throw new Error(`${pathname} did not include ${JSON.stringify(marker)}`)
+    }
+  }
+
+  return body
+}
+
+async function expectStatus(pathname, expectedStatus) {
+  const response = await fetch(new URL(pathname, baseUrl), {
+    redirect: "manual",
+  })
+
+  if (response.status !== expectedStatus) {
+    throw new Error(
+      `${pathname} returned ${response.status}; expected ${expectedStatus}`
+    )
+  }
+
+  console.log(`ok ${pathname} (${expectedStatus})`)
+}
+
 const projects = await readPublishedProjects()
 
-await expectResponse("/", { marker: "connect with me!" })
+const home = await expectDocument("/", [
+  "Hello, I’m Shariff.",
+  "Data Scientist &amp; Software Engineer",
+  "mailto:muhd.shariff01@gmail.com",
+  "https://github.com/shareeep",
+  "https://linkedin.com/in/shariff-rashid",
+  "/resume.pdf",
+])
+
+const sectionOrder = ["Work experience", "Featured projects", "Older projects"]
+  .map((marker) => home.indexOf(marker))
+  .every((position, index, positions) =>
+    index === 0 ? position >= 0 : position > positions[index - 1]
+  )
+
+if (!sectionOrder) {
+  throw new Error(
+    "/ did not render work experience before featured and older projects"
+  )
+}
+
+await expectStatus("/projects", 404)
 await expectResponse("/capoo", { marker: "Back" })
 await expectResponse("/wordle", { marker: "Turn 1 of 6" })
 
@@ -59,7 +107,9 @@ await expectResponse("/api/og?heading=Smoke%20Test&type=Portfolio&mode=light", {
 })
 
 for (const project of projects) {
-  await expectResponse(`/${project.slugAsParams}`, { marker: "Back to home" })
+  await expectResponse(`/${project.slugAsParams}`, {
+    marker: "Back to projects",
+  })
   if (project.image?.startsWith("/")) {
     await expectResponse(project.image)
   }

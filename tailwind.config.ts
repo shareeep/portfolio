@@ -15,7 +15,7 @@ const config: Config = {
       center: true,
       padding: {
         DEFAULT: "1rem", // Default padding for smallest screens
-        sm: "2rem",      // Padding for sm screens and up
+        sm: "2rem", // Padding for sm screens and up
       },
       screens: {
         "2xl": "1400px",
@@ -66,23 +66,12 @@ const config: Config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      screens: {
+        desktop: "1100px",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [],
 }
 
 export default config
