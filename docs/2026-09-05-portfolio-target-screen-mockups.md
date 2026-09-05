@@ -13,11 +13,11 @@ The desktop portfolio uses the three-column editorial shell from the live Bidyut
 
 - A persistent navigation and contact rail on the left
 - A narrow reading column for profile, work, and project content
-- A compact status rail on the right
+- An empty right gutter that preserves the reading measure without adding filler
 
 Fine grid lines align headings, rows, and controls across the viewport. The main column follows a resume structure: GovTech and HTX as work experience, four featured projects led by iPiD and the SMU BIA project, then an older-projects list.
 
-On mobile, the left rail becomes a top navigation bar. The right rail drops out, and the content uses one column. The layout needs no menu drawer.
+On mobile, the left rail becomes a top navigation bar and the content uses one column. No breakpoint renders a status rail. The layout needs no menu drawer.
 
 ## Site Map
 
@@ -62,10 +62,10 @@ On mobile, the left rail becomes a top navigation bar. The right rail drops out,
 
 ```text
 +----------------------------+------------------------------------------------------+----------------------------+
-| LEFT RAIL                  | MAIN READING COLUMN                                  | RIGHT RAIL                 |
+| LEFT RAIL                  | MAIN READING COLUMN                                  | EMPTY GUTTER               |
 |                            |                                                      |                            |
-| [SR mark]                  | [portrait]  Hello, I'm Shariff.                      | Open to work            o  |
-|                            |             Data Scientist & Software Engineer       | Singapore  16:20 SGT       |
+| [SR mark]                  | [portrait]  Hello, I'm Shariff.                      |                            |
+|                            |             Data Scientist & Software Engineer       |                            |
 | Home                       |                                                      |                            |
 | Experience                 | Short introduction and current focus.                |                            |
 | Projects                   |                                                      |                            |
@@ -80,7 +80,7 @@ On mobile, the left rail becomes a top navigation bar. The right rail drops out,
 |                            |                                                      |                            |
 | Drop me a message          | Footer note                                           |                            |
 | email address              |                                                      |                            |
-| GitHub LinkedIn Resume     |                                                      |                            |
+| GitHub LinkedIn            |                                                      |                            |
 +----------------------------+------------------------------------------------------+----------------------------+
 ```
 
@@ -103,8 +103,8 @@ The page scrolls as one document. Each side rail uses `position: sticky` within 
 |                          |  [avatar]  Hello, I'm Shariff.                         |                          |
 |                          |            Data Scientist & Software Engineer          |                          |
 |                          |                                                        |                          |
-| [SR]                     |  I build applied AI systems and dependable software.   | Open to work          o  |
-|                          |  I'm completing a BSc in Information Systems at SMU.   | Singapore  16:20 SGT     |
+| [SR]                     |  I build applied AI systems and dependable software.   |                          |
+|                          |  I'm completing a BSc in Information Systems at SMU.   |                          |
 | Home                     |                                                        |                          |
 | Experience               |  My current work focuses on document intelligence,    |                          |
 | Projects                 |  RAG systems, and products that support human review.  |                          |
@@ -118,7 +118,7 @@ The page scrolls as one document. Each side rail uses `position: sticky` within 
 |                          |                                                        |                          |
 | Drop me a message        |  Featured projects                                     |                          |
 | shariff@[confirmed]      |  iPiD Growth Intelligence Platform                 ->  |                          |
-| GitHub LinkedIn Resume   |  FYP / 2026                                             |                          |
+| GitHub LinkedIn          |  FYP / 2026                                             |                          |
 +--------------------------+--------------------------------------------------------+--------------------------+
 ```
 
@@ -128,8 +128,8 @@ Both rows start collapsed. The visitor can open either row with Enter or Space, 
 
 ```text
 +--------------------------+--------------------------------------------------------+--------------------------+
-| Home                     |  Featured projects                                     | Open to work          o  |
-| Experience               |                                                        | Singapore  16:20 SGT     |
+| Home                     |  Featured projects                                     |                          |
+| Experience               |                                                        |                          |
 | Projects                 |  iPiD Growth Intelligence Platform                 ->  |                          |
 | Playground               |  Cited account research and grounded ABM briefs.       |                          |
 |                          |--------------------------------------------------------|                          |
@@ -147,7 +147,7 @@ Both rows start collapsed. The visitor can open either row with Enter or Space, 
 |                          |                                                        |                          |
 | Drop me a message        |  Older projects                                        |                          |
 | shariff@[confirmed]      |  2025  Aircraft Delay Analysis                     ->  |                          |
-| GitHub LinkedIn Resume   |  2025  CampusG / Phishing Detection / 6 more       ->  |                          |
+| GitHub LinkedIn          |  2025  CampusG / Phishing Detection / 6 more       ->  |                          |
 +--------------------------+--------------------------------------------------------+--------------------------+
 ```
 
@@ -180,7 +180,7 @@ The top bar contains the home-linked mark on the left and three section links on
 |                                          |
 | Drop me a message                        |
 | shariff@[confirmed]                      |
-| GitHub  LinkedIn  Resume                 |
+| GitHub  LinkedIn                         |
 |                                          |
 | Experience                               |
 |------------------------------------------|
@@ -231,7 +231,7 @@ Both internships start collapsed on mobile. Opening a row inserts a compact, ful
 +------------------------------------------+
 ```
 
-Mobile omits the right status rail and project preview images. Featured and older rows together expose every published project. Each row is one link target that opens its case study directly and shows a neutral focus outline.
+Mobile omits project preview images. Featured and older rows together expose every published project. Each row is one link target that opens its case study directly and shows a neutral focus outline.
 
 ## Project Case Study
 
@@ -244,8 +244,8 @@ The project page keeps the global shell and replaces the main column. The case-s
 
 ```text
 +--------------------------+--------------------------------------------------------+--------------------------+
-| [SR]                     |  <- Back to projects                                   | Open to work          o  |
-|                          |                                                        | Singapore  16:20 SGT     |
+| [SR]                     |  <- Back to projects                                   |                          |
+|                          |                                                        |                          |
 | Home                     |  iPiD Growth Intelligence Platform                     |                          |
 | Experience               |  FYP / 2026 / Team project                             |                          |
 | Projects                 |                                                        |                          |
@@ -288,19 +288,19 @@ The iPiD note has no product image, interface capture, repository action, live d
 
 ## Responsive Contract
 
-| Element         | Mobile, 320-767 px     | Tablet, 768-1099 px | Desktop, 1100 px and above      |
-| --------------- | ---------------------- | ------------------- | ------------------------------- |
-| Shell           | Top bar and one column | Left rail and main  | Left rail, main, and right rail |
-| Navigation      | Non-sticky top bar     | Sticky left rail    | Sticky left rail                |
-| Status          | Omitted                | Row under profile   | Sticky right rail               |
-| Contact         | Profile block          | Left rail           | Left rail                       |
-| Internships     | Collapsed at load      | Collapsed at load   | Collapsed at load               |
-| Project preview | Omitted                | Omitted             | Omitted                         |
-| Project body    | Full width             | Up to 640 px        | Up to 640 px                    |
+| Element         | Mobile, 320-767 px     | Tablet, 768-1099 px | Desktop, 1100 px and above        |
+| --------------- | ---------------------- | ------------------- | --------------------------------- |
+| Shell           | Top bar and one column | Left rail and main  | Left rail, main, and empty gutter |
+| Navigation      | Non-sticky top bar     | Sticky left rail    | Sticky left rail                  |
+| Status          | Not rendered           | Not rendered        | Not rendered                      |
+| Contact         | Profile block          | Left rail           | Left rail                         |
+| Internships     | Collapsed at load      | Collapsed at load   | Collapsed at load                 |
+| Project preview | Omitted                | Omitted             | Omitted                           |
+| Project body    | Full width             | Up to 640 px        | Up to 640 px                      |
 
 ## Content Inputs
 
-At planning time, the repository lacked a public resume URL and email address. The implementation adds both to `src/config/site.ts` and derives the introduction and availability text from the current resume material.
+The implementation adds the confirmed email address to `src/config/site.ts`. The résumé remains private: the site contains no résumé configuration, link, or public PDF. Profile and experience copy may still be derived from private career source material.
 
 Create the iPiD MDX entry from approved FYP material before adding its homepage link. Keep it to verified team-level facts, its GTM Engineering purpose, engineering challenges, and pseudocode. Do not display the product, product UI, demo, repository, proprietary code or data, or unsupported personal-contribution claims. Update `hate-speech-dap.mdx` from the richer SMU BIA project source in the sibling `../resume-refs` repository, which contains measured results missing from the portfolio copy.
 
@@ -339,8 +339,8 @@ The implementation follows the OpenSpec shell and reading order. Final captures 
 
 Intentional differences from the ASCII target:
 
-- The status copy says “Open to graduate roles,” which is more precise than the generic “Open to work.”
-- The status rail shows `Singapore · SGT` without a clock. This keeps the shell server-rendered and avoids a client-only timer for decorative information.
+- The third desktop grid track is intentional whitespace. It has no semantic aside or substitute content.
+- The site exposes no résumé link or file, availability claim, location label, or time-zone label.
 - Real profile and project summaries determine line wrapping; the hierarchy, project order, disclosure state, and breakpoint behaviour match the target.
 
 ### Mobile experience expanded — 390 × 844

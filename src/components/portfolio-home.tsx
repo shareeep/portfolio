@@ -19,7 +19,6 @@ function ProfileLinks() {
       <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
-      <a href={siteConfig.links.resume}>Resume</a>
     </nav>
   )
 }
@@ -50,13 +49,6 @@ export function PortfolioHome({
         <p>{profile.introduction}</p>
         <p>{profile.focus}</p>
         <ProfileLinks />
-        <div className="tablet-status" aria-label="Availability">
-          <span>
-            <span className="status-dot" aria-hidden="true" />
-            {profile.availability}
-          </span>
-          <span>{siteConfig.location} · SGT</span>
-        </div>
       </section>
 
       <section id="experience" className="page-section">

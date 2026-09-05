@@ -65,11 +65,11 @@ The loader delays the information a recruiter needs:
 - Name and professional positioning
 - Recent internships
 - Projects
-- Resume and contact links
+- Contact links
 
 ### Desktop
 
-At a 1440 by 1000 viewport, the settled first screen starts with the experience card and shows part of the project browser. The page does not present Shariff's name, professional summary, resume, or contact links as stable content near the top.
+At a 1440 by 1000 viewport, the settled first screen starts with the experience card and shows part of the project browser. The page does not present Shariff's name, professional summary, or contact links as stable content near the top.
 
 The visual design nests several bordered, rounded surfaces. The experience panel contains an accordion and typing panel. The project section contains a folder tree, a selected-project card, a quick-breakdown card, and two more project cards. Each layer competes for attention.
 
@@ -109,7 +109,7 @@ The main layout mounts the loader over each route in the route group. Visitors m
 
 The hero stores internship content and renders a rotating typing animation. It does not provide a stable introduction or primary links.
 
-**Correction:** Replace the typing panel with a server-rendered identity block containing the name, role, one short positioning statement, resume, GitHub, LinkedIn, and email.
+**Correction:** Replace the typing panel with a server-rendered identity block containing the name, role, one short positioning statement, GitHub, LinkedIn, and email. Keep the résumé private rather than publishing a file or link.
 
 ### Project browser state
 

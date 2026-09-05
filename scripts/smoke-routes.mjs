@@ -75,8 +75,19 @@ const home = await expectDocument("/", [
   "mailto:muhd.shariff01@gmail.com",
   "https://github.com/shareeep",
   "https://linkedin.com/in/shariff-rashid",
-  "/resume.pdf",
 ])
+
+for (const forbiddenMarker of [
+  "/resume.pdf",
+  "Open to graduate roles",
+  "Singapore · SGT",
+]) {
+  if (home.includes(forbiddenMarker)) {
+    throw new Error(
+      `/ unexpectedly included ${JSON.stringify(forbiddenMarker)}`
+    )
+  }
+}
 
 const sectionOrder = ["Work experience", "Featured projects", "Older projects"]
   .map((marker) => home.indexOf(marker))
@@ -91,6 +102,7 @@ if (!sectionOrder) {
 }
 
 await expectStatus("/projects", 404)
+await expectStatus("/resume.pdf", 404)
 await expectResponse("/capoo", { marker: "Back" })
 await expectResponse("/wordle", { marker: "Turn 1 of 6" })
 

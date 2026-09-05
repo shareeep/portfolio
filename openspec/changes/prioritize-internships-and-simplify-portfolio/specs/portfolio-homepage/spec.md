@@ -8,13 +8,14 @@ Define a portfolio homepage that presents Shariff's recent work through a clear 
 
 ### Requirement: Immediate identity and primary actions
 
-The portfolio SHALL render Shariff's name, professional positioning, and primary resume and contact links without a blocking introduction.
+The portfolio SHALL render Shariff's name, professional positioning, and primary contact links without a blocking introduction. It SHALL NOT publish or link a résumé.
 
 #### Scenario: Visitor opens the homepage
 
 - **WHEN** a visitor loads `/`
 - **THEN** the page shows Shariff's name and positioning in the first content section
-- **AND** the page exposes resume, GitHub, LinkedIn, and email actions before the work sections
+- **AND** the page exposes GitHub, LinkedIn, and email actions before the work sections
+- **AND** the page exposes no résumé link or public résumé asset
 - **AND** no timed overlay blocks the page
 
 #### Scenario: Visitor uses a mobile viewport
@@ -163,22 +164,23 @@ The redesign SHALL preserve current project, Capoo, and Wordle URLs.
 
 ### Requirement: Responsive and accessible navigation
 
-The portfolio SHALL provide the reference three-column shell on desktop and a top navigation bar with one content column on mobile. Each layout SHALL retain readable document order, visible focus, semantic headings, and labelled controls.
+The portfolio SHALL provide the reference desktop composition with a left navigation rail, centred reading column, and empty right gutter, plus a top navigation bar with one content column on mobile. Each layout SHALL retain readable document order, visible focus, semantic headings, and labelled controls.
 
 #### Scenario: Visitor uses a desktop viewport
 
 - **WHEN** a visitor opens a main portfolio route at 1440 by 1000
 - **THEN** the page shows navigation and contact links in a left rail
 - **AND** the page shows route content in the centre column
-- **AND** the page shows availability and location in a right rail
-- **AND** both side rails remain visible while the central document scrolls
+- **AND** the right grid track remains unoccupied as visual breathing room
+- **AND** no semantic right rail, availability claim, location label, or time-zone label renders
+- **AND** the left rail remains visible while the central document scrolls
 
 #### Scenario: Visitor uses a mobile viewport
 
 - **WHEN** a visitor opens a main portfolio route at 390 by 844
 - **THEN** the left-rail navigation appears as a top navigation bar
 - **AND** the route content renders in one column
-- **AND** the right status rail does not render
+- **AND** no status rail or status substitute renders
 - **AND** the navigation requires no drawer or menu expansion
 - **AND** the top navigation remains in normal document flow rather than sticking to the viewport
 - **AND** the home-linked brand mark replaces a redundant Home or About text item
@@ -189,7 +191,7 @@ The portfolio SHALL provide the reference three-column shell on desktop and a to
 
 - **WHEN** a visitor opens a main portfolio route from 768 through 1099 pixels wide
 - **THEN** the page shows the navigation rail and main content column
-- **AND** the page places status information with the profile content
+- **AND** the page does not add status information to the profile content
 
 #### Scenario: Visitor follows a section link from a project route
 

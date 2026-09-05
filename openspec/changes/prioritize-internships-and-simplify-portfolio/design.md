@@ -2,7 +2,7 @@
 
 ## End State
 
-The main route group renders one responsive editorial shell. Wide screens use a left navigation rail, a narrow content column, and a right status rail. Small screens place the navigation across the top, hide the status rail, and render one content column. The homepage keeps a stable, server-owned reading flow: identity, primary links, GovTech and HTX work experience, four featured projects, an older-projects list, and contact.
+The main route group renders one responsive editorial shell. Wide screens use a left navigation rail, a narrow content column, and an empty right gutter that preserves the reading measure without creating a redundant content rail. Small screens place the navigation across the top and render one content column. The homepage keeps a stable, server-owned reading flow: identity, primary contact links, GovTech and HTX work experience, four featured projects, an older-projects list, and contact.
 
 `src/config/site.ts` owns site metadata and links, `src/content/profile.ts` owns profile and experience copy, and project MDX frontmatter owns project summaries and homepage curation.
 
@@ -37,9 +37,9 @@ The implementation pass will add final rendered screenshots to that document. An
 grid-template-columns: minmax(240px, 1fr) minmax(0, 640px) minmax(240px, 1fr);
 ```
 
-The navigation and contact block will occupy the left rail. The route content will occupy the centre. Availability and Singapore time will occupy the right rail. Both desktop side rails will use sticky inner wrappers, while the document keeps one page-level scroll container.
+The navigation and contact block will occupy the left rail. The route content will occupy the centre. The third grid track will remain empty as intentional whitespace; it will not contain a semantic aside, availability claim, location, time zone, or substitute filler. The desktop left rail will use a sticky inner wrapper, while the document keeps one page-level scroll container.
 
-From 768 through 1099 pixels, the shell will keep a sticky left rail and the main column, then place status information beneath the profile heading. Below 768 pixels, CSS will place the navigation in a non-sticky top bar and hide the right rail. The implementation will not add a drawer, menu button, viewport hook, or duplicate mobile route tree. The same route content will keep its document order.
+From 768 through 1099 pixels, the shell will keep a sticky left rail and the main column. Below 768 pixels, CSS will place the navigation in a non-sticky top bar. The implementation will not add a status substitute, drawer, menu button, viewport hook, or duplicate mobile route tree. The same route content will keep its document order.
 
 One navigation model will supply each layout. Experience and Projects will use `/#experience` and `/#projects` from every route. Projects always means the homepage directory, never a competing index page. Each project row opens its root-level case study directly. The desktop rail will use Home as the route back to the profile, while the home-linked brand mark provides that affordance on mobile. A separate About item or route would duplicate the homepage identity and will not be rendered.
 
@@ -152,7 +152,8 @@ Search MDX component mappings and content files before removing Callout, Card, c
 ### Behaviour
 
 - Confirm section order in the rendered document and that no `/projects` index is exposed.
-- Confirm resume, GitHub, LinkedIn, email, Playground, section, home/brand, and direct project links.
+- Confirm GitHub, LinkedIn, email, Playground, section, home/brand, and direct project links.
+- Confirm no résumé asset or link, availability copy, location label, time-zone label, or empty semantic status region remains.
 - Confirm each existing project slug renders its case study.
 - Confirm `/capoo` and `/wordle` still render.
 

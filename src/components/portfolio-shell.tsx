@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { profile } from "@/content/profile"
 
 import { siteConfig } from "@/config/site"
 
@@ -31,7 +30,6 @@ function PrimaryLinks() {
       <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
-      <a href={siteConfig.links.resume}>Resume</a>
     </nav>
   )
 }
@@ -86,16 +84,6 @@ export function PortfolioShell({ children }: { children: React.ReactNode }) {
           <span>Built with Next.js and MDX.</span>
         </footer>
       </div>
-
-      <aside className="right-rail" aria-label="Availability">
-        <div className="rail-inner status-rail">
-          <p>
-            <span className="status-dot" aria-hidden="true" />
-            {profile.availability}
-          </p>
-          <p>{siteConfig.location} · SGT</p>
-        </div>
-      </aside>
     </div>
   )
 }

@@ -2,19 +2,19 @@
 
 ## Intent
 
-Restructure the portfolio so a recruiter can identify Shariff, understand his two recent internships, inspect selected projects, and reach his resume or contact links without learning a custom interface.
+Restructure the portfolio so a recruiter can identify Shariff, understand his two recent internships, inspect selected projects, and reach his contact links without learning a custom interface.
 
 ## Problem
 
-The terminal introduction blocks the first visit. The settled homepage begins with a large experience card and uses a filesystem tree to browse projects. Identity, positioning, resume, and contact details lack a stable place near the top.
+The terminal introduction blocks the first visit. The settled homepage begins with a large experience card and uses a filesystem tree to browse projects. Identity, positioning, and contact details lack a stable place near the top.
 
 The code mirrors that interaction cost. The homepage depends on a terminal sequence, a 328-line project browser, two project-detail route implementations, two animation packages, and a broad copied UI component set.
 
 ## Proposed Change
 
 - Replace the terminal introduction and typing panel with a static identity section.
-- Use a three-column editorial shell on desktop with navigation on the left, content in the centre, and status on the right.
-- Reflow the navigation into a plain top bar on mobile and hide the desktop status rail.
+- Use a three-column editorial shell on desktop with navigation on the left, content in the centre, and intentional breathing room on the right.
+- Reflow the navigation into a plain top bar on mobile; do not create a status rail at any breakpoint.
 - Present GovTech and HTX under Work Experience before projects.
 - Feature four projects in this order: iPiD FYP, SMU BIA hate-speech project, Privacy-Focused Agentic Anonymiser, and Hate Speech Classification with BERT.
 - Show the remaining published work in a compact older-projects list.
@@ -56,7 +56,7 @@ The change affects the main route layout, homepage, project navigation, content 
 ## Success Criteria
 
 - The first paint shows Shariff's name, positioning, and primary links with no blocking animation.
-- Desktop visitors receive a three-column navigation, reading, and status layout with sticky side rails.
+- Desktop visitors receive a left navigation rail, a centred reading column, and an unoccupied right gutter that preserves the editorial measure.
 - Mobile visitors receive a top navigation bar and one content column without a drawer.
 - GovTech and HTX appear before the featured-project section.
 - The featured-project section presents iPiD first, the SMU BIA project second, then the two GenAI with LLMs projects.
@@ -66,6 +66,7 @@ The change affects the main route layout, homepage, project navigation, content 
 - The featured and older-project lists together expose every published project without a separate index page.
 - Navigation uses neutral metadata colours, omits a redundant About item, and treats the desktop Home item or mobile brand mark as the clear route back to the profile.
 - Expanded mobile experience rows use compact, full-width resume-style details rather than a heavily indented card layout.
+- The public site exposes no résumé file or link, availability claim, location label, or time-zone status.
 - Mobile visitors can reach the identity and primary links within the first viewport.
 - Keyboard users can open internship details and identify focus.
 - Reduced-motion users receive no nonessential movement.

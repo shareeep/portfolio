@@ -14,7 +14,7 @@
 - [x] 2.3 Refresh `content/projects/hate-speech-dap.mdx` from the evidence-led SMU BIA source in `../resume-refs/projects/hate-speech-dap.mdx`.
 - [x] 2.4 Set `homepageOrder` from 1 through 4 on iPiD, SMU BIA hate speech, PII anonymisation, and BERT classification.
 - [x] 2.5 Create `src/content/profile.ts` for the introduction, GovTech, and HTX content.
-- [x] 2.6 Keep site metadata, resume, social URLs, email, and location in `src/config/site.ts`.
+- [x] 2.6 Keep site metadata, social URLs, and email in `src/config/site.ts`; do not publish a résumé or location/status fields.
 - [x] 2.7 Remove duplicated display copy from components after the new content owners compile.
 - [x] 2.8 Allow a project image to be absent and verify the iPiD route renders without a broken image or invented placeholder.
 
@@ -26,7 +26,7 @@
 - [x] 3.4 Build the flat featured-project list from the MDX collection.
 - [x] 3.5 Build the compact older-projects list from published entries without `homepageOrder`.
 - [x] 3.6 Expose every published project through the homepage featured and older-project lists, with direct links to root-level case studies and no separate `/projects` index.
-- [x] 3.7 Add the compact location, availability, Playground, and footer content.
+- [x] 3.7 Add compact Playground and footer content while leaving the desktop right gutter intentionally unoccupied.
 - [x] 3.8 Apply the grid, typography, rules, and responsive treatments in global styles.
 - [x] 3.9 Use desktop Home and the mobile brand mark to return to the profile; omit a redundant About navigation item and page.
 
@@ -62,3 +62,5 @@
 - [x] 6.10 Remove the competing `/projects` index and verify Projects consistently opens the homepage directory from every main route.
 - [x] 6.11 Replace green and teal metadata accents with a warm neutral hierarchy and compact expanded mobile experience details to the full content width.
 - [x] 6.12 Refresh final responsive captures, including an expanded mobile experience row, and repeat lint, build, smoke, accessibility, and strict OpenSpec checks.
+- [x] 6.13 Remove every résumé link and the public résumé asset, remove availability/location/time-zone status UI at every breakpoint, and verify the right desktop track remains non-semantic whitespace.
+- [x] 6.14 Refresh affected screenshots and repeat lint, build, smoke, responsive, and strict OpenSpec checks.

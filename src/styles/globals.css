@@ -75,17 +75,8 @@
   grid-template-columns: minmax(240px, 1fr) minmax(0, 640px) minmax(240px, 1fr);
 }
 
-.left-rail,
-.right-rail {
-  @apply relative hidden bg-background/70 desktop:block;
-}
-
 .left-rail {
-  @apply border-r;
-}
-
-.right-rail {
-  @apply border-l;
+  @apply relative hidden border-r bg-background/70 desktop:block;
 }
 
 .rail-inner {
@@ -122,18 +113,6 @@
 
 .rail-links a {
   @apply transition-colors hover:text-foreground hover:underline;
-}
-
-.status-rail {
-  @apply h-auto justify-start gap-3 pt-36 text-right text-sm text-muted-foreground;
-}
-
-.status-rail p:first-child {
-  @apply text-foreground;
-}
-
-.status-dot {
-  @apply mr-2 inline-block size-2 rounded-full bg-foreground/60;
 }
 
 .mobile-nav {
@@ -178,10 +157,6 @@
 
 .profile-links a {
   @apply underline decoration-border transition-colors hover:decoration-foreground;
-}
-
-.tablet-status {
-  @apply hidden border-y py-3 text-sm text-muted-foreground;
 }
 
 .experience-list {
@@ -361,10 +336,6 @@
 
   .rail-contact > a {
     @apply text-[0.68rem] tracking-tight;
-  }
-
-  .tablet-status {
-    @apply flex justify-between;
   }
 }
 

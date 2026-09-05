@@ -24,7 +24,7 @@ pnpm smoke
 
 ## Content ownership
 
-- `src/config/site.ts` owns metadata, email, location, and public profile links.
+- `src/config/site.ts` owns metadata, email, and public profile links.
 - `src/content/profile.ts` owns the introduction and the GovTech and HTX experience entries.
 - `content/projects/*.mdx` owns project titles, summaries, dates, images, categories, highlights, and case-study bodies.
 - `openspec/changes/prioritize-internships-and-simplify-portfolio` is the source of truth for the current portfolio information architecture.
