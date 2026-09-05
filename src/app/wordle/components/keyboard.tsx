@@ -16,14 +16,26 @@ const COLOR_CLASSES: Record<string, string> = {
   miss: "text-white",
 }
 
+const RESULT_LABELS = {
+  exact: "correct position",
+  present: "present elsewhere",
+  miss: "not in the word",
+} as const
+
+const RESULT_SYMBOLS = {
+  exact: "●",
+  present: "◆",
+  miss: "×",
+} as const
+
 const COLOR_STYLES: Record<"exact" | "present" | "miss", React.CSSProperties> = {
   exact: {
-    backgroundColor: "#17c15f",
-    borderColor: "#17c15f",
+    backgroundColor: "#15803d",
+    borderColor: "#15803d",
   },
   present: {
-    backgroundColor: "#f4a800",
-    borderColor: "#f4a800",
+    backgroundColor: "#b45309",
+    borderColor: "#b45309",
   },
   miss: {
     backgroundColor: "#3a3a3c",
@@ -60,25 +72,43 @@ export function Keyboard({
           <div key={rowIndex} className="flex justify-center gap-2">
             {row.map((key) => {
               const color = colors[key]
+              const visibleLabel =
+                key === "enter" ? "enter" : key === "back" ? "⌫" : key
+              const accessibleLabel =
+                key === "enter"
+                  ? "Enter"
+                  : key === "back"
+                    ? "Backspace"
+                    : `${key.toUpperCase()}${color ? `, ${RESULT_LABELS[color]}` : ""}`
               return (
                 <button
                   key={key}
                   type="button"
                   onClick={() => handleClick(key)}
+                  disabled={disabled}
+                  aria-label={accessibleLabel}
                   style={
                     color && color !== null
                       ? COLOR_STYLES[color as "exact" | "present" | "miss"]
                       : undefined
                   }
                   className={cx(
-                    "flex-1 min-w-[32px] h-11 rounded-xl border border-border/70 bg-muted/70 px-2 text-center text-sm font-semibold leading-none text-foreground shadow-sm transition hover:-translate-y-[1px] hover:shadow",
+                    "relative flex-1 min-w-[32px] h-11 rounded-xl border border-border/70 bg-muted/70 px-2 text-center text-sm font-semibold leading-none text-foreground shadow-sm transition hover:-translate-y-[1px] hover:shadow",
                     key === "enter" && "min-w-[48px] text-xs sm:text-sm",
                     key === "back" && "min-w-[48px] text-xs sm:text-sm",
                     color && COLOR_CLASSES[color],
                     disabled && "opacity-60"
                   )}
                 >
-                  {key === "enter" ? "enter" : key === "back" ? "⌫" : key}
+                  {visibleLabel}
+                  {color && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute right-1 top-1 text-[8px] leading-none"
+                    >
+                      {RESULT_SYMBOLS[color]}
+                    </span>
+                  )}
                 </button>
               )
             })}

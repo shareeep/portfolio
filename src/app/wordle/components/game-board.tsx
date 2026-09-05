@@ -1,5 +1,17 @@
 import type { Board, State } from "../types"
 
+const RESULT_LABELS = {
+  exact: "correct position",
+  present: "present elsewhere",
+  miss: "not in the word",
+} as const
+
+const RESULT_SYMBOLS = {
+  exact: "●",
+  present: "◆",
+  miss: "×",
+} as const
+
 function cx(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(" ")
 }
@@ -21,6 +33,7 @@ export function GameBoard({ board, state }: Props) {
         return (
           <div
             key={rowIndex}
+            role="group"
             className="grid grid-cols-5 gap-2 sm:gap-3"
             aria-label={`Row ${rowIndex + 1}`}
           >
@@ -31,13 +44,15 @@ export function GameBoard({ board, state }: Props) {
               return (
                 <div
                   key={colIndex}
+                  role="img"
+                  aria-label={`Row ${rowIndex + 1}, column ${colIndex + 1}: ${letter ? `${letter.toUpperCase()}${result ? `, ${RESULT_LABELS[result]}` : ""}` : "empty"}`}
                   className={cx(
-                    "flex aspect-square items-center justify-center rounded-xl border text-2xl font-semibold uppercase transition-all sm:text-3xl",
+                    "relative flex aspect-square items-center justify-center rounded-xl border text-2xl font-semibold uppercase transition-all sm:text-3xl",
                     filled && "border-foreground/40",
                     result === "exact" &&
-                      "border-[#17c15f] bg-[#17c15f] text-white",
+                      "border-[#15803d] bg-[#15803d] text-white",
                     result === "present" &&
-                      "border-[#f4a800] bg-[#f4a800] text-white",
+                      "border-[#b45309] bg-[#b45309] text-white",
                     result === "miss" &&
                       "border-[#3a3a3c] bg-[#3a3a3c] text-white",
                     isCurrentRow &&
@@ -46,7 +61,15 @@ export function GameBoard({ board, state }: Props) {
                       "animate-[pulse_0.25s_ease-in-out]"
                   )}
                 >
-                  {letter}
+                  <span aria-hidden="true">{letter}</span>
+                  {result && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute right-1.5 top-1.5 text-[10px] leading-none"
+                    >
+                      {RESULT_SYMBOLS[result]}
+                    </span>
+                  )}
                 </div>
               )
             })}

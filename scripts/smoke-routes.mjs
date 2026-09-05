@@ -72,6 +72,7 @@ const projects = await readPublishedProjects()
 const home = await expectDocument("/", [
   "Hello, I’m Shariff.",
   "Data Scientist &amp; Software Engineer",
+  'SR<span class="sr-only"> — <!-- -->Shariff Rashid<!-- -->, home',
   "HTX (Home Team Science and Technology Agency)",
   "Experiments",
   "Some stuff I made for fun :)",
@@ -106,8 +107,17 @@ if (!sectionOrder) {
 
 await expectStatus("/projects", 404)
 await expectStatus("/resume.pdf", 404)
-await expectResponse("/capoo", { marker: "Back" })
-await expectResponse("/wordle", { marker: "Turn 1 of 6" })
+await expectDocument("/capoo", [
+  "Back",
+  "Capoo ASCII art experiment",
+  "A repeating ASCII art illustration of Capoo, a cartoon cat.",
+])
+await expectDocument("/wordle", [
+  "Turn 1 of 6",
+  'role="status"',
+  'aria-label="Backspace"',
+  'aria-controls="wordle-instructions"',
+])
 
 const wordResponse = await expectResponse("/api/wordle/next", {
   contentType: "application/json",

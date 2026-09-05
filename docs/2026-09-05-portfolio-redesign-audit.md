@@ -197,3 +197,22 @@ These captures preserve the pre-redesign homepage after its terminal sequence, a
 ### Mobile baseline
 
 ![Portfolio homepage before redesign at mobile width](./assets/portfolio-redesign/baseline-home-mobile.png)
+
+## Accessibility follow-up
+
+The post-redesign review uses WCAG 2.2 AA as its practical baseline. It covers the portfolio shell, homepage, project route, Capoo, and Wordle. Automated checks are a safety net rather than proof of conformance; VoiceOver, keyboard-only use, zoom/reflow, and content-quality checks remain appropriate before treating the site as fully audited.
+
+### Resolved findings
+
+- **Label in name:** The visible `SR` home mark was overridden by `aria-label="Shariff Rashid, home"`. Its accessible name now begins with the visible text and continues with the owner and destination. This follows [WCAG 2.5.3](https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html).
+- **Navigation and focus:** The skip link targets a programmatically focusable `main` landmark. Links, buttons, and experience disclosures share a high-contrast visible focus treatment. External GitHub and LinkedIn links announce that they open a new tab.
+- **Color and contrast:** Primary text, muted text, and focus-ring contrast against the page background measure approximately 14.13:1, 4.96:1, and 10.05:1. Wordle's white-on-result colors were raised from approximately 2.38:1 and 2.01:1 to approximately 5.02:1, and shape markers now repeat the result meaning so color is not the only cue. This follows [WCAG 1.4.1](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html).
+- **Status and control state:** Wordle exposes turn and outcome changes as polite status messages, gives its instructions control `aria-expanded` and `aria-controls`, prevents document-level keyboard shortcuts from double-triggering focused controls, and uses native disabled states for unavailable keys. This follows [WCAG 4.1.3](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html).
+- **Non-text content:** Capoo exposes one concise text alternative while removing its infinitely repeated ASCII characters from the accessibility tree. Adjacent company logos remain decorative, the profile portrait is described, and all 36 MDX `Image` blocks provide an `alt` attribute. This follows [WCAG 1.1.1](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html).
+
+### Manual follow-up
+
+- Complete one VoiceOver and Safari pass through the home mark, navigation, experience disclosures, Wordle board, and result message.
+- Check reflow at 200% and 400% zoom, especially the expanded HTX name and project tables.
+- Review whether each project image's alternative describes the information conveyed rather than merely satisfying the presence of an `alt` attribute.
+- Inspect text embedded inside project screenshots separately; HTML checks cannot assess contrast or reading order inside raster images.

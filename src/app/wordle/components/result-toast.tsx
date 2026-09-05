@@ -15,7 +15,12 @@ export function ResultToast({ outcome, solution, onPlayAgain }: Props) {
 
   return (
     <div className="fixed inset-x-0 bottom-6 z-30 flex justify-center px-4">
-      <div className="border-border/80 bg-card/95 w-full max-w-lg animate-[fade-in_0.3s_ease-out] rounded-2xl border p-4 shadow-lg backdrop-blur">
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="border-border/80 bg-card/95 w-full max-w-lg animate-[fade-in_0.3s_ease-out] rounded-2xl border p-4 shadow-lg backdrop-blur"
+      >
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold">

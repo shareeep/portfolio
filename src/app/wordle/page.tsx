@@ -14,6 +14,7 @@ export default function WordlePage() {
 
   return (
     <main className="bg-background relative min-h-screen">
+      <h1 className="sr-only">Wordle</h1>
       <div className="mx-auto flex min-h-screen max-w-4xl flex-col items-center px-4 pb-16 pt-10 sm:px-6">
         <WordleClient initialSolution={initialSolution} />
       </div>

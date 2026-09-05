@@ -64,3 +64,5 @@
 - [x] 6.12 Refresh final responsive captures, including an expanded mobile experience row, and repeat lint, build, smoke, accessibility, and strict OpenSpec checks.
 - [x] 6.13 Remove every résumé link and the public résumé asset, remove availability/location/time-zone status UI at every breakpoint, and verify the right desktop track remains non-semantic whitespace.
 - [x] 6.14 Refresh affected screenshots and repeat lint, build, smoke, responsive, and strict OpenSpec checks.
+- [x] 6.15 Make the visible `SR` text the start of the home mark's accessible name and verify named landmarks, skip navigation, focus visibility, external-link names, and disclosure semantics.
+- [x] 6.16 Give Capoo one concise non-text alternative; give Wordle semantic status updates, meaningful key/cell names, native disabled states, help disclosure state, and visible non-color result cues; repeat lint, build, smoke, and strict OpenSpec validation.

@@ -204,6 +204,12 @@ The portfolio SHALL provide the reference desktop composition with a left naviga
 - **THEN** the portfolio opens the homepage identity and introduction
 - **AND** the navigation exposes no separate About item or page
 
+#### Scenario: Assistive technology identifies the home mark
+
+- **WHEN** a visitor encounters the visible `SR` home link
+- **THEN** its accessible name starts with `SR`
+- **AND** the name identifies Shariff Rashid and the home destination
+
 #### Scenario: Visitor expands experience on mobile
 
 - **WHEN** a visitor expands an internship at a 390 by 844 viewport
@@ -217,3 +223,21 @@ The portfolio SHALL provide the reference desktop composition with a left naviga
 - **THEN** each interactive element receives visible focus
 - **AND** each disclosure and link can be activated
 - **AND** focus order follows document order
+
+### Requirement: Accessible experiments
+
+The Capoo and Wordle experiments SHALL expose meaningful names, keyboard behavior, and status information without relying on repeated ASCII characters or color alone.
+
+#### Scenario: Assistive technology reads the Capoo experiment
+
+- **WHEN** a visitor opens `/capoo`
+- **THEN** the repeating ASCII artwork has one concise text alternative
+- **AND** repeated art characters are not announced as document content
+
+#### Scenario: Visitor plays Wordle without relying on color
+
+- **WHEN** a guess is evaluated
+- **THEN** each result has a visible shape cue in addition to color
+- **AND** assistive technology can determine the letter and result
+- **AND** turn and outcome changes are announced as status messages
+- **AND** every on-screen key exposes its disabled state and meaningful name

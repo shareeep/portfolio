@@ -14,9 +14,11 @@ function ProfileLinks() {
     <nav className="profile-links" aria-label="Contact and profile links">
       <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
         GitHub
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
       <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
       <a href={`mailto:${siteConfig.email}`}>Email</a>
     </nav>
@@ -91,8 +93,12 @@ export function PortfolioHome({
           <p>Some stuff I made for fun :)</p>
         </div>
         <div className="playground-links">
-          <Link href="/capoo">Capoo ↗</Link>
-          <Link href="/wordle">Wordle ↗</Link>
+          <Link href="/capoo">
+            Capoo<span aria-hidden="true"> ↗</span>
+          </Link>
+          <Link href="/wordle">
+            Wordle<span aria-hidden="true"> ↗</span>
+          </Link>
         </div>
       </section>
     </>

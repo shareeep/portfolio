@@ -11,24 +11,23 @@ const navigation = [
 
 function Brand() {
   return (
-    <Link
-      href="/"
-      className="portfolio-mark"
-      aria-label={`${siteConfig.name}, home`}
-    >
+    <Link href="/" className="portfolio-mark">
       SR
+      <span className="sr-only"> — {siteConfig.name}, home</span>
     </Link>
   )
 }
 
 function PrimaryLinks() {
   return (
-    <nav className="rail-links" aria-label="Primary links">
+    <nav className="rail-links" aria-label="Contact and profile links">
       <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
         GitHub
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
       <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
       <a href={`mailto:${siteConfig.email}`}>Email</a>
     </nav>
@@ -73,7 +72,9 @@ export function PortfolioShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="reading-column">
-        <main id="main-content">{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <footer className="portfolio-footer">
           <span>
             © {new Date().getFullYear()} {siteConfig.name}

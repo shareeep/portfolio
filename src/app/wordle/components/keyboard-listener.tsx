@@ -18,6 +18,13 @@ export function KeyboardListener({
   useEffect(() => {
     if (disabled) return
     const handler = (event: KeyboardEvent) => {
+      if (
+        event.target instanceof HTMLElement &&
+        event.target.closest("a, button, input, select, textarea")
+      ) {
+        return
+      }
+
       const { key } = event
       if (key === "Enter") {
         onEnter()

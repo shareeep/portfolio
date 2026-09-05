@@ -19,14 +19,14 @@ export function GameLegend({ solutionHint }: Props) {
           {solutionHint}
         </p>
         <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-wide">
-          <span className="rounded-md bg-green-500 px-2 py-1 font-semibold text-white">
-            Exact
+          <span className="rounded-md bg-green-700 px-2 py-1 font-semibold text-white">
+            ● Exact
           </span>
-          <span className="rounded-md bg-amber-400 px-2 py-1 font-semibold text-white">
-            Present
+          <span className="rounded-md bg-amber-700 px-2 py-1 font-semibold text-white">
+            ◆ Present
           </span>
           <span className="bg-muted text-foreground/70 rounded-md px-2 py-1 font-semibold">
-            Miss
+            × Miss
           </span>
         </div>
       </div>

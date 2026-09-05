@@ -163,6 +163,8 @@ Search MDX component mappings and content files before removing Callout, Card, c
 - Navigate each disclosure and link with the keyboard.
 - Confirm visible focus and correct heading order.
 - Enable reduced motion and confirm that content remains stable.
+- Confirm the visible `SR` text begins the home link's accessible name.
+- Confirm Wordle status and result meaning are not communicated through color alone, and Capoo exposes one concise alternative instead of repeated ASCII characters.
 
 ### Code and contracts
 

@@ -86,13 +86,20 @@ export function WordleClient({ initialSolution }: WordleClientProps) {
         </Link>
 
         <div className="flex items-center gap-3">
-          <span className="bg-card text-foreground rounded-full px-3 py-[6px] text-sm font-medium shadow-sm">
+          <span
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="bg-card text-foreground rounded-full px-3 py-[6px] text-sm font-medium shadow-sm"
+          >
             {statusText}
           </span>
 
           <button
             type="button"
             onClick={handleNewWord}
+            disabled={refreshing}
+            aria-busy={refreshing}
             className="border-border text-foreground bg-card/80 group inline-flex items-center gap-2 rounded-full border px-3 py-[6px] text-sm font-medium shadow-sm backdrop-blur transition hover:-translate-y-px hover:shadow active:scale-[0.98]"
           >
             <span
@@ -130,17 +137,23 @@ export function WordleClient({ initialSolution }: WordleClientProps) {
         <button
           type="button"
           onClick={() => setShowHelp((v) => !v)}
+          aria-expanded={showHelp}
+          aria-controls="wordle-instructions"
           className="text-muted-foreground hover:text-foreground flex w-full items-center justify-between text-xs uppercase tracking-[0.2em] transition"
         >
           <span>{showHelp ? "Hide instructions" : "Show instructions"}</span>
-          <span className="text-lg leading-none">{showHelp ? "–" : "+"}</span>
+          <span aria-hidden="true" className="text-lg leading-none">
+            {showHelp ? "–" : "+"}
+          </span>
         </button>
 
-        {showHelp && (
-          <div className="pt-4">
-            <GameLegend solutionHint={hint} />
-          </div>
-        )}
+        <div
+          id="wordle-instructions"
+          hidden={!showHelp}
+          className="pt-4"
+        >
+          <GameLegend solutionHint={hint} />
+        </div>
       </div>
 
       <ResultToast
