@@ -47,9 +47,9 @@ Project images are optional. Omit `image` when a case study should not display p
 
 ## Supported routes
 
-- `/` — profile, work experience, featured projects, older projects, and Playground
+- `/` — profile, work experience, featured projects, older projects, and Experiments
 - `/<project-slug>` — project case study
-- `/capoo` and `/wordle` — Playground experiments
+- `/capoo` and `/wordle` — small experiments made for fun
 
 ## Deployment
 

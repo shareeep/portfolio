@@ -72,6 +72,9 @@ const projects = await readPublishedProjects()
 const home = await expectDocument("/", [
   "Hello, I’m Shariff.",
   "Data Scientist &amp; Software Engineer",
+  "HTX (Home Team Science and Technology Agency)",
+  "Experiments",
+  "Some stuff I made for fun :)",
   "mailto:muhd.shariff01@gmail.com",
   "https://github.com/shareeep",
   "https://linkedin.com/in/shariff-rashid",

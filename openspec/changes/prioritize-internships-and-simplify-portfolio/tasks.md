@@ -26,7 +26,7 @@
 - [x] 3.4 Build the flat featured-project list from the MDX collection.
 - [x] 3.5 Build the compact older-projects list from published entries without `homepageOrder`.
 - [x] 3.6 Expose every published project through the homepage featured and older-project lists, with direct links to root-level case studies and no separate `/projects` index.
-- [x] 3.7 Add compact Playground and footer content while leaving the desktop right gutter intentionally unoccupied.
+- [x] 3.7 Add compact Experiments and footer content while leaving the desktop right gutter intentionally unoccupied.
 - [x] 3.8 Apply the grid, typography, rules, and responsive treatments in global styles.
 - [x] 3.9 Use desktop Home and the mobile brand mark to return to the profile; omit a redundant About navigation item and page.
 
@@ -36,7 +36,7 @@
 - [x] 4.2 Replace the project tree with the new project list.
 - [x] 4.3 Keep the existing root-level project URLs under `[projectSlug]`.
 - [x] 4.4 Delete `[...slug]` after route smoke tests pass.
-- [x] 4.5 Keep `/capoo` and `/wordle` and expose them through one Playground entry.
+- [x] 4.5 Keep `/capoo` and `/wordle` and expose them through one Experiments entry.
 
 ## 5. Consolidate Motion and Dependencies
 

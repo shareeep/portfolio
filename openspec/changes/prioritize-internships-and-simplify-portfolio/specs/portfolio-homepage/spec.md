@@ -26,13 +26,13 @@ The portfolio SHALL render Shariff's name, professional positioning, and primary
 
 ### Requirement: Work-experience-first information hierarchy
 
-The homepage SHALL present GovTech and HTX under Work Experience before the featured-project section.
+The homepage SHALL present GovTech and HTX (Home Team Science and Technology Agency) under Work Experience before the featured-project section.
 
 #### Scenario: Visitor reads the homepage in document order
 
 - **WHEN** a visitor moves past the identity section
 - **THEN** the page presents GovTech first
-- **AND** the page presents HTX second
+- **AND** the page presents HTX (Home Team Science and Technology Agency) second
 - **AND** the featured-project heading follows the work-experience section
 
 ### Requirement: Evidence-led work-experience summaries
@@ -157,7 +157,7 @@ The redesign SHALL preserve current project, Capoo, and Wordle URLs.
 - **WHEN** a visitor opens any published root-level project slug
 - **THEN** the portfolio returns the matching case study
 
-#### Scenario: Playground route is opened
+#### Scenario: Experiment route is opened
 
 - **WHEN** a visitor opens `/capoo` or `/wordle`
 - **THEN** the existing experience renders at that route

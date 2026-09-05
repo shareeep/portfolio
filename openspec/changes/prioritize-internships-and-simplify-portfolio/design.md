@@ -2,7 +2,7 @@
 
 ## End State
 
-The main route group renders one responsive editorial shell. Wide screens use a left navigation rail, a narrow content column, and an empty right gutter that preserves the reading measure without creating a redundant content rail. Small screens place the navigation across the top and render one content column. The homepage keeps a stable, server-owned reading flow: identity, primary contact links, GovTech and HTX work experience, four featured projects, an older-projects list, and contact.
+The main route group renders one responsive editorial shell. Wide screens use a left navigation rail, a narrow content column, and an empty right gutter that preserves the reading measure without creating a redundant content rail. Small screens place the navigation across the top and render one content column. The homepage keeps a stable, server-owned reading flow: identity, primary contact links, GovTech and HTX (Home Team Science and Technology Agency) work experience, four featured projects, an older-projects list, and contact.
 
 `src/config/site.ts` owns site metadata and links, `src/content/profile.ts` owns profile and experience copy, and project MDX frontmatter owns project summaries and homepage curation.
 
@@ -52,7 +52,7 @@ Each content section will use headings, rows, spacing, and one-pixel separators.
 The work-experience section will contain:
 
 1. GovTech, Data Scientist Intern
-2. HTX, Software Engineering Intern
+2. HTX (Home Team Science and Technology Agency), Software Engineering Intern
 
 Each row will show organization, role, date range, and two or three highlights. Native `details` and `summary` elements will own disclosure state unless motion testing finds a clear need for a controlled component. Both rows will start collapsed at each viewport, which avoids screen-size-dependent state. On mobile, the expanded details will align to the section width with compact spacing and a consistent muted text treatment; they will not inherit the logo-column indent used by the summary.
 
@@ -152,7 +152,7 @@ Search MDX component mappings and content files before removing Callout, Card, c
 ### Behaviour
 
 - Confirm section order in the rendered document and that no `/projects` index is exposed.
-- Confirm GitHub, LinkedIn, email, Playground, section, home/brand, and direct project links.
+- Confirm GitHub, LinkedIn, email, Experiments, section, home/brand, and direct project links.
 - Confirm no résumé asset or link, availability copy, location label, time-zone label, or empty semantic status region remains.
 - Confirm each existing project slug renders its case study.
 - Confirm `/capoo` and `/wordle` still render.

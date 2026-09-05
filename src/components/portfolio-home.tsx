@@ -12,13 +12,13 @@ import {
 function ProfileLinks() {
   return (
     <nav className="profile-links" aria-label="Contact and profile links">
-      <a href={`mailto:${siteConfig.email}`}>Email</a>
       <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
         GitHub
       </a>
       <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
+      <a href={`mailto:${siteConfig.email}`}>Email</a>
     </nav>
   )
 }
@@ -87,8 +87,8 @@ export function PortfolioHome({
 
       <section id="playground" className="page-section playground-section">
         <div>
-          <h2>Playground</h2>
-          <p>Small experiments kept separate from the résumé flow.</p>
+          <h2>Experiments</h2>
+          <p>Some stuff I made for fun :)</p>
         </div>
         <div className="playground-links">
           <Link href="/capoo">Capoo ↗</Link>

@@ -15,7 +15,7 @@ The code mirrors that interaction cost. The homepage depends on a terminal seque
 - Replace the terminal introduction and typing panel with a static identity section.
 - Use a three-column editorial shell on desktop with navigation on the left, content in the centre, and intentional breathing room on the right.
 - Reflow the navigation into a plain top bar on mobile; do not create a status rail at any breakpoint.
-- Present GovTech and HTX under Work Experience before projects.
+- Present GovTech and HTX (Home Team Science and Technology Agency) under Work Experience before projects.
 - Feature four projects in this order: iPiD FYP, SMU BIA hate-speech project, Privacy-Focused Agentic Anonymiser, and Hate Speech Classification with BERT.
 - Show the remaining published work in a compact older-projects list.
 - Make Projects a single, unambiguous homepage section whose rows open root-level case studies directly; do not add a competing `/projects` index.
@@ -23,7 +23,7 @@ The code mirrors that interaction cost. The homepage depends on a terminal seque
 - Keep the existing project case studies and root-level project URLs.
 - Remove `framer-motion`; remove `motion` too if the redesigned routes have no JavaScript animation consumer.
 - Remove the project tree, icon cloud, duplicate route, and homepage support code made obsolete by this redesign.
-- Keep Capoo and Wordle available through a compact Playground link.
+- Keep Capoo and Wordle available through a compact Experiments section.
 
 ## Scope
 

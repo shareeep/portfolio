@@ -1,7 +1,7 @@
 # Portfolio Target Screen Mockups
 
 **Date:** 2026-09-05
-**Status:** Target layout and final rendered screenshots complete
+**Status:** Target layout complete; final captures predate the latest copy polish
 **OpenSpec change:** [`prioritize-internships-and-simplify-portfolio`](../openspec/changes/prioritize-internships-and-simplify-portfolio/proposal.md)
 **Audit:** [`2026-09-05-portfolio-redesign-audit.md`](./2026-09-05-portfolio-redesign-audit.md)
 
@@ -34,7 +34,7 @@ On mobile, the left rail becomes a top navigation bar and the content uses one c
 |   `-- BERT and LoRA study -> /hate-speech-classification
 |-- older projects
 |   `-- /<project-slug>
-`-- Playground
+`-- Experiments
     |-- /capoo
     `-- /wordle
 
@@ -69,8 +69,8 @@ On mobile, the left rail becomes a top navigation bar and the content uses one c
 | Home                       |                                                      |                            |
 | Experience                 | Short introduction and current focus.                |                            |
 | Projects                   |                                                      |                            |
-| Playground                 | GovTech                                               |                            |
-|                            | HTX                                                   |                            |
+| Play                       | GovTech                                               |                            |
+|                            | HTX (Home Team Science and Technology Agency)         |                            |
 |                            |                                                      |                            |
 |                            | Featured projects                                    |                            |
 |                            | Project rows                                          |                            |
@@ -78,9 +78,7 @@ On mobile, the left rail becomes a top navigation bar and the content uses one c
 |                            | Older projects                                       |                            |
 |                            | Compact title and year rows                          |                            |
 |                            |                                                      |                            |
-| Drop me a message          | Footer note                                           |                            |
-| email address              |                                                      |                            |
-| GitHub LinkedIn            |                                                      |                            |
+| GitHub LinkedIn Email      | Footer note                                           |                            |
 +----------------------------+------------------------------------------------------+----------------------------+
 ```
 
@@ -108,17 +106,17 @@ The page scrolls as one document. Each side rail uses `position: sticky` within 
 | Home                     |                                                        |                          |
 | Experience               |  My current work focuses on document intelligence,    |                          |
 | Projects                 |  RAG systems, and products that support human review.  |                          |
-| Playground               |  Experience                                            |                          |
+| Play                     |  Experience                                            |                          |
 |                          |                                                        |                          |
 |                          |  (G) GovTech Singapore             May 2026 - Present  |                          |
 |                          |      Data Scientist Intern                          >  |                          |
 |                          |--------------------------------------------------------|                          |
-|                          |  (H) HTX Singapore                Jan 2026 - Apr 2026  |                          |
-|                          |      Software Engineering Intern                    >  |                          |
+|                          |  (H) HTX (Home Team Science and Technology Agency)    |                          |
+|                          |      Software Engineering Intern  Jan 2026 - Apr 2026 >|                          |
 |                          |                                                        |                          |
-| Drop me a message        |  Featured projects                                     |                          |
-| shariff@[confirmed]      |  iPiD Growth Intelligence Platform                 ->  |                          |
-| GitHub LinkedIn          |  FYP / 2026                                             |                          |
+| GitHub LinkedIn Email    |  Featured projects                                     |                          |
+|                          |  iPiD Growth Intelligence Platform                 ->  |                          |
+|                          |  FYP / 2026                                             |                          |
 +--------------------------+--------------------------------------------------------+--------------------------+
 ```
 
@@ -131,7 +129,7 @@ Both rows start collapsed. The visitor can open either row with Enter or Space, 
 | Home                     |  Featured projects                                     |                          |
 | Experience               |                                                        |                          |
 | Projects                 |  iPiD Growth Intelligence Platform                 ->  |                          |
-| Playground               |  Cited account research and grounded ABM briefs.       |                          |
+| Play                     |  Cited account research and grounded ABM briefs.       |                          |
 |                          |--------------------------------------------------------|                          |
 |                          |  SMU BIA: Hate Speech and Embedding Analysis        ->  |                          |
 |                          |  AI/ML / 2025                                          |                          |
@@ -145,9 +143,9 @@ Both rows start collapsed. The visitor can open either row with Enter or Space, 
 |                          |  GenAI with LLMs / 2025                                |                          |
 |                          |  RoBERTa full fine-tuning reached Macro F1 0.689.       |                          |
 |                          |                                                        |                          |
-| Drop me a message        |  Older projects                                        |                          |
-| shariff@[confirmed]      |  2025  Aircraft Delay Analysis                     ->  |                          |
-| GitHub LinkedIn          |  2025  CampusG / Phishing Detection / 6 more       ->  |                          |
+| GitHub LinkedIn Email    |  Older projects                                        |                          |
+|                          |  2025  Aircraft Delay Analysis                     ->  |                          |
+|                          |  2025  CampusG / Phishing Detection / 6 more       ->  |                          |
 +--------------------------+--------------------------------------------------------+--------------------------+
 ```
 
@@ -178,9 +176,7 @@ The top bar contains the home-linked mark on the left and three section links on
 | intelligence, RAG systems, and products  |
 | that support human review.               |
 |                                          |
-| Drop me a message                        |
-| shariff@[confirmed]                      |
-| GitHub  LinkedIn                         |
+| GitHub  LinkedIn  Email                  |
 |                                          |
 | Experience                               |
 |------------------------------------------|
@@ -188,7 +184,8 @@ The top bar contains the home-linked mark on the left and three section links on
 |     Data Scientist Intern                |
 |     May 2026 - Present                 > |
 |------------------------------------------|
-| (H) HTX Singapore                        |
+| (H) HTX (Home Team Science and           |
+|     Technology Agency)                   |
 |     Software Engineering Intern          |
 |     Jan 2026 - Apr 2026                > |
 +------------------------------------------+
@@ -226,7 +223,9 @@ Both internships start collapsed on mobile. Opening a row inserts a compact, ful
 | 2025  Software Project Management      ->|
 | 2025  ESMOS Cloud Migration            ->|
 |------------------------------------------|
-| Playground: Capoo / Wordle               |
+| Experiments                              |
+| Some stuff I made for fun :)             |
+| Capoo / Wordle                           |
 | (c) 2026 Shariff Rashid                  |
 +------------------------------------------+
 ```
@@ -249,14 +248,13 @@ The project page keeps the global shell and replaces the main column. The case-s
 | Home                     |  iPiD Growth Intelligence Platform                     |                          |
 | Experience               |  FYP / 2026 / Team project                             |                          |
 | Projects                 |                                                        |                          |
-| Playground               |  review trails, and grounded business outputs.         |                          |
+| Play                     |  review trails, and grounded business outputs.         |                          |
 |                          |                                                        |                          |
 |                          |  Project facts                                         |                          |
 |                          |  GTM Engineering context                              |                          |
 |                          |  Engineering challenges                               |                          |
 |                          |  Pseudocode                                             |                          |
-| Contact                  |                                                        |                          |
-| GitHub LinkedIn          |  <- Back to projects                                   |                          |
+| GitHub LinkedIn Email    |  <- Back to projects                                   |                          |
 +--------------------------+--------------------------------------------------------+--------------------------+
 ```
 
@@ -300,7 +298,7 @@ The iPiD note has no product image, interface capture, repository action, live d
 
 ## Content Inputs
 
-The implementation adds the confirmed email address to `src/config/site.ts`. The résumé remains private: the site contains no résumé configuration, link, or public PDF. Profile and experience copy may still be derived from private career source material.
+The implementation keeps the confirmed email action in `src/config/site.ts` without printing the raw address in the desktop rail. The résumé remains private: the site contains no résumé configuration, link, or public PDF. Profile and experience copy may still be derived from private career source material.
 
 Create the iPiD MDX entry from approved FYP material before adding its homepage link. Keep it to verified team-level facts, its GTM Engineering purpose, engineering challenges, and pseudocode. Do not display the product, product UI, demo, repository, proprietary code or data, or unsupported personal-contribution claims. Update `hate-speech-dap.mdx` from the richer SMU BIA project source in the sibling `../resume-refs` repository, which contains measured results missing from the portfolio copy.
 
@@ -324,6 +322,8 @@ Compare each render with the shell, content order, and viewport rules above. Rec
 ## Final rendered screens
 
 The implementation follows the OpenSpec shell and reading order. Final captures use the requested viewports; the in-app browser reserves 15 pixels for its scrollbar, so the rendered content width is correspondingly smaller where a vertical scrollbar appears.
+
+The captures below record the completed structural redesign. The ASCII layouts above reflect the subsequent copy polish: the expanded HTX name, the Experiments wording, and the responsive GitHub, LinkedIn, and Email placement. Refresh these images when local browser capture is available again.
 
 ### Homepage desktop — 1440 × 1000
 

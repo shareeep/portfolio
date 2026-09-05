@@ -95,24 +95,12 @@
   @apply border-b px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground;
 }
 
-.rail-contact {
-  @apply flex flex-col items-start gap-3 text-sm;
-}
-
-.rail-contact > p {
-  @apply text-muted-foreground;
-}
-
-.rail-contact > a {
-  @apply max-w-full break-all underline decoration-border transition-colors hover:decoration-foreground;
-}
-
 .rail-links {
-  @apply mt-5 flex flex-wrap gap-x-5 gap-y-2 text-muted-foreground;
+  @apply flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground;
 }
 
 .rail-links a {
-  @apply transition-colors hover:text-foreground hover:underline;
+  @apply underline decoration-border transition-colors hover:text-foreground hover:decoration-foreground;
 }
 
 .mobile-nav {
@@ -152,7 +140,7 @@
 }
 
 .profile-links {
-  @apply flex flex-wrap gap-x-6 gap-y-2 text-sm;
+  @apply flex flex-wrap gap-x-6 gap-y-2 text-sm desktop:hidden;
 }
 
 .profile-links a {
@@ -193,7 +181,7 @@
 }
 
 .experience-heading strong {
-  @apply col-start-1 row-start-1 truncate font-medium;
+  @apply col-start-1 row-start-1 leading-snug font-medium;
 }
 
 .experience-heading > span {

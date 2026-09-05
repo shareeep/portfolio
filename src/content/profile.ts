@@ -21,7 +21,7 @@ export const experiences = [
     ],
   },
   {
-    organisation: "HTX Singapore",
+    organisation: "HTX (Home Team Science and Technology Agency)",
     role: "Software Engineering Intern",
     team: "xDigital · AI Products Team",
     dates: "Jan 2026 – Apr 2026",

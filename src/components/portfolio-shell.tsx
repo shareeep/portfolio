@@ -30,6 +30,7 @@ function PrimaryLinks() {
       <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
+      <a href={`mailto:${siteConfig.email}`}>Email</a>
     </nav>
   )
 }
@@ -67,11 +68,7 @@ export function PortfolioShell({ children }: { children: React.ReactNode }) {
             </nav>
           </div>
 
-          <div className="rail-contact">
-            <p>Drop me a message</p>
-            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-            <PrimaryLinks />
-          </div>
+          <PrimaryLinks />
         </div>
       </aside>
 
