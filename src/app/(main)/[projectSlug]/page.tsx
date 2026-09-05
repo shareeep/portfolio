@@ -12,8 +12,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
-import { env } from "@/env.mjs"
-import { siteConfig } from "@/config/site"
+import { getSiteUrl, siteConfig } from "@/config/site"
 import { absoluteUrl, cn, formatDate } from "@/lib/utils"
 
 interface ProjectSlugPageProps {
@@ -41,8 +40,7 @@ export async function generateMetadata({
     return {}
   }
 
-  const url = env.NEXT_PUBLIC_APP_URL
-  const ogUrl = new URL(`${url}/api/og`)
+  const ogUrl = new URL("/api/og", getSiteUrl())
   ogUrl.searchParams.set("heading", project.title)
   ogUrl.searchParams.set("type", "Project")
   ogUrl.searchParams.set("mode", "dark")

@@ -4,9 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 interface RootLayoutProps {
@@ -72,8 +70,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           {children}
           <Analytics />
-          <Toaster />
-          <TailwindIndicator />
           <SpeedInsights />
         </ThemeProvider>
       </body>

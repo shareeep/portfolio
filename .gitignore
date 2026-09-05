@@ -45,3 +45,6 @@ public/static
 
 # reference files
 /shariff-documents
+
+# local package-manager cache
+.pnpm-store/

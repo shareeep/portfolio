@@ -1,0 +1,31 @@
+schema: spec-driven
+
+context: |
+  Product: Shariff Rashid's public engineering portfolio.
+  Stack: Next.js 16 App Router, React 18, TypeScript, Tailwind CSS 3, Velite, and MDX.
+  Project content: content/projects/*.mdx owns project metadata and case-study bodies.
+  Site content: src/config/site.ts owns metadata and public links. Profile and experience content should have one non-component owner.
+  Public compatibility: preserve existing root-level project slugs, /capoo, and /wordle unless a proposal defines a migration.
+  Package manager: pnpm.
+  Verification: pnpm lint and pnpm build.
+
+rules:
+  proposal:
+    - State user-visible outcomes and explicit non-goals.
+    - Identify existing public routes or content contracts affected by the change.
+  design:
+    - Keep one canonical owner for each content field and behavior.
+    - Prefer server components and narrow client interaction boundaries.
+    - Add dependencies only when an existing platform or small local component cannot meet the requirement.
+  tasks:
+    - Add behavior or route coverage before removing an existing path.
+    - Include searches that prove superseded components, imports, and dependencies are gone.
+
+operations:
+  apply:
+    guidance:
+      - Preserve unrelated user changes.
+      - Run focused checks after each coherent refactoring step.
+  archive:
+    guidance:
+      - Confirm each required task is complete before archiving.

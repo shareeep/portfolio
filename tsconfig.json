@@ -23,9 +23,6 @@
       "@/*": [
         "./src/*"
       ],
-      "types": [
-        "./src/types"
-      ],
       "#site/content": [
         "./.velite"
       ]
