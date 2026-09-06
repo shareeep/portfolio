@@ -103,7 +103,7 @@ const home = await expectDocument("/", [
   "RAG and agent workflows, prompt tracing, document-processing reliability, and human review",
   'SR<span class="sr-only"> — <!-- -->Shariff Rashid<!-- -->, home',
   "GovTech (Government Technology Agency)",
-  "Own development and production operations for two AI products",
+  "Own full-stack development, AI engineering, and production operations for two AI products",
   "Langfuse tracing and prompt version management",
   "improve cache reuse and reduce latency",
   "Built a queue system for document jobs",

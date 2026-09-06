@@ -67,7 +67,7 @@ Each work-experience entry SHALL show the organization, role, date range, and tw
 #### Scenario: Visitor expands the GovTech internship
 
 - **WHEN** the visitor opens the GovTech details
-- **THEN** the highlights state Shariff's ownership across two AI products
+- **THEN** the highlights state Shariff's ownership of full-stack development, AI engineering, and production operations across two AI products
 - **AND** the highlights state that Shariff built the document-job queue system
 - **AND** the prompt-management highlight states that the changes improved cache reuse and reduced latency
 - **AND** the highlights cover Langfuse tracing and shared document ingestion

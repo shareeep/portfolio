@@ -15,7 +15,7 @@ export const experiences = [
     dates: "May 2026 – Present",
     logo: "/images/govtech_singapore_logo.jpeg",
     highlights: [
-      "Own development and production operations for two AI products; built one from scratch and took over the second through launch.",
+      "Own full-stack development, AI engineering, and production operations for two AI products; built one from scratch and took over the second through launch.",
       "Instrumented both products with Langfuse tracing and prompt version management; reworked prompts to improve cache reuse and reduce latency.",
       "Built a queue system for document jobs to resolve pre-production memory failures, then deployed shared PDF and DOCX ingestion for reuse across the team’s AI products.",
     ],

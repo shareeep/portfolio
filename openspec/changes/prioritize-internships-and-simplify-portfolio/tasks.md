@@ -22,6 +22,7 @@
 - [x] 2.11 Rewrite the four featured-project descriptions around one verified differentiator each; rename the SMU BIA entry around its Singlish-aware guardrail; and add its code-switching method, adversarial-data challenges, and carefully qualified model observations to the case study.
 - [x] 2.12 Clarify GovTech ownership by stating that Shariff built the document-job queue system and that the prompt changes improved cache reuse and reduced latency; rewrite the recent-work summary around the evidence shown on the page.
 - [x] 2.13 Refocus the SMU BIA case study on the embedding benchmark and Singlish guardrail: remove numbered track labels and the discarded sarcasm, agentic-LLM, and KG-RAG content; align its overview, highlights, tags, datasets, and technologies.
+- [x] 2.14 Describe GovTech ownership across full-stack development, AI engineering, and production operations while retaining the settled resume's two-product scope and launch history.
 
 ## 3. Build the New Homepage
 
@@ -76,3 +77,4 @@
 - [x] 6.19 Verify the four featured summaries against their case studies, confirm the homepage names the Singlish and code-switched guardrail, then repeat lint, smoke, build, and strict OpenSpec validation.
 - [x] 6.20 Verify the revised profile and GovTech copy in the rendered homepage, then repeat lint, smoke, build, and strict OpenSpec validation.
 - [x] 6.21 Verify the focused SMU BIA route exposes no discarded track content or stale metadata, then repeat lint, smoke, build, and strict OpenSpec validation.
+- [x] 6.22 Verify the rendered GovTech entry names full-stack development, AI engineering, and production operations without implying sole product-management ownership; repeat lint, smoke, and strict OpenSpec validation.
