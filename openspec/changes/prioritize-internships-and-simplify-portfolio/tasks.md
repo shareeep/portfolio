@@ -23,6 +23,7 @@
 - [x] 2.12 Clarify GovTech ownership by stating that Shariff built the document-job queue system and that the prompt changes improved cache reuse and reduced latency; rewrite the recent-work summary around the evidence shown on the page.
 - [x] 2.13 Refocus the SMU BIA case study on the embedding benchmark and Singlish guardrail: remove numbered track labels and the discarded sarcasm, agentic-LLM, and KG-RAG content; align its overview, highlights, tags, datasets, and technologies.
 - [x] 2.14 Describe GovTech ownership across full-stack development, AI engineering, and production operations while retaining the settled resume's two-product scope and launch history.
+- [x] 2.15 Rewrite the profile's recent-work sentence in active voice around taking AI products from prototype to production, with concrete AI workflow, prompt tracing, document reliability, and domain-expert evaluation work.
 
 ## 3. Build the New Homepage
 
@@ -78,3 +79,4 @@
 - [x] 6.20 Verify the revised profile and GovTech copy in the rendered homepage, then repeat lint, smoke, build, and strict OpenSpec validation.
 - [x] 6.21 Verify the focused SMU BIA route exposes no discarded track content or stale metadata, then repeat lint, smoke, build, and strict OpenSpec validation.
 - [x] 6.22 Verify the rendered GovTech entry names full-stack development, AI engineering, and production operations without implying sole product-management ownership; repeat lint, smoke, and strict OpenSpec validation.
+- [x] 6.23 Verify the rendered recent-work sentence uses the approved active wording and contains no vague quality adjectives; repeat lint, smoke, and strict OpenSpec validation.

@@ -99,8 +99,8 @@ for (const forbiddenMarker of [
 const home = await expectDocument("/", [
   "Hello, I’m Shariff.",
   "Data Scientist &amp; Software Engineer",
-  "Recently, I’ve worked across the path from AI prototype to production",
-  "RAG and agent workflows, prompt tracing, document-processing reliability, and human review",
+  "Recently, I’ve taken AI products from prototype to production",
+  "building structured AI workflows, tracing prompts, improving document-processing reliability, and designing evaluations with domain experts",
   'SR<span class="sr-only"> — <!-- -->Shariff Rashid<!-- -->, home',
   "GovTech (Government Technology Agency)",
   "Own full-stack development, AI engineering, and production operations for two AI products",

@@ -4,7 +4,7 @@ export const profile = {
   introduction:
     "I build applied AI systems and dependable software. I’m completing a BSc in Information Systems at Singapore Management University, with a second major in Computer Science (Artificial Intelligence).",
   focus:
-    "Recently, I’ve worked across the path from AI prototype to production: RAG and agent workflows, prompt tracing, document-processing reliability, and human review.",
+    "Recently, I’ve taken AI products from prototype to production by building structured AI workflows, tracing prompts, improving document-processing reliability, and designing evaluations with domain experts.",
 } as const
 
 export const experiences = [

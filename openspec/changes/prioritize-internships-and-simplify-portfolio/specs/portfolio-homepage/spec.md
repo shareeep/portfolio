@@ -27,8 +27,8 @@ The portfolio SHALL render Shariff's name, professional positioning, and primary
 #### Scenario: Visitor reads the recent-work summary
 
 - **WHEN** the visitor reads the profile introduction
-- **THEN** the recent-work copy connects AI prototypes to production work
-- **AND** it names RAG and agent workflows, prompt tracing, document-processing reliability, and human review
+- **THEN** the recent-work copy states that Shariff takes AI products from prototype to production
+- **AND** it names structured AI workflows, prompt tracing, document-processing reliability, and evaluations with domain experts
 - **AND** it avoids repeating the generic applied-AI positioning in the preceding sentence
 
 ### Requirement: Work-experience-first information hierarchy

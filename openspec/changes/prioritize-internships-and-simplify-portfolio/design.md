@@ -59,7 +59,7 @@ Each row will show organization, role, date range, and two or three highlights. 
 
 The GovTech entry will adapt the settled resume rather than duplicate it verbatim. It will state ownership of full-stack development, AI engineering, and production operations across two AI products, say that Shariff built the document-job queue system, and connect the prompt changes to improved cache reuse and reduced latency. This wording describes engineering ownership without implying that Shariff replaces the products' managers or product owners. GovTech and HTX will both use implied-first-person, action-led resume phrasing so the section does not change grammatical perspective between entries. The website will preserve the resume's dates, organization, role, and completed-work claims.
 
-The profile's recent-work sentence will summarize the evidence that follows instead of repeating the headline. It will connect AI prototypes to production and name RAG and agent workflows, prompt tracing, document-processing reliability, and human review.
+The profile's recent-work sentence will summarize the evidence that follows instead of repeating the headline. It will use active voice to say that Shariff takes AI products from prototype to production by building structured AI workflows, tracing prompts, improving document-processing reliability, and designing evaluations with domain experts. It will avoid vague quality adjectives.
 
 The homepage will not render iPiD or SMU BIA as secondary experience. Their project case studies will carry that work.
 
