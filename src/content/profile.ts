@@ -4,7 +4,7 @@ export const profile = {
   introduction:
     "I build applied AI systems and dependable software. I’m completing a BSc in Information Systems at Singapore Management University, with a second major in Computer Science (Artificial Intelligence).",
   focus:
-    "My recent work focuses on document intelligence, RAG systems, context engineering, and products that keep people in control of AI-assisted decisions.",
+    "Recently, I’ve worked across the path from AI prototype to production: RAG and agent workflows, prompt tracing, document-processing reliability, and human review.",
 } as const
 
 export const experiences = [
@@ -16,8 +16,8 @@ export const experiences = [
     logo: "/images/govtech_singapore_logo.jpeg",
     highlights: [
       "Own development and production operations for two AI products; built one from scratch and took over the second through launch.",
-      "Instrumented both products with Langfuse tracing and prompt version management; reworked prompts to improve cache reuse and latency.",
-      "Resolved pre-production memory failures by queueing document jobs and deploying shared PDF and DOCX ingestion for reuse across the team’s AI products.",
+      "Instrumented both products with Langfuse tracing and prompt version management; reworked prompts to improve cache reuse and reduce latency.",
+      "Built a queue system for document jobs to resolve pre-production memory failures, then deployed shared PDF and DOCX ingestion for reuse across the team’s AI products.",
     ],
   },
   {

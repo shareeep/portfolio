@@ -24,6 +24,13 @@ The portfolio SHALL render Shariff's name, professional positioning, and primary
 - **THEN** the first viewport contains the identity and primary actions
 - **AND** the page begins the work-experience section without horizontal scrolling
 
+#### Scenario: Visitor reads the recent-work summary
+
+- **WHEN** the visitor reads the profile introduction
+- **THEN** the recent-work copy connects AI prototypes to production work
+- **AND** it names RAG and agent workflows, prompt tracing, document-processing reliability, and human review
+- **AND** it avoids repeating the generic applied-AI positioning in the preceding sentence
+
 ### Requirement: Work-experience-first information hierarchy
 
 The homepage SHALL present GovTech and HTX (Home Team Science and Technology Agency) under Work Experience before the featured-project section.
@@ -61,7 +68,9 @@ Each work-experience entry SHALL show the organization, role, date range, and tw
 
 - **WHEN** the visitor opens the GovTech details
 - **THEN** the highlights state Shariff's ownership across two AI products
-- **AND** the highlights cover Langfuse tracing, prompt management, and document-processing reliability
+- **AND** the highlights state that Shariff built the document-job queue system
+- **AND** the prompt-management highlight states that the changes improved cache reuse and reduced latency
+- **AND** the highlights cover Langfuse tracing and shared document ingestion
 - **AND** the copy remains grounded in the settled September resume without invented metrics or responsibilities
 
 ### Requirement: Featured project navigation
