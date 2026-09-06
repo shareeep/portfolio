@@ -73,6 +73,10 @@ const home = await expectDocument("/", [
   "Hello, I’m Shariff.",
   "Data Scientist &amp; Software Engineer",
   'SR<span class="sr-only"> — <!-- -->Shariff Rashid<!-- -->, home',
+  "GovTech (Government Technology Agency)",
+  "I own two AI products from product-owner requirements through production.",
+  "Langfuse tracing and prompt version management",
+  "queueing document jobs",
   "HTX (Home Team Science and Technology Agency)",
   "Experiments",
   "Some stuff I made for fun :)",
@@ -107,6 +111,25 @@ if (!sectionOrder) {
 
 await expectStatus("/projects", 404)
 await expectStatus("/resume.pdf", 404)
+const ipid = await expectDocument("/ipid-growth-intelligence", [
+  "market intelligence, campaign production, account research, and sales outreach",
+  "It ranks weekly developments and returns cited findings with reusable context and review logs.",
+  "Human review gates research before content or outreach.",
+])
+
+for (const forbiddenMarker of [
+  "Developed a connected-agent GTM platform",
+  "Built a research agent",
+  "View demo",
+  "View repository",
+]) {
+  if (ipid.includes(forbiddenMarker)) {
+    throw new Error(
+      `/ipid-growth-intelligence unexpectedly included ${JSON.stringify(forbiddenMarker)}`
+    )
+  }
+}
+
 await expectDocument("/capoo", [
   "Back",
   "Capoo ASCII art experiment",

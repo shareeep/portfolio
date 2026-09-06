@@ -22,6 +22,7 @@ The implementation pass will add final rendered screenshots to that document. An
 - Both dynamic route modules generate the same twelve project paths.
 - Project MDX frontmatter already contains title, short title, description, date, image, category, highlights, authors, and tags.
 - iPiD has approved project material in the sibling `../resume-refs/master-resume.md` file but no portfolio MDX entry.
+- The settled September GovTech resume in `../resume-refs/generated-cv/govtech-datascientist-tap-cv.md` and its matching HTML preview are the approved factual baseline for the GovTech and iPiD refresh; `../resume-refs/raw-govtech-sept.md` supplies supporting context.
 - `content/projects/hate-speech-dap.mdx` represents the SMU BIA project, while `../resume-refs/projects/hate-speech-dap.mdx` contains a newer evidence-led version.
 - Existing project paths may appear in search indexes, resumes, or shared messages.
 - `/capoo` and `/wordle` have direct homepage links and count as supported public routes.
@@ -56,6 +57,8 @@ The work-experience section will contain:
 
 Each row will show organization, role, date range, and two or three highlights. Native `details` and `summary` elements will own disclosure state unless motion testing finds a clear need for a controlled component. Both rows will start collapsed at each viewport, which avoids screen-size-dependent state. On mobile, the expanded details will align to the section width with compact spacing and a consistent muted text treatment; they will not inherit the logo-column indent used by the summary.
 
+The GovTech entry will adapt the settled resume rather than duplicate it verbatim. It will state ownership across two AI products, explain the product-owner collaboration in plain language, and group the Langfuse, prompt, and document-processing work into readable evidence. The website may use first-person sentences where that makes ownership clearer; it will preserve the resume's dates, organization, role, and completed-work claims.
+
 The homepage will not render iPiD or SMU BIA as secondary experience. Their project case studies will carry that work.
 
 ### 3. Keep project facts in MDX
@@ -76,6 +79,8 @@ The featured order will be:
 4. `hate-speech-classification`
 
 The iPiD entry will use neutral, team-level language. It may state verified facts about what the project built, describe its GTM Engineering purpose, and explain engineering challenges in prose and illustrative pseudocode. It will not display the product, its interface, a demo, repository links, proprietary source code or data, or unapproved claims about Shariff's personal contribution. Its page renderer must support an intentionally absent image rather than substituting a product screenshot or invented placeholder.
+
+The refreshed opening will name the four connected workstreams from the settled resume: market intelligence, content production, account research, and sales outreach. It will describe citations, reusable context, and review history as concrete system behavior. Resume bullets that use individual authorship will become team-level facts on the public project page.
 
 Existing project entries may continue to render the cover or demo images already approved in their MDX. Repository and live-demo actions remain content-driven where they already exist; this change does not add new global action fields or previous/next project navigation.
 

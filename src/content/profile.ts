@@ -9,15 +9,15 @@ export const profile = {
 
 export const experiences = [
   {
-    organisation: "GovTech Singapore",
+    organisation: "GovTech (Government Technology Agency)",
     role: "Data Scientist Intern",
-    team: "SCG Digital Governance · Central Digital Assurance",
+    team: "SCG Digital Governance · Central Digital Assurance (CDA-IM8)",
     dates: "May 2026 – Present",
     logo: "/images/govtech_singapore_logo.jpeg",
     highlights: [
-      "Build tools that process control evidence, support IM8 assurance reviews, and produce management reports.",
-      "Develop a full-stack agentic application that retrieves policy evidence with RAG, generates insights, and exports assurance reports.",
-      "Design context and human-review checkpoints so users can assess model outputs against source material.",
+      "I own two AI products from product-owner requirements through production. I built one from scratch and took over the other through launch.",
+      "I added Langfuse tracing and prompt version management to both products, then reworked prompts to improve cache reuse and latency.",
+      "I resolved pre-production memory failures by queueing document jobs and deploying shared PDF and DOCX ingestion for the team’s AI products.",
     ],
   },
   {

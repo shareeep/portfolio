@@ -51,6 +51,13 @@ Each work-experience entry SHALL show the organization, role, date range, and tw
 - **AND** keyboard focus remains on the disclosure control
 - **AND** assistive technology can determine the expanded state
 
+#### Scenario: Visitor expands the GovTech internship
+
+- **WHEN** the visitor opens the GovTech details
+- **THEN** the highlights state Shariff's ownership across two AI products
+- **AND** the highlights cover Langfuse tracing, prompt management, and document-processing reliability
+- **AND** the copy remains grounded in the settled September resume without invented metrics or responsibilities
+
 ### Requirement: Featured project navigation
 
 The homepage SHALL show four featured projects sourced from published MDX entries. It SHALL present the iPiD FYP first, the SMU BIA hate-speech project second, the Privacy-Focused Agentic Anonymiser third, and Hate Speech Classification with BERT fourth.
@@ -84,6 +91,13 @@ The iPiD project route SHALL present only approved, team-level project facts and
 - **AND** the page may explain engineering challenges through prose and illustrative pseudocode
 - **AND** the page makes no unsupported claim about Shariff's individual contribution
 - **AND** the page shows no product screenshot, interface capture, demo action, repository action, proprietary source code, or proprietary data
+
+#### Scenario: Visitor scans the iPiD project facts
+
+- **WHEN** the visitor reads the project summary and opening sections
+- **THEN** the page names the connected market-intelligence, content, account-research, and sales-outreach workflows
+- **AND** it explains that research findings retain citations, reusable context, and review history
+- **AND** individual resume claims are rewritten as team-level project facts
 
 #### Scenario: Project image is intentionally absent
 

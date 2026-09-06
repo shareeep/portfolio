@@ -33,6 +33,7 @@ The code mirrors that interaction cost. The homepage depends on a terminal seque
 - Profile and experience content ownership
 - Featured-project curation through MDX frontmatter
 - iPiD engineering-note creation from approved FYP material, limited to verified project facts, its GTM Engineering character, engineering challenges, and illustrative pseudocode
+- GovTech and iPiD content grounded in the settled September resume, with the raw notes used to interpret scope and the generated Markdown/HTML treated as the approved factual baseline
 - SMU BIA case-study refresh from the evidence in the sibling `../resume-refs` repository
 - Homepage-to-project navigation
 - Animation package consolidation or removal
@@ -78,6 +79,9 @@ The change affects the main route layout, homepage, project navigation, content 
 ## Source Material
 
 - [`docs/2026-09-05-portfolio-redesign-audit.md`](../../../docs/2026-09-05-portfolio-redesign-audit.md)
+- [`../resume-refs/raw-govtech-sept.md`](../../../../resume-refs/raw-govtech-sept.md)
+- [`../resume-refs/generated-cv/govtech-datascientist-tap-cv.md`](../../../../resume-refs/generated-cv/govtech-datascientist-tap-cv.md)
+- [`../resume-refs/generated-cv/govtech-datascientist-tap-preview.html`](../../../../resume-refs/generated-cv/govtech-datascientist-tap-preview.html)
 - <https://bidyut.cc/>
 - <https://github.com/bidyut10/portfolio-template-one/tree/8a115ca2bebfd424111770d6ceb422d8070f69f5>
 - <https://motion.dev/docs/react-upgrade-guide>
