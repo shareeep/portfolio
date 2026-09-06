@@ -68,6 +68,33 @@ async function expectStatus(pathname, expectedStatus) {
 }
 
 const projects = await readPublishedProjects()
+const hateSpeechDapProject = projects.find(
+  ({ slugAsParams }) => slugAsParams === "hate-speech-dap"
+)
+
+if (!hateSpeechDapProject) {
+  throw new Error("hate-speech-dap was missing from the published project index")
+}
+
+const hateSpeechDapMetadata = JSON.stringify({
+  tags: hateSpeechDapProject.tags,
+  highlights: hateSpeechDapProject.highlights,
+})
+
+for (const forbiddenMarker of [
+  "LLM",
+  "Multi-task Learning",
+  "Ollama",
+  "RAG",
+  "agentic",
+  "KG-RAG",
+]) {
+  if (hateSpeechDapMetadata.includes(forbiddenMarker)) {
+    throw new Error(
+      `hate-speech-dap metadata unexpectedly included ${JSON.stringify(forbiddenMarker)}`
+    )
+  }
+}
 
 const home = await expectDocument("/", [
   "Hello, I’m Shariff.",
@@ -136,13 +163,35 @@ const ipid = await expectDocument("/ipid-growth-intelligence", [
   "Human review gates research before content or outreach.",
 ])
 
-await expectDocument("/hate-speech-dap", [
+const hateSpeechDap = await expectDocument("/hate-speech-dap", [
   "Singlish-Aware Hate Speech Guardrail",
+  "Embedding Space Analysis",
   "continued masked-language-model pre-training",
   "Adversarial Data Was the Hard Part",
   "not evidence that Gemini broadly has weaker safeguards for Asian content",
   "Every generated example must therefore remain untrusted until human review",
+  "Singaporean text corpus",
+  "Python, PyTorch, Hugging Face Transformers, Scikit-learn, XGBoost",
+  "The embedding + XGBoost approach exceeded the end-to-end RoBERTa baseline (70.3% vs 70.0%).",
 ])
+
+for (const forbiddenMarker of [
+  "Track 1:",
+  "Track 2:",
+  "Sarcasm-Aware Hate Speech Detection",
+  "Multi-Task Learning",
+  "Knowledge Graph RAG",
+  "LLaMA-3-8B",
+  "Ollama",
+  "Neo4j",
+  "LangChain",
+]) {
+  if (hateSpeechDap.includes(forbiddenMarker)) {
+    throw new Error(
+      `/hate-speech-dap unexpectedly included ${JSON.stringify(forbiddenMarker)}`
+    )
+  }
+}
 
 for (const forbiddenMarker of [
   "Developed a connected-agent GTM platform",

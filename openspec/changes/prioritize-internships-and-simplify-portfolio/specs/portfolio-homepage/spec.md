@@ -104,6 +104,14 @@ Each featured-project description SHALL lead with one concrete differentiator or
 - **AND** it distinguishes observed model behaviour from a general claim about a provider's regional safety safeguards
 - **AND** it treats generated examples as untrusted data requiring human review and an independent evaluation source
 
+#### Scenario: Visitor reads the focused SMU BIA case study
+
+- **WHEN** the visitor opens the SMU BIA case study
+- **THEN** the overview presents the embedding and traditional-ML benchmark followed by the Singlish guardrail extension
+- **AND** the embedding section has no numbered track label
+- **AND** the page omits the discarded sarcasm, multi-task-learning, agentic-LLM, and KG-RAG sections
+- **AND** the highlights, tags, datasets, and technology list omit tools and claims used only by those discarded sections
+
 #### Scenario: Visitor wants the complete project set
 
 - **WHEN** the visitor reaches the homepage project section
