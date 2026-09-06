@@ -74,7 +74,7 @@ const home = await expectDocument("/", [
   "Data Scientist &amp; Software Engineer",
   'SR<span class="sr-only"> — <!-- -->Shariff Rashid<!-- -->, home',
   "GovTech (Government Technology Agency)",
-  "I own two AI products from product-owner requirements through production.",
+  "Own development and production operations for two AI products",
   "Langfuse tracing and prompt version management",
   "queueing document jobs",
   "HTX (Home Team Science and Technology Agency)",
@@ -106,6 +106,17 @@ const sectionOrder = ["Work experience", "Featured projects", "Older projects"]
 if (!sectionOrder) {
   throw new Error(
     "/ did not render work experience before featured and older projects"
+  )
+}
+
+const experienceSection = home.slice(
+  home.indexOf('id="experience"'),
+  home.indexOf('id="projects"')
+)
+
+if (/<li[^>]*>I(?:\s|&#x27;|’)/.test(experienceSection)) {
+  throw new Error(
+    "/ rendered an explicit first-person pronoun in an experience highlight"
   )
 }
 

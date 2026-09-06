@@ -16,13 +16,13 @@ The Markdown and HTML contain the same 17 content bullets. The portfolio adapts 
 
 ### GovTech
 
-The homepage now uses three short first-person highlights:
+The homepage now uses three short action-led highlights with the subject implied:
 
 1. Ownership of two AI products, including one built from scratch and one taken through launch.
 2. Langfuse tracing, prompt version management, cache reuse, and latency work.
 3. Queue-backed document jobs and shared PDF and DOCX ingestion used to resolve memory failures.
 
-The website keeps the organization, role, team, dates, and completed-work claims from the resume. First-person sentences make Shariff's ownership clear when a visitor expands the experience row.
+The website keeps the organization, role, team, dates, and completed-work claims from the resume. GovTech and HTX use the same resume-style perspective so the section reads as one document.
 
 ### iPiD Growth Intelligence
 

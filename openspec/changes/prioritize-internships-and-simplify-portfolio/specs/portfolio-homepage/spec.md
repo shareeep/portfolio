@@ -37,7 +37,7 @@ The homepage SHALL present GovTech and HTX (Home Team Science and Technology Age
 
 ### Requirement: Evidence-led work-experience summaries
 
-Each work-experience entry SHALL show the organization, role, date range, and two or three concise highlights.
+Each work-experience entry SHALL show the organization, role, date range, and two or three concise highlights. All experience highlights SHALL use the same implied-first-person, action-led perspective.
 
 #### Scenario: Visitor scans a collapsed internship row
 
@@ -50,6 +50,12 @@ Each work-experience entry SHALL show the organization, role, date range, and tw
 - **THEN** the page reveals the internship highlights
 - **AND** keyboard focus remains on the disclosure control
 - **AND** assistive technology can determine the expanded state
+
+#### Scenario: Visitor compares internship entries
+
+- **WHEN** the visitor reads highlights from GovTech and HTX
+- **THEN** both entries use action-led resume phrasing with the subject implied
+- **AND** neither entry switches to explicit first-person pronouns
 
 #### Scenario: Visitor expands the GovTech internship
 

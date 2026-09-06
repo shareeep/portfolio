@@ -15,9 +15,9 @@ export const experiences = [
     dates: "May 2026 – Present",
     logo: "/images/govtech_singapore_logo.jpeg",
     highlights: [
-      "I own two AI products from product-owner requirements through production. I built one from scratch and took over the other through launch.",
-      "I added Langfuse tracing and prompt version management to both products, then reworked prompts to improve cache reuse and latency.",
-      "I resolved pre-production memory failures by queueing document jobs and deploying shared PDF and DOCX ingestion for the team’s AI products.",
+      "Own development and production operations for two AI products; built one from scratch and took over the second through launch.",
+      "Instrumented both products with Langfuse tracing and prompt version management; reworked prompts to improve cache reuse and latency.",
+      "Resolved pre-production memory failures by queueing document jobs and deploying shared PDF and DOCX ingestion for reuse across the team’s AI products.",
     ],
   },
   {
