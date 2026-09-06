@@ -78,6 +78,10 @@ The featured order will be:
 3. `pii-anonymisation-gen-ai`
 4. `hate-speech-classification`
 
+Each featured row will use one memorable, evidence-backed hook rather than the same abstract project-summary voice. The iPiD line will name the connected GTM workflows and their evidence trail; the SMU BIA entry will be renamed around its Singlish and code-switched guardrail; the anonymiser line will state its local privacy pipeline and measured improvement; and the BERT line will state the full-fine-tuning versus LoRA result. Detailed metrics and methodology stay in the case studies so the homepage remains scannable.
+
+The SMU BIA case study will add a hack-day localisation section grounded in `../resume-refs/hack-day-angle.md`, `../resume-refs/findings-embedding-space.md`, and the settled resume. It will separate implemented work from reflection: continued masked-language-model pre-training adapts the encoder to Singaporean text, while the reflection covers synthetic-data quality, train/test leakage, and human review. Any note about Gemini or coding agents will be framed as a bounded project observation rather than a general conclusion about safety systems.
+
 The iPiD entry will use neutral, team-level language. It may state verified facts about what the project built, describe its GTM Engineering purpose, and explain engineering challenges in prose and illustrative pseudocode. It will not display the product, its interface, a demo, repository links, proprietary source code or data, or unapproved claims about Shariff's personal contribution. Its page renderer must support an intentionally absent image rather than substituting a product screenshot or invented placeholder.
 
 The refreshed opening will name the four connected workstreams from the settled resume: market intelligence, content production, account research, and sales outreach. It will describe citations, reusable context, and review history as concrete system behavior. Resume bullets that use individual authorship will become team-level facts on the public project page.

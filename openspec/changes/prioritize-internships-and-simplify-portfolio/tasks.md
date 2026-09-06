@@ -19,6 +19,7 @@
 - [x] 2.8 Allow a project image to be absent and verify the iPiD route renders without a broken image or invented placeholder.
 - [x] 2.9 Refresh GovTech and iPiD from the settled September resume: preserve approved facts, adapt GovTech for readable web copy, and convert iPiD's individual resume bullets into publication-safe team-level project language.
 - [x] 2.10 Standardize GovTech and HTX highlights on implied-first-person, action-led resume phrasing without changing their approved facts.
+- [x] 2.11 Rewrite the four featured-project descriptions around one verified differentiator each; rename the SMU BIA entry around its Singlish-aware guardrail; and add its code-switching method, adversarial-data challenges, and carefully qualified model observations to the case study.
 
 ## 3. Build the New Homepage
 
@@ -70,3 +71,4 @@
 - [x] 6.16 Give Capoo one concise non-text alternative; give Wordle semantic status updates, meaningful key/cell names, native disabled states, help disclosure state, and visible non-color result cues; repeat lint, build, smoke, and strict OpenSpec validation.
 - [x] 6.17 Verify the refreshed GovTech and iPiD copy against the settled resume Markdown and HTML, confirm the iPiD page still exposes no product media or proprietary detail, and repeat lint, smoke, build, and strict OpenSpec validation.
 - [x] 6.18 Verify that no experience highlight uses an explicit first-person pronoun, then repeat lint, smoke, build, and strict OpenSpec validation.
+- [x] 6.19 Verify the four featured summaries against their case studies, confirm the homepage names the Singlish and code-switched guardrail, then repeat lint, smoke, build, and strict OpenSpec validation.

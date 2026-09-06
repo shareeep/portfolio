@@ -78,6 +78,11 @@ const home = await expectDocument("/", [
   "Langfuse tracing and prompt version management",
   "queueing document jobs",
   "HTX (Home Team Science and Technology Agency)",
+  "Four connected AI workflows link market monitoring",
+  "Singlish Hate-Speech Guardrail",
+  "Built a hate-speech guardrail for Singlish and code-switched text",
+  "improving anonymisation from 87% to 97%",
+  "LoRA trained only 0.71% of the parameters but fell to 0.630",
   "Experiments",
   "Some stuff I made for fun :)",
   "mailto:muhd.shariff01@gmail.com",
@@ -126,6 +131,14 @@ const ipid = await expectDocument("/ipid-growth-intelligence", [
   "market intelligence, campaign production, account research, and sales outreach",
   "It ranks weekly developments and returns cited findings with reusable context and review logs.",
   "Human review gates research before content or outreach.",
+])
+
+await expectDocument("/hate-speech-dap", [
+  "Singlish-Aware Hate Speech Guardrail",
+  "continued masked-language-model pre-training",
+  "Adversarial Data Was the Hard Part",
+  "not evidence that Gemini broadly has weaker safeguards for Asian content",
+  "Every generated example must therefore remain untrusted until human review",
 ])
 
 for (const forbiddenMarker of [

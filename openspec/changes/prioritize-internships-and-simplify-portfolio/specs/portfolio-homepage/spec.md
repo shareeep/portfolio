@@ -68,6 +68,8 @@ Each work-experience entry SHALL show the organization, role, date range, and tw
 
 The homepage SHALL show four featured projects sourced from published MDX entries. It SHALL present the iPiD FYP first, the SMU BIA hate-speech project second, the Privacy-Focused Agentic Anonymiser third, and Hate Speech Classification with BERT fourth.
 
+Each featured-project description SHALL lead with one concrete differentiator or result rather than a generic study or platform summary. The SMU BIA entry SHALL be named for its Singlish-aware hate-speech guardrail, and its description and case study SHALL identify the code-switched language work.
+
 #### Scenario: Project qualifies for the homepage
 
 - **WHEN** a published project has a `homepageOrder` value
@@ -78,6 +80,20 @@ The homepage SHALL show four featured projects sourced from published MDX entrie
 
 - **WHEN** the visitor activates a project link
 - **THEN** the matching root-level project route renders the full MDX case study
+
+#### Scenario: Visitor scans featured-project descriptions
+
+- **WHEN** the visitor reads the four featured rows
+- **THEN** each description communicates a distinct engineering idea, result, or trade-off
+- **AND** the SMU BIA row names the Singlish and code-switched guardrail
+- **AND** supporting metrics and implementation detail remain available in the linked case study
+
+#### Scenario: Visitor reads the SMU BIA reflection
+
+- **WHEN** the visitor reaches the localisation reflection
+- **THEN** the page explains the difficulty of generating credible adversarial Singlish data
+- **AND** it distinguishes observed model behaviour from a general claim about a provider's regional safety safeguards
+- **AND** it treats generated examples as untrusted data requiring human review and an independent evaluation source
 
 #### Scenario: Visitor wants the complete project set
 

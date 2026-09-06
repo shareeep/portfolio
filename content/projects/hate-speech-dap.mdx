@@ -1,7 +1,7 @@
 ---
-title: Hate Speech Classification - 11th DAP Project
-shortTitle: "Hate Speech - Embeddings & ML"
-description: "Comprehensive hate speech classification combining transformer fine-tuning, embedding space analysis, and traditional ML classifiers — achieving 70.3% 3-class accuracy with frozen embeddings + XGBoost, exceeding end-to-end RoBERTa."
+title: Singlish-Aware Hate Speech Guardrail
+shortTitle: "Singlish Hate-Speech Guardrail"
+description: "Built a hate-speech guardrail for Singlish and code-switched text, then tested whether RoBERTa embeddings with XGBoost could outperform an end-to-end classifier."
 image: /images/projects/hate-speech-dap.png
 date: "2025-11-01"
 homepageOrder: 2
@@ -22,9 +22,12 @@ tags:
     "Scikit-learn",
     "Embeddings",
     "Traditional ML",
+    "Singlish",
+    "Code-switching",
   ]
 projectType: "AI/ML"
 highlights:
+  - Adapted the encoder to Singlish and code-switched text through continued masked-language-model pre-training
   - Frozen fine-tuned embeddings + XGBoost achieves 70.3% 3-class accuracy, exceeding end-to-end RoBERTa (70.0%)
   - Embedding geometry analysis showing fine-tuning yields ~50× improvement in silhouette cluster quality
   - Benchmarked 4 transformer encoders × 4 traditional ML classifiers (LogReg, XGBoost, Random Forest, MLP)
@@ -33,10 +36,11 @@ highlights:
 
 ## Overview
 
-Developed as part of the **11th DAP (Data Associates Program) under SMUBIA (Business Intelligence & Analytics Club)**, this project addresses hate speech classification through two complementary tracks:
+Developed as part of the **11th DAP (Data Associates Program) under SMUBIA (Business Intelligence & Analytics Club)**, this project began as an embeddings experiment and grew into a guardrail for language closer to home. It covers three connected tracks:
 
 1. **Embedding Space Analysis & Traditional ML:** Using BERT and RoBERTa as embedding models to generate 768-dimensional text representations, then feeding those into traditional ML classifiers (Logistic Regression, XGBoost, Random Forest, MLP) to classify hate speech — investigating whether embeddings + traditional ML can match end-to-end deep learning.
 2. **Agentic & Multi-Task Learning:** Exploring sarcasm-aware hate speech detection through multi-task learning, LLM agentic workflows, and Knowledge Graph RAG.
+3. **Singlish Localisation:** Adapting the encoder through continued masked-language-model pre-training, then testing the guardrail on Singaporean slang and code-switched text.
 
 **Dataset:** HateXplain — 15,383 train / 1,924 test samples, with 3-class labels (Hate, Offensive, Normal) and annotator rationales.
 
@@ -87,6 +91,22 @@ Within **1.2%** of end-to-end fine-tuning — at a fraction of the compute cost.
 1. **Embeddings are the bottleneck, not classifiers.** Switching from vanilla to fine-tuned embeddings gains ~8% F1. Switching classifiers within the same embeddings changes only ~2–4% F1.
 2. **The encoder's linear classification head is the weak link.** End-to-end fine-tuning of a domain-specific RoBERTa model achieved 70.0% accuracy — almost identical to frozen embeddings + XGBoost (70.3%). The encoder learns excellent representations, but its single `nn.Linear(768, 3)` head can't exploit them as well as XGBoost can.
 3. **Traditional ML can match end-to-end deep learning.** The frozen encoder + XGBoost approach is faster to iterate, more modular, and requires no GPU for classifier training.
+
+---
+
+## Hack-Day Extension: A Singlish-Aware Guardrail
+
+The original benchmark answered a narrow question on HateXplain. The hack-day extension asked a harder one: would the pipeline recognise hate and offensive language when people switch between English, Singlish, and local slang?
+
+We continued masked-language-model pre-training on Singaporean text before extracting embeddings. This gave the encoder more exposure to local vocabulary and phrasing without changing the guardrail's three outputs: hate, offensive, or normal.
+
+### Reflection: Adversarial Data Was the Hard Part
+
+Generating credible adversarial examples was harder than wiring up the classifier. General chat models often returned language that was sanitised, stereotypical, or recognisably unlike natural Singlish. Using the same generator for both training and evaluation would also risk measuring the generator's writing style rather than the guardrail's ability to generalise.
+
+In this bounded experiment, coding agents were more useful for producing structured test fixtures inside a reviewable engineering workflow. Gemini also appeared more willing to return some Asian-localised examples. That is an observation from this experiment, not evidence that Gemini broadly has weaker safeguards for Asian content; model versions, prompt wording, and locale coverage may also explain the difference.
+
+Every generated example must therefore remain untrusted until human review, and evaluation data needs a source independent from the training-data generator. Real regional data would be stronger, provided its licensing, privacy, and annotation quality were handled properly.
 
 ---
 
